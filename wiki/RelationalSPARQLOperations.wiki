@@ -38,7 +38,7 @@ A formal definition of an untyped JOIN (based on Date’s definition of Join):
 
 Let r and s have attributes X1,X2,...,Xm, Y1,Y2,...,Yn, Z1,Z2,...,Zp.  Where Y’s are the common attributes, X’s are other attributes of r and Z’s are the other attributes of s.  The untyped JOIN of r and s is a relation t with a heading that is the set theoretic union of the headings r and s {X, Y, Z} and a body that consists of the set of all tuples {X x, Y y, Z z} such that a tuple appears in r with X value x or no value for X and Y value y and a tuple appears in s with Y value y and Z value z or no value for Z.  Y values for r and s may both be unbound or either maybe unbound - this does not lead to a successful join.  A successful join occurs if at least one Y value y for r and s are equal and are not unbound.
 
-Using untyped join in SPARQL was suggested by R. Cyganiak in [http://www.hpl.hp.com/techreports/2005/HPL-2005-170.html A Relational Algebra for SPARQL].  This is slightly modified to not require the use of NULL values.
+Using untyped join in SPARQL was suggested by R. Cyganiak in [http://www.hpl.hp.com/techreports/2005/HPL-2005-170.html A Relational Algebra for SPARQL].  This version of untyped join, however, does not use NULL values but instead relies on untyped relations.
 
 == Union ==
 This is equivalent to the UNION operator in SPARQL.
