@@ -2,8 +2,7 @@
 
 = Introduction =
 
-This contains online documentation and tutorials for the JRDF project.  The rest of the documentation is available at [http://jrdf.sourceforge.net the JRDF Sourceforge page].
+This Wiki contains any online documentation and tutorials for the JRDF project.  The rest of the documentation (Javadoc and papers mainly) is available on the [http://jrdf.sourceforge.net the JRDF Sourceforge page].
 
 = Documentation =
  * [RelationalSPARQLOperations Relational SPARQL Operations]
-
