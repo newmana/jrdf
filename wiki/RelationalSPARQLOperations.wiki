@@ -60,4 +60,4 @@ A formal definition of MINIMUM UNION:
 
 The minimum union of relations r and s is the outer union of r and s followed by removing subsumed tuples. Tuple subsumption is defined as t1 subsumes t2 if t1 has more values that are bound than t2 and that the values in t2 that are bound are equal to t1.  The removal of subsumed tuples in R is denoted as R￬.
 
-Outer union, minimum union and the formalism for left outer join were all presented in C. Galindo-Legarai's paper "[http://citeseer.ist.psu.edu/446711.html Outerjoins as Disjunctions]".
+Outer union, minimum union and both formalisms of left outer join were all presented in C. Galindo-Legarai's paper "[http://citeseer.ist.psu.edu/446711.html Outerjoins as Disjunctions]".
