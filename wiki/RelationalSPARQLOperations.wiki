@@ -4,7 +4,7 @@
 SPARQL operations JOIN, UNION and OPTIONAL can be defined using modified relational algebra.  The following is a formal definition of these operations by modifying the relational algebra to support untyped relations and operations.
 
 = Untyped Relations =
-An untyped relation is a convenient way to represent relations that are differently typed tuples in one data structure.   It contains a heading that is a super set of attributes of the contained tuples. The following is an example of an untyped relation:
+An untyped relation is a convenient way to represent relations which can contain differently typed tuples.   It contains a heading that is a super set of attributes of the contained tuples. The following is an example of an untyped relation:
 || SNO | sno || SNAME | name || STATUS | integer || CITY | char ||
 || S1 || "Smith" || 20 || "London" ||
 || S2 || "Jones" || 10 || ||
