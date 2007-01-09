@@ -4,13 +4,13 @@
 SPARQL operations JOIN, UNION and OPTIONAL can be defined using modified relational algebra.  The following is a formal definition of these operations by modifying the relational algebra to support untyped relations and operations.
 
 = Untyped Relations =
-An untyped relation is a convenient way to represent relations that are differently typed.   It allows the heading of a relation to be a super set of attributes of the tuples stored in a relation. The following is an example of an untyped relation:
+An untyped relation is a convenient way to represent relations that are differently typed tuples in one data structure.   It contains a heading that is a super set of attributes of the contained tuples. The following is an example of an untyped relation:
 || SNO | sno || SNAME | name || STATUS | integer || CITY | char ||
 || S1 || "Smith" || 20 || "London" ||
 || S2 || "Jones" || 10 || ||
 || S3 || "Blake" || || ||
 
-Which represents three different relations (which can be derived by projecting away the columns):
+Which represents three different relations (which can be derived by projecting away the relevant columns):
 || SNO | sno || SNAME | name || STATUS | integer || CITY | char ||
 || S1 || "Smith" || 20 || "London" ||
 
@@ -24,6 +24,8 @@ Which represents three different relations (which can be derived by projecting a
 || S3 || "Blake" ||
 
 Note: There are no NULLs just tuples of differing types - they are sets of attribute value pairs and some attribute values are missing in certain tuples (for example the tuple with a SNO of S3 is missing the STATUS and CITY attributes).
+
+This idea was present by C. Galindo-Legaria in [ftp://ftp.deas.harvard.edu/techreports/tr-12-92.ps.gz Algebraic Optimization of Outerjoin Queries].
 
 = Untyped Operations =
 
