@@ -1,7 +1,7 @@
 #summary SPARQL Operations using Relational Operations
 
 = SPARQL Operations using Relational Operations =
-SPARQL operations JOIN, UNION and OPTIONAL can be defined using modified relational operations.  The following is a formal definition of these operations by modifying the relational model to support untyped relations and operations.
+SPARQL operations JOIN, UNION and OPTIONAL can be defined using modified relational algebra.  The following is a formal definition of these operations by modifying the relational algebra to support untyped relations and operations.
 
 = Untyped Relations =
 An untyped relation is a convenient way to represent relations that are differently typed.   It allows the heading of a relation to be a super set of attributes of the tuples stored in a relation. The following is an example of an untyped relation:
