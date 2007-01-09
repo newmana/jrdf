@@ -27,6 +27,8 @@ Note: There are no NULLs just tuples of differing types - they are sets of attri
 
 = Untyped Operations =
 
+To support untyped relations, untyped operations can be used to work with these tuples.
+
 == Join ==
 This is equivalent to the "." operator in SPARQL.
 
