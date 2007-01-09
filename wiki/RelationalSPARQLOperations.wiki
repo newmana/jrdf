@@ -44,13 +44,13 @@ The outer union of relations r and s is the set theoretic union of the headings 
 == Left Outer Join ==
 This is equivalent to the OPTIONAL operator in SPARQL.
 
-A formal definition of LEFT OUTER JOIN:
+A formal definition of LEFT OUTER JOIN (LOJ):
 
-The left outer join of relations r and s is the outer union of the join of r and s and the antijoin of r and s. Or formally: R1 ⟕ R2 := (R1 ⋈  R2) ⊎ (R1 ⊳ R2).  Antijoin is composed of difference and semijoin.  Semijoin is composed of join and project.  The fully expanded version can therefore be expressed as: R1 ⟕ R2 := (R1 ⋈ R2) ⊎ (R1 － (π(R1) (R1 ⋈ R2))).  Where: “－” denotes difference and “π” denotes project.  
+The left outer join of relations r and s is the outer union of the join of r and s and the antijoin of r and s. Or formally: R1 LOJ R2 := (R1 ⋈  R2) ⊎ (R1 ⊳ R2).  Antijoin is composed of difference and semijoin.  Semijoin is composed of join and project.  The fully expanded version can therefore be expressed as: R1 LOJ R2 := (R1 ⋈ R2) ⊎ (R1 － (π(R1) (R1 ⋈ R2))).  Where: “－” denotes difference and “π” denotes project.  
 
-A second fomrla definition of LEFT OUTER JOIN:
+A second formal definition of LEFT OUTER JOIN (LOJ):
 
-R1 ⟕ R2 := R1 ⋈  R2 ⊕ R1.  Where, minimum union operator (⊕), which has the same effect as performing outer union with the results of the antijoin of r and s.
+R1 LOJ R2 := R1 ⋈  R2 ⊕ R1.  Where, minimum union operator (⊕), which has the same effect as performing outer union with the results of the antijoin of r and s.
 
 A formal definition of MINIMUM UNION:
 
