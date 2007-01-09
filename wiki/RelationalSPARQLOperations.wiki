@@ -38,6 +38,8 @@ A formal definition of an untyped JOIN (based on Date’s definition of Join):
 
 Let r and s have attributes X1,X2,...,Xm, Y1,Y2,...,Yn, Z1,Z2,...,Zp.  Where Y’s are the common attributes, X’s are other attributes of r and Z’s are the other attributes of s.  The untyped JOIN of r and s is a relation t with a heading that is the set theoretic union of the headings r and s {X, Y, Z} and a body that consists of the set of all tuples {X x, Y y, Z z} such that a tuple appears in r with X value x or no value for X and Y value y and a tuple appears in s with Y value y and Z value z or no value for Z.  Y values for r and s may both be unbound or either maybe unbound - this does not lead to a successful join.  A successful join occurs if at least one Y value y for r and s are equal and are not unbound.
 
+Using untyped join in SPARQL was suggested by R. Cyganiak in [http://www.hpl.hp.com/techreports/2005/HPL-2005-170.html A Relational Algebra for SPARQL].  This is slightly modified to not require the use of NULL values.
+
 == Union ==
 This is equivalent to the UNION operator in SPARQL.
 
@@ -57,3 +59,5 @@ R1 LOJ R2 := R1 ⋈  R2 ⊕ R1.  Where, minimum union operator (⊕), which has 
 A formal definition of MINIMUM UNION:
 
 The minimum union of relations r and s is the outer union of r and s followed by removing subsumed tuples. Tuple subsumption is defined as t1 subsumes t2 if t1 has more values that are bound than t2 and that the values in t2 that are bound are equal to t1.  The removal of subsumed tuples in R is denoted as R￬.
+
+Outer union, minimum union and the formalism for left outer join were all presented in C. Galindo-Legarai's paper "[http://citeseer.ist.psu.edu/446711.html Outerjoins as Disjunctions]".
