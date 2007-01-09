@@ -10,7 +10,7 @@ An untyped relation is a convenient way to represent relations that are differen
 || S2 || "Jones" || 10 || ||
 || S3 || "Blake" || || ||
 
-Which represents three different relations (which can be derived by projecting away the columns:
+Which represents three different relations (which can be derived by projecting away the columns):
 || SNO | sno || SNAME | name || STATUS | integer || CITY | char ||
 || S1 || "Smith" || 20 || "London" ||
 
