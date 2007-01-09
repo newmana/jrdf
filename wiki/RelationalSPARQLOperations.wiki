@@ -25,7 +25,7 @@ Which represents three different relations (which can be derived by projecting a
 
 Note: There are no NULLs just tuples of differing types - they are sets of attribute value pairs and some attribute values are missing in certain tuples (for example the tuple with a SNO of S3 is missing the STATUS and CITY attributes).
 
-This idea was present by C. Galindo-Legaria in [ftp://ftp.deas.harvard.edu/techreports/tr-12-92.ps.gz Algebraic Optimization of Outerjoin Queries].
+This idea was presented by C. Galindo-Legaria in "[ftp://ftp.deas.harvard.edu/techreports/tr-12-92.ps.gz Algebraic Optimization of Outerjoin Queries]".
 
 = Untyped Operations =
 
