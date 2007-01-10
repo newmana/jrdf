@@ -1,0 +1,10 @@
+#summary Ways to wire up JRDF and entry points
+
+= JRDF and IoC =
+Use of inversion of control (IoC) is used to decouple the various dependencies in JRDF.  The use of Spring (2.0.1) is used in the JRDF GUI and in testing.
+
+== Use of Spring ==
+== Without Spring ==
+= Entry Points =
+== JRDF Graph ==
+== SPARQL Connection ==
