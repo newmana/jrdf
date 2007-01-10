@@ -1,4 +1,5 @@
 #summary Introduction to JRDF Wiki
+#labels Featured
 
 = Introduction =
 
