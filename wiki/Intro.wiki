@@ -6,3 +6,4 @@ This Wiki contains any online design, documentation and tutorials for the JRDF p
 
 = Documentation =
  * [RelationalSPARQLOperations Relational SPARQL Operations]
+ * [JRDFWiring Wiring and Entry Points in JRDF]
