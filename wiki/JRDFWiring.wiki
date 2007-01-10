@@ -6,5 +6,6 @@ Use of inversion of control (IoC) is used to decouple the various dependencies i
 == Use of Spring ==
 == Without Spring ==
 = Entry Points =
+In order to use JRDF it must be obvious where to start - that is what are the first objects that need to be created.  This has to be available and clear even if a wiring framework, such as Spring, is not available.
 == JRDF Graph ==
 == SPARQL Connection ==
