@@ -10,7 +10,7 @@ An untyped relation is a convenient way to represent differently typed tuples in
 || S2 || "Jones" || 10 || ||
 || S3 || "Blake" || || ||
 
-Which represents three different relations (which can be derived by projecting away the relevant columns):
+Which represents three different typed relations (which can be derived by projecting away the relevant columns):
 || SNO | sno || SNAME | name || STATUS | integer || CITY | char ||
 || S1 || "Smith" || 20 || "London" ||
 
@@ -23,13 +23,13 @@ Which represents three different relations (which can be derived by projecting a
 || S2 || "Jones" ||
 || S3 || "Blake" ||
 
-Note: There are no NULLs just tuples of differing types - they are sets of attribute value pairs and some attribute values are missing in certain tuples (for example the tuple with a SNO of S3 is missing the STATUS and CITY attributes).
+Note: There are no NULLs just tuples of differing types - they are sets of attribute value pairs and some attribute values are missing in certain tuples (for example the tuple with a SNO of "S3" is missing the STATUS and CITY attributes).
 
 This idea was presented by C. Galindo-Legaria in "[ftp://ftp.deas.harvard.edu/techreports/tr-12-92.ps.gz Algebraic Optimization of Outerjoin Queries]".
 
 = Untyped Operations =
 
-To support untyped relations, untyped operations can be used to work with these tuples.
+To support untyped relations, untyped operations must be defined to work with tuples of differing attributes.  Specifically, what must be done when an operation encounters a tuples of different types.  In SQL, a NULL causes join failure and the SQL and relational union operator requires tuples of the same type in order for the ooperation to proceed.
 
 == Join ==
 This is equivalent to the "." operator in SPARQL.
