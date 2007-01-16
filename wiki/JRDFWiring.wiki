@@ -10,9 +10,17 @@ Spring is a popular IoC container.  Using Spring for JRDF is to allow:
   * The use of existing Spring libraries and extensions.  This includes declarative transactions, JPA, Aspects, Spring Rich Client, and AOP.
   * Allows integration into other Spring enabled projects.
 
+The creation of object through the container is often called wiring.  JRDF comes with a XML configuration file (wiring.xml) that defines the creation of various objects.  This includes the lifecycle of the bean and whether the a bean is a singleton (only one instance) or a prototype (instances created new every time).  Spring 2.0 provides a new, custom scope, which allows scopes to be tied to a thread or HTTP session.
+
 However, it is clear the Spring and containers are a rather large requirement for most projects.  With this in mind the use of IoC has been limited.
 
 == Without Spring ==
+The use of IoC can be taken to the finest level, where each object is created through the container and constructors are never used.  This finest level of control has two main drawbacks:
+  * It is not clear through the list of bean wiring exactly the order in which bean are created or rather what objects are at the top of the depency tree.
+  * That no objects can be created without an IoC framework.
+
+In order to find a balance between wiring everything and wiring very few things entry points have been defined to allow the user of a system determine not only how to use JRDF without an IoC container but it also reduces the complexity in determining what to wire up if a container is already being used.
+
 = Entry Points =
 In order to use JRDF it must be obvious where to start - that is what are the first objects that need to be created.  This has to be available and clear even if a wiring framework, such as Spring, is not available.
 == JRDF Graph ==
