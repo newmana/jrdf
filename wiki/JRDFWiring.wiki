@@ -23,5 +23,8 @@ In order to find a balance between wiring everything and wiring very few things 
 
 = Entry Points =
 In order to use JRDF it must be obvious where to start - that is what are the first objects that need to be created.  This has to be available and clear even if a wiring framework, such as Spring, is not available.
+
+JRDF has two entry points: Graph and SPARQL connection.
+
 == JRDF Graph ==
 == SPARQL Connection ==
