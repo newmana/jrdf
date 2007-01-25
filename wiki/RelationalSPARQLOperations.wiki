@@ -29,7 +29,7 @@ This idea was presented by C. Galindo-Legaria in "[ftp://ftp.deas.harvard.edu/te
 
 = Untyped Operations =
 
-To support untyped relations, untyped operations must be defined to work with tuples of differing attributes.  Specifically, what must be done when an operation encounters a tuples of different types.  In SQL, a NULL causes join failure and the SQL and relational union operator requires tuples of the same type in order for the ooperation to proceed.
+To support untyped relations, untyped operations must be defined to work with tuples of differing attributes.  Specifically, what must be done when an operation encounters tuples of different types.  In SQL, a NULL causes join failure and the SQL and relational union operator requires tuples of the same type in order for the ooperation to proceed.
 
 == Join ==
 This is equivalent to the "." operator in SPARQL.
