@@ -27,4 +27,31 @@ In order to use JRDF it must be obvious where to start - that is what are the fi
 JRDF has two entry points: Graph and SPARQL connection.
 
 == JRDF Graph ==
+
+The JRDF Graph API supports pluggable storage through the LongIndex and NodePool interfaces and the ability to produce results from simple graph queries that are sorted or unsorted.  An a third interface, NodePoolComparator, is an optional third interface required by sorted graphs.
+
+=== Implementations of LongIndex and NodePool ===
+
+There is currently in memory interfaces for both LongIndex and NodePool interfaces.  JRDF requires three long indexes (in order to index each combination of triples which is through the GraphHandler interface 012, 120 and 201).  To create these implementations the following code is required:
+<code>
+LongIndex[] indexes = new LongIndex[]{new LongIndexMem(), new LongIndexMem(), new LongIndexMem()};
+NodePoolMem nodePool = new NodePoolMemImpl();
+</code>
+
+=== Constructing GraphFactories ===
+
+The GraphFactory interface has two implementations GraphFactoryImpl (unsorted results returned) and OrderedGraphFactoryImpl (sorted results returned).
+
+To construct an unsorted GraphFactory the following code is required:
+<code>
+GraphFactory orderedGraphFactory = new GraphFactoryImpl(indexes, nodePool);
+</code>
+
+To construct a sorted GraphFactory:
+<code>
+NodeTypeComparator nodeTypeComparator = new NodeTypeComparatorImpl();
+NodeComparator comparator = new NodeComparatorImpl(NODE_TYPE_COMPARATOR);
+GraphFactory orderedGraphFactory = new OrderedGraphFactoryImpl(indexes, nodePool, comparator);
+</code>
+
 == SPARQL Connection ==
