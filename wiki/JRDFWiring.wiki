@@ -57,4 +57,36 @@ NodeComparator comparator = new NodeComparatorImpl(nodeTypeComparator);
 GraphFactory orderedGraphFactory = new OrderedGraphFactoryImpl(indexes, nodePool, comparator);
 }}}
 
+=== Spring Wiring Fragment ===
+
+The following creates an in memory, graph that returns sorted results using Spring's XML configuration file instead.
+
+{{{
+    <bean class="org.jrdf.graph.index.longindex.mem.LongIndexMem" singleton="false"/>
+
+    <bean class="org.jrdf.graph.index.nodepool.mem.NodePoolMemImpl" singleton="false"/>
+
+    <bean id="graphFactory" class="org.jrdf.graph.mem.OrderedGraphFactoryImpl" singleton="false">
+        <constructor-arg>
+            <list>
+                <ref bean="org.jrdf.graph.index.longindex.mem.LongIndexMem"/>
+                <ref bean="org.jrdf.graph.index.longindex.mem.LongIndexMem"/>
+                <ref bean="org.jrdf.graph.index.longindex.mem.LongIndexMem"/>
+            </list>
+        </constructor-arg>
+        <constructor-arg ref="org.jrdf.graph.index.nodepool.mem.NodePoolMemImpl"/>
+        <constructor-arg>
+            <ref bean="nodeComparator"/>
+        </constructor-arg>
+    </bean>
+
+    <bean id="nodeTypeComparator" class="org.jrdf.util.NodeTypeComparatorImpl"/>
+
+    <bean id="nodeComparator" class="org.jrdf.graph.mem.NodeComparatorImpl">
+        <constructor-arg>
+            <ref bean="nodeTypeComparator"/>
+        </constructor-arg>
+    </bean>
+}}}
+
 == SPARQL Connection ==
