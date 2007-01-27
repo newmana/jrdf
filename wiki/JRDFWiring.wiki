@@ -35,7 +35,7 @@ The JRDF Graph API supports pluggable storage through the LongIndex and NodePool
 There is currently in memory implementations for both LongIndex and NodePool interfaces.  JRDF requires three long indexes (in order to index each combination of triples which is through the GraphHandler interface),  These indexes are arranged in 012, 120 and 201, where 0 refers to subject nodes, 1 refers to predicate nodes and 2 refers to object nodes.  
 
 ==== In Memory ====
-To create these in memory implementation implementations the following code is required:
+In order to create in memory implementations the following code is required:
 {{{
 LongIndex[] indexes = new LongIndex[]{new LongIndexMem(), new LongIndexMem(), new LongIndexMem()};
 NodePoolMem nodePool = new NodePoolMemImpl();
