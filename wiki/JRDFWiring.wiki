@@ -32,7 +32,10 @@ The JRDF Graph API supports pluggable storage through the LongIndex and NodePool
 
 === Implementations of LongIndex and NodePool ===
 
-There is currently in memory interfaces for both LongIndex and NodePool interfaces.  JRDF requires three long indexes (in order to index each combination of triples which is through the GraphHandler interface 012, 120 and 201).  To create these implementations the following code is required:
+There is currently in memory implementations for both LongIndex and NodePool interfaces.  JRDF requires three long indexes (in order to index each combination of triples which is through the GraphHandler interface),  These indexes are arranged in 012, 120 and 201, where 0 refers to subject nodes, 1 refers to predicate nodes and 2 refers to object nodes.  
+
+==== In Memory ====
+To create these in memory implementation implementations the following code is required:
 {{{
 LongIndex[] indexes = new LongIndex[]{new LongIndexMem(), new LongIndexMem(), new LongIndexMem()};
 NodePoolMem nodePool = new NodePoolMemImpl();
@@ -50,7 +53,7 @@ GraphFactory orderedGraphFactory = new GraphFactoryImpl(indexes, nodePool);
 To construct a sorted GraphFactory:
 {{{
 NodeTypeComparator nodeTypeComparator = new NodeTypeComparatorImpl();
-NodeComparator comparator = new NodeComparatorImpl(NODE_TYPE_COMPARATOR);
+NodeComparator comparator = new NodeComparatorImpl(nodeTypeComparator);
 GraphFactory orderedGraphFactory = new OrderedGraphFactoryImpl(indexes, nodePool, comparator);
 }}}
 
