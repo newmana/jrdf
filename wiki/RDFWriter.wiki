@@ -12,6 +12,17 @@ There are two interfaces: BlankNodeRegistry (TODO: May integrate with Parser's P
 
 When writing out blank nodes in RDF/XML it is important the the same blank node stored in a graph is persisted with the same blank node identifier.  The BlankNodeRegistry is used to map blank node instances with unique identifiers.
 
+== RdfNamespaceMap ==
+
+In order to reduce the verbosity of the RDF/XML that is produced a standard set of namespaces is used.  This includes:
+  * RDF,
+  * RDFS,
+  * OWL,
+  * DC (Dublic Core), and
+  * DC Terms (Dublic Core Terms).
+
+Others can be added either directly (using add) or the unique partial URIs are extracted from the predicates of statements found in a given Graph (using the load method).
+
 == RdfWriter ==
 
 The interface RdfWriter provides a generic way to implement various ways of persisting RDF.    It takes a Graph and either and OutputStream or Writer.  The caller of the code must ensure that the OutputStream or Writer is closed correctly.
@@ -24,7 +35,9 @@ To create an RDF/XML implementation the following code is used (assuming a JRDF 
 {{{
 StringWriter out = new StringWriter();
 try {
-  RdfWriter writer = new RdfXmlWriter();
+  BlankNodeRegistry nodeRegistry = new BlankNodeRegistryImpl();
+  RdfNamespaceMap map = new RdfNamespaceMapImpl();
+  RdfWriter writer = new RdfXmlWriter(nodeRegistry, map);
   writer.write(graph, out);
 } finally {
   out.close();
