@@ -4,7 +4,7 @@
 Inversion of Control (IoC) is used to decouple the various dependencies in JRDF.  The IoC container used in the JRDF GUI and testing is Spring (2.0.1).  For the main code base (everything except org.jrdf.gui at the moment) constructors are injected with their dependencies and there is no explict use of Spring code or interfaces.  This allows objects to be constructed normally or another IoC container to be used.
 
 == Using Spring ==
-Spring is a popular IoC container.  Using Spring and JRDF allows:
+Spring is a popular IoC container.  Using Spring with JRDF allows:
   * Easier testing that comes with the use of inversion of control,
   * The ability to switch in different implementations (such as different implementations of query operations such as OPTIONAL),
   * The future use of existing Spring libraries and extensions.  This includes declarative transactions, JPA, Aspects, Spring Rich Client, and AOP.
