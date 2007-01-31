@@ -1,7 +1,7 @@
 #summary Ways to wire up JRDF and entry points
 
 = JRDF and IoC =
-Use of inversion of control (IoC) is used to decouple the various dependencies in JRDF.  The IoC contained used in the JRDF GUI and testing is Spring (2.0.1).
+Inversion of Control (IoC) is used to decouple the various dependencies in JRDF.  The IoC contained used in the JRDF GUI and testing is Spring (2.0.1).  Constructor based IoC is used throughout with no dependencies on Spring specific code or interfaces.  This allows objects to be constructed normally or another IoC container to be used.
 
 == Using Spring ==
 Spring is a popular IoC container.  Using Spring for JRDF is to allow:
