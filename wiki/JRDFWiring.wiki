@@ -16,10 +16,10 @@ However, it is clear that Spring and most IoC containers are a rather large requ
 
 == Without Spring ==
 The use of IoC can be taken to the finest level, where each object is created through the container and constructors are never used.  This finest level of control has two main drawbacks:
-  * It is not clear through the list of bean wiring exactly the order in which bean are created or rather what objects are at the top of the depency tree.
+  * It is not clear through the list of bean wiring the exact order in which beans are created or what objects are at the top of the depency tree.
   * That no objects can be created without an IoC framework.
 
-In order to find a balance between wiring everything and wiring very few things entry points have been defined to allow the user of a system determine not only how to use JRDF without an IoC container but it also reduces the complexity in determining what to wire up if a container is already being used.
+In order to find a balance between wiring everything and wiring very few things entry points have been defined to allow the user of a system determine not only how to use JRDF without an IoC container but it also reduces the complexity in determining what to wire up if a container is already being used.  This makes it easier to switch to another IoC container too.
 
 = Entry Points =
 In order to use JRDF it must be obvious where to start - that is what are the first objects that need to be created.  This has to be available and clear even if a wiring framework, such as Spring, is not available.
