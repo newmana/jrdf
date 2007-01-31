@@ -1,18 +1,18 @@
 #summary Ways to wire up JRDF and entry points
 
 = JRDF and IoC =
-Inversion of Control (IoC) is used to decouple the various dependencies in JRDF.  The IoC contained used in the JRDF GUI and testing is Spring (2.0.1).  Constructor based IoC is used throughout with no dependencies on Spring specific code or interfaces.  This allows objects to be constructed normally or another IoC container to be used.
+Inversion of Control (IoC) is used to decouple the various dependencies in JRDF.  The IoC contained used in the JRDF GUI and testing is Spring (2.0.1).  For the main code base (everything except org.jrdf.gui at the moment) constructors are injected with their dependencies and there is no explict use of Spring code or interfaces.  This allows objects to be constructed normally or another IoC container to be used.
 
 == Using Spring ==
-Spring is a popular IoC container.  Using Spring for JRDF is to allow:
+Spring is a popular IoC container.  Using Spring and JRDF allows:
   * Easier testing that comes with the use of inversion of control,
   * The ability to switch in different implementations (such as different implementations of query operations such as OPTIONAL),
-  * The use of existing Spring libraries and extensions.  This includes declarative transactions, JPA, Aspects, Spring Rich Client, and AOP.
+  * The future use of existing Spring libraries and extensions.  This includes declarative transactions, JPA, Aspects, Spring Rich Client, and AOP.
   * Allows integration into other Spring enabled projects.
 
-The creation of object through the container is often called wiring.  JRDF comes with a XML configuration file (wiring.xml) that defines the creation of various objects.  This includes the lifecycle of the bean and whether the a bean is a singleton (only one instance) or a prototype (instances created new every time).  Spring 2.0 provides a new, custom scope, which allows scopes to be tied to a thread or HTTP session.
+The creation of objects through the container is often called wiring.  JRDF comes with a XML configuration file (wiring.xml) that defines the creation of various objects.  This includes the lifecycle of the beans and whether the a bean is a singleton (only one instance) or a prototype (instances created new every time).  Spring 2.0 provides a new, custom scope, which allows scopes to be tied to other lifecycles such as threads or HTTP sessions.
 
-However, it is clear the Spring and containers are a rather large requirement for most projects.  With this in mind the use of IoC has been limited.
+However, it is clear that Spring and most IoC containers are a rather large requirement for most projects.  With this in mind the use of the JRDF code without an IoC is kept in mind in order to retain ease of use without one.
 
 == Without Spring ==
 The use of IoC can be taken to the finest level, where each object is created through the container and constructors are never used.  This finest level of control has two main drawbacks:
