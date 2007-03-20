@@ -5,23 +5,23 @@ SPARQL operations JOIN, UNION and OPTIONAL can be defined using modified relatio
 
 = Untyped Relations =
 An untyped relation is a convenient way to represent differently typed tuples in a single data structure.   It contains a heading that is a super set of attributes of the contained tuples. The following is an example of an untyped relation:
-|| SNO | sno || SNAME | name || STATUS | integer || CITY | char ||
-|| S1 || "Smith" || 20 || "London" ||
-|| S2 || "Jones" || 10 || ||
-|| S3 || "Blake" || || ||
+|| SNO|| sno || SNAME || name || STATUS || integer || CITY || char ||
+|||| S1 |||| "Smith" |||| 20 |||| "London" ||
+|||| S2 |||| "Jones" |||| 10 |||| ||
+|||| S3 |||| "Blake" |||| |||| ||
 
 Which represents three different typed relations (which can be derived by projecting away the relevant columns):
-|| SNO | sno || SNAME | name || STATUS | integer || CITY | char ||
-|| S1 || "Smith" || 20 || "London" ||
+|| SNO|| sno || SNAME || name || STATUS || integer || CITY || char ||
+|||| S1 |||| "Smith" |||| 20 |||| "London" ||
 
-|| SNO | sno || SNAME | name || STATUS | integer ||
-|| S1 || "Smith" || 20 ||
-|| S2 || "Jones" || 10 ||
+|| SNO || sno || SNAME || name || STATUS || integer ||
+|||| S1 |||| "Smith" |||| 20 ||
+|||| S2 |||| "Jones" |||| 10 ||
 
-|| SNO | sno || SNAME | name || 
-|| S1 || "Smith" ||
-|| S2 || "Jones" ||
-|| S3 || "Blake" ||
+|| SNO || sno || SNAME || name || 
+|||| S1 |||| "Smith" ||
+|||| S2 |||| "Jones" ||
+|||| S3 |||| "Blake" ||
 
 Note: There are no NULLs just tuples of differing types - they are sets of attribute value pairs and some attribute values are missing in certain tuples (for example the tuple with a SNO of "S3" is missing the STATUS and CITY attributes).
 
@@ -61,3 +61,5 @@ A formal definition of MINIMUM UNION:
 The minimum union of relations r and s is the outer union of r and s followed by removing subsumed tuples. Tuple subsumption is defined as t1 subsumes t2 if t1 has more values that are bound than t2 and that the values in t2 that are bound are equal to t1.  The removal of subsumed tuples in R is denoted as R￬.
 
 Outer union, minimum union and both formalisms of left outer join were all presented in C. Galindo-Legarai's paper "[http://citeseer.ist.psu.edu/446711.html Outerjoins as Disjunctions]".
+
+
