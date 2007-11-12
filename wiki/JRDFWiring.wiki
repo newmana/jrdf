@@ -56,6 +56,8 @@ LongIndex[] indexes = new LongIndex[]{new LongIndexBdb(factory1), new LongIndexB
 NodePoolFactory nodePoolFactory = new BdbNodePoolFactory(HANDLER);
 }}}
 
+Db4o requires similar creation except the implmementations are Db4oMapFactory and Db4oNodePoolFactory.
+
 === Constructing GraphFactories ===
 
 The GraphFactory interface has two implementations GraphFactoryImpl (unsorted results returned) and OrderedGraphFactoryImpl (sorted results returned).
