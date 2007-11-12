@@ -32,7 +32,7 @@ The Spring enabled entry point, [http://jrdf.sourceforge.net/0.5.1/doc/javadoc/o
 
 == JRDF Graph ==
 
-The JRDF Graph API supports pluggable storage through the LongIndex and NodePool interfaces and the ability to produce results from simple graph queries that are sorted or unsorted.  A third, optional interface, NodePoolComparator, is required by sorted graphs.
+The JRDF Graph API supports pluggable storage through the LongIndex and NodePool interfaces and the ability to produce results from simple graph queries that are sorted or unsorted.  A third optional interface, NodePoolComparator, is required by sorted graphs.
 
 If you use one of the factories the resources required by the Indexes and Nodepool will be created automatically.  The BDB and db4o directories automatically create new files and directories using a [http://jrdf.sourceforge.net/0.5.1/doc/javadoc/org/jrdf/map/DirectoryHandler.html DirectoryHandler].
 
