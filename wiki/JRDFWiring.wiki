@@ -58,7 +58,7 @@ LongIndex[] indexes = new LongIndex[]{new LongIndexBdb(factory1), new LongIndexB
 NodePoolFactory nodePoolFactory = new BdbNodePoolFactory(HANDLER);
 }}}
 
-Db4o requires similar creation except the implmementations are Db4oMapFactory and Db4oNodePoolFactory.
+Db4o requires similar steps except the implmementations are Db4oMapFactory and Db4oNodePoolFactory.
 
 === Constructing GraphFactories ===
 
