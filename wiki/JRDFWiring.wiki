@@ -32,15 +32,28 @@ There are implementations for using [http://jrdf.sourceforge.net/0.5.1/doc/javad
 
 The JRDF Graph API supports pluggable storage through the LongIndex and NodePool interfaces and the ability to produce results from simple graph queries that are sorted or unsorted.  An a third interface, NodePoolComparator, is an optional third interface required by sorted graphs.
 
+If you use one of the factories the resources required by the Indexes and Nodepool will be created automatically.  The BDB and db4o directories automatically create new files and directories using a [http://jrdf.sourceforge.net/0.5.1/doc/javadoc/org/jrdf/map/DirectoryHandler.html DirectoryHandler].
+
 === Implementations of LongIndex and NodePool ===
 
-There is currently in memory implementations for both LongIndex and NodePool interfaces.  JRDF requires three long indexes (in order to index each combination of triples which is through the GraphHandler interface),  These indexes are arranged in 012, 120 and 201, where 0 refers to subject nodes, 1 refers to predicate nodes and 2 refers to object nodes.  
+There is in memory, BDB and db4o implementations of both LongIndex and NodePool interfaces.  JRDF requires three long indexes (in order to index each combination of triples which is through the GraphHandler interface),  These indexes are arranged in 012, 120 and 201, where 0 refers to subject nodes, 1 refers to predicate nodes and 2 refers to object nodes.  
 
 ==== In Memory ====
 In order to create in memory implementations the following code is required:
 {{{
 LongIndex[] indexes = new LongIndex[]{new LongIndexMem(), new LongIndexMem(), new LongIndexMem()};
 NodePoolMem nodePool = new NodePoolMemImpl();
+}}}
+
+==== BDB and db4o ===
+To create BDB indexes and node pools requires a few more steps.
+{{{
+StoredMapHandler handler = new StoredMapHandlerImpl(new TempDirectoryHandler());
+MapFactory factory1 = new BdbMapFactory(handler, "spo" + graphNumber);
+MapFactory factory2 = new BdbMapFactory(handler, "pos" + graphNumber);
+MapFactory factory3 = new BdbMapFactory(handler, "osp" + graphNumber);
+LongIndex[] indexes = new LongIndex[]{new LongIndexBdb(factory1), new LongIndexBdb(factory2), new LongIndexBdb(factory3)};
+NodePoolFactory nodePoolFactory = new BdbNodePoolFactory(HANDLER);
 }}}
 
 === Constructing GraphFactories ===
