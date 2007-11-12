@@ -22,11 +22,11 @@ The use of IoC can be taken to the finest level, where each object is created th
 In order to find a balance between wiring everything and wiring very few things entry points have been defined to allow the user of a system determine not only how to use JRDF without an IoC container but it also reduces the complexity in determining what to wire up if a container is already being used.  This makes it easier to switch to another IoC container too.
 
 = Entry Points =
-In order to use JRDF it must be obvious where to start - that is what are the first objects that need to be created.  This has to be available and clear even if a wiring framework, such as Spring, is not available.
+In order to use JRDF it must be obvious where to start - what are the first objects that need to be created?  This has to be available and clear even if a wiring framework, such as Spring, is not available.
 
 The [http://jrdf.sourceforge.net/0.5.1/doc/javadoc/org/jrdf/JRDFFactory.html JRDFFactory] interface is the main entry point to JRDF.  It provides access to JRDF graphs and SPARQL connections.
 
-There are implementations for using [http://jrdf.sourceforge.net/0.5.1/doc/javadoc/org/jrdf/SpringJRDFFactory.html Spring wiring file] and specific implementations tied to [http://jrdf.sourceforge.net/0.5.1/doc/javadoc/org/jrdf/SortedMemoryJRDFFactory.html memory], [http://jrdf.sourceforge.net/0.5.1/doc/javadoc/org/jrdf/SortedBdbJRDFFactory.html BDB] and [http://jrdf.sourceforge.net/0.5.1/doc/javadoc/org/jrdf/SortedDb4oJRDFFactory.html db4o].
+There are implementations for using [http://jrdf.sourceforge.net/0.5.1/doc/javadoc/org/jrdf/SpringJRDFFactory.html Spring] and specific implementations tied to [http://jrdf.sourceforge.net/0.5.1/doc/javadoc/org/jrdf/SortedMemoryJRDFFactory.html memory], [http://jrdf.sourceforge.net/0.5.1/doc/javadoc/org/jrdf/SortedBdbJRDFFactory.html BDB] and [http://jrdf.sourceforge.net/0.5.1/doc/javadoc/org/jrdf/SortedDb4oJRDFFactory.html db4o].
 
 == JRDF Graph ==
 
