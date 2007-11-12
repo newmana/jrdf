@@ -24,7 +24,9 @@ In order to find a balance between wiring everything and wiring very few things 
 = Entry Points =
 In order to use JRDF it must be obvious where to start - that is what are the first objects that need to be created.  This has to be available and clear even if a wiring framework, such as Spring, is not available.
 
-JRDF has two entry points: Graph and SPARQL connection.
+The <a href="http://jrdf.sourceforge.net/0.5.1/doc/javadoc/org/jrdf/JRDFFactory.html">JRDFFactory</a> interface is the main entry point to JRDF.  It provides access to JRDF graphs and SPARQL connections.
+
+There are implementations for using a <a href="http://jrdf.sourceforge.net/0.5.1/doc/javadoc/org/jrdf/SpringJRDFFactory.html">Spring wiring file</a> and specific implementations tied to <a href="http://jrdf.sourceforge.net/0.5.1/doc/javadoc/org/jrdf/SortedMemoryJRDFFactory.html">memory</a>, <a href="http://jrdf.sourceforge.net/0.5.1/doc/javadoc/org/jrdf/SortedBdbJRDFFactory.html">BDB </a> and <a href="http://jrdf.sourceforge.net/0.5.1/doc/javadoc/org/jrdf/SortedDb4oJRDFFactory.html">db4o</a>.
 
 == JRDF Graph ==
 
