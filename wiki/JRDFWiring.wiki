@@ -74,6 +74,8 @@ NodeComparator comparator = new NodeComparatorImpl(nodeTypeComparator);
 GraphFactory orderedGraphFactory = new OrderedGraphFactoryImpl(indexes, nodePool, comparator);
 }}}
 
+Sorted graphs copies any results and puts them into sorted order - defined by a [http://jrdf.sourceforge.net/0.5.1/doc/javadoc/org/jrdf/graph/TripleComparator.html TripleComparator].
+
 === Spring Wiring Fragment ===
 
 The following creates an in memory, graph that returns sorted results using Spring's XML configuration file instead.
