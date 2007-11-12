@@ -26,7 +26,9 @@ In order to use JRDF it must be obvious where to start - what are the first obje
 
 The [http://jrdf.sourceforge.net/0.5.1/doc/javadoc/org/jrdf/JRDFFactory.html JRDFFactory] interface is the main entry point to JRDF.  It provides access to JRDF graphs and SPARQL connections.
 
-There are implementations for using [http://jrdf.sourceforge.net/0.5.1/doc/javadoc/org/jrdf/SpringJRDFFactory.html Spring] as well as  [http://jrdf.sourceforge.net/0.5.1/doc/javadoc/org/jrdf/SortedMemoryJRDFFactory.html in memory], [http://jrdf.sourceforge.net/0.5.1/doc/javadoc/org/jrdf/SortedBdbJRDFFactory.html BDB] and [http://jrdf.sourceforge.net/0.5.1/doc/javadoc/org/jrdf/SortedDb4oJRDFFactory.html db4o] implementations.
+There are implementations for using [http://jrdf.sourceforge.net/0.5.1/doc/javadoc/org/jrdf/SortedMemoryJRDFFactory.html in memory], [http://jrdf.sourceforge.net/0.5.1/doc/javadoc/org/jrdf/SortedBdbJRDFFactory.html BDB] and [http://jrdf.sourceforge.net/0.5.1/doc/javadoc/org/jrdf/SortedDb4oJRDFFactory.html db4o] implementations.
+
+The Spring enabled entry point, [http://jrdf.sourceforge.net/0.5.1/doc/javadoc/org/jrdf/SpringJRDFFactory.html SpringJRDFFactory], reads a wiring.xml file for wiring up the various components.  The current wiring.xml is configured exactly the same way as the SortedMemoryJRDFFactory.
 
 == JRDF Graph ==
 
