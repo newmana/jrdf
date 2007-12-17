@@ -21,7 +21,7 @@ To create an on disk graph replace the first line with (this current requires db
 JRDFFactory jrdfFactory = SortedDiskJRDFFactory.getFactory();
 }}}
 
-== Literals ==
+=== Literals ===
 
 The Element Factory also allows the creation of literals.  To create the typed literal "Hello World"^^xsd:String:
 
@@ -32,7 +32,7 @@ Literal literal = elementFactory.createLiteral("Hello World", org.jrdf.vocabular
 graph.add(node, node, literal);
 }}}
 
-== Blank Nodes ==
+=== Blank Nodes ===
 
 Blank nodes can also be created using the Element Factory:
 
@@ -43,11 +43,11 @@ Node node2 = elementFactory.createBlankNode();
 graph.add(node2, node1, node2);
 }}}
 
-= Triple Factory =
+== Triple Factory ==
 
 The Triple factory offers a short cut for some frequent operations and creating RDF data structures.  It allows you to add triples directly to the Graph without having to create the individual nodes first, resources, reify triples and add RDF containers (Bag, Alt, Collection and Sequence).
 
-== URI Reference ==
+=== URI Reference ===
 
 To create a triple with URI References requires the following code:
 
@@ -57,7 +57,7 @@ URI node = URI.create("urn:node");
 tripleFactory.add(node, node, node);
 }}}
 
-== Literals ==
+=== Literals ===
 
 To create literals, replace the last parameter with one or two parameters specifying the Literal.  For example, to create a literal with a data type of "xsd:string" requires the following code:
 
@@ -67,7 +67,7 @@ URI node = URI.create("urn:node");
 tripleFactory.add(node, node, "Hello World", org.jrdf.vocabulary.XSD.STRING);
 }}}
 
-== Blank Nodes ==
+=== Blank Nodes ===
 Blank nodes are a more difficult to add as the blank node made need to be added to many triples.  For example:
 
 {{{
@@ -77,6 +77,8 @@ urn:node urn:node _1
 
 So they cannot be added using the TripleFactory and must use the Graph Element Factory and add them to the Graph.
 
-== Reifying Triples ==
+=== Resources ===
 
-== Creating RDF Containers ==
+=== Reifying Triples ===
+
+=== Creating RDF Containers ===
