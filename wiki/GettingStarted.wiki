@@ -39,7 +39,7 @@ Literal literal = elementFactory.createLiteral(7);
 }}}
 
 The mapping from Java types to XSD types is as follows:
-|| Java Type || XSD Type ||
+|| *Java Type* || *XSD Type* ||
 || NULL_URI  || xsd:string ||
 || String || xsd:string ||
 || Boolean || xsd:boolean ||
