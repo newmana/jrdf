@@ -79,6 +79,8 @@ So they cannot be added using the TripleFactory and must use the Graph Element F
 
 === Resources ===
 
+An RDF Resource is either a blank node or a URI Reference.  JRDF provides a way to create or wrap existing Blank Nodes and URI References and treat them as resources.  It also provides a shorter way of adding values to the Graph and to return the values related to it.
+
 === Reifying Triples ===
 
 === Creating RDF Containers ===
