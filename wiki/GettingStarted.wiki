@@ -209,7 +209,7 @@ RDF Containers and Collections have many similarities with Java's Collection cla
 || Collection || Yes, Linked list || Yes || Yes ||
 || Sequence || Yes, FIFO (First In, First Out) || Yes || No ||
 
-Being closed means being able to say that there are only the currently specified number of members that belong to the group.
+Being closed means being able to say that there are only the currently specified number of members that belong to the group.  For more information see: <a href="http://www.w3.org/TR/rdf-primer/#collections">RDF Primer's entry on Collections</a>.
 
 You can create a collection, add triples to it and then add it to the graph using the Triple Factory.  For example:
 {{{
