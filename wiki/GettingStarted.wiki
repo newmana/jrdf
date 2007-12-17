@@ -21,7 +21,7 @@ JRDFFactory jrdfFactory = SortedDiskJRDFFactory.getFactory();
 
 == Literals ==
 
-The Element Factory also allows the creation of literals:
+The Element Factory also allows the creation of literals.  To create the typed literal "Hello World"^^xsd:String:
 
 {{{
 ...
