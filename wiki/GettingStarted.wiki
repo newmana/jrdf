@@ -93,6 +93,17 @@ URIReference foo = elementFactory.createURIReference(URI.create("urn:foo"));
 URIReference bar = elementFactory.createURIReference(URI.create("urn:bar"));
 graph.add(foo, foo, foo);
 graph.add(bar, bar, bar);
+ClosableIterator<Triple> tripleIter = graph.find(AnySubject.ANY_SUBJECT, AnyPredicate.ANY_PREDICATE, AnyObject.ANY_OBJECT);
+try {
+  while (tripleIter.hasNext()) {
+    Triple triple = tripleIter.next();
+    System.out.println("Got triple: " + triple);
+  }
+}
+finally {
+  tripleIter.close();
+}
+graph.remove(foo, foo, foo);
 }}}
 
 === Resources ===
