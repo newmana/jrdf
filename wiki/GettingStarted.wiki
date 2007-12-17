@@ -48,7 +48,7 @@ The mapping from Java types to XSD types is as follows:
 || Double || xsd:double ||
 || GregorianCalendar || xsd:dateTime ||
 || java.sql.Date || xsd:dateTime ||
-|| java.util.Date || xsd:DateTime ||
+|| java.util.Date || xsd:dateTime ||
 || QName || xsd:QName ||
 || BigInteger (positive value) || xsd:nonNegativeInteger ||
 || BigInteger (negative value) || xsd:nonPositiveInteger ||
