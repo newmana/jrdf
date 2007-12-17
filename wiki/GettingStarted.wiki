@@ -38,7 +38,7 @@ Blank nodes can also be created using the Element Factory:
 ...
 Node node1 = elementFactory.createURIReference(URI.create("urn:node"));
 Node node2 = elementFactory.createBlankNode();
-graph.add(node1, node, node1);
+graph.add(node2, node1, node2);
 }}}
 
 == Triple Factory ==
