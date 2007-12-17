@@ -43,7 +43,7 @@ graph.add(node1, node, node1);
 
 == Triple Factory ==
 
-The Triple factory allows you to add triples directly to the Graph without having to create the individual nodes first.
+The Triple factory offers a short cut and allows you to add triples directly to the Graph without having to create the individual nodes first.  This has the effect of creating the nodes first and then adding them to the Graph.  It also provides methods for reifying triples and adding RDF containers (Bag, Alt, Collection and Sequence).
 
 == URI Reference ==
 
