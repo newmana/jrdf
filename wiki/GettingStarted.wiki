@@ -2,6 +2,8 @@
 
 = Getting Started with JRDF Local Graphs =
 
+== Graph and Graph Element Factory ==
+
 To create a local graph you must use a Factory - either an in memory factory or an on disk one.  A local graph requires the creation of RDF structures (triples, literals, URI References, etc.) from a specific RDF graph.  This is done using a Graph Element Factory and Triple Factory to create these structures.
 
 To create an in memory graph factory, create a new graph and add the triple "urn:node, urn:node, urn:node" requires the following code:
@@ -41,7 +43,7 @@ Node node2 = elementFactory.createBlankNode();
 graph.add(node2, node1, node2);
 }}}
 
-== Triple Factory ==
+= Triple Factory =
 
 The Triple factory offers a short cut for some frequent operations and creating RDF data structures.  It allows you to add triples directly to the Graph without having to create the individual nodes first, resources, reify triples and add RDF containers (Bag, Alt, Collection and Sequence).
 
