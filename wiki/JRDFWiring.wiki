@@ -36,6 +36,16 @@ The JRDF Graph API supports pluggable storage through the LongIndex and NodePool
 
 If you use one of the factories the resources required by the Indexes and Nodepool will be created automatically.  The BDB and db4o directories automatically create new files and directories using a [http://jrdf.sourceforge.net/0.5.1/doc/javadoc/org/jrdf/map/DirectoryHandler.html DirectoryHandler].
 
+To get create a new graph from the entry points simple call "getNewGraph" or wire one in.  For example, the code to get a new graph and add the triple "urn:node", "urn:node", "urn:node" is:
+
+{{{
+JRDFFactory jrdfFactory = SortedMemoryJRDFFactory.getFactory();
+Graph graph = jrdfFactory.getNewGraph();
+TripleFactory tripleFactory = tripleFactory.getTripleFactory();
+URI node = URI.create("urn:node");
+tripleFactory.add(node, node, node); 
+}}}
+
 === Implementations of LongIndex and NodePool ===
 
 There is in memory, BDB and db4o implementations of both LongIndex and NodePool interfaces.  JRDF requires three long indexes (in order to index each combination of triples which is through the GraphHandler interface),  These indexes are arranged in 012, 120 and 201, where 0 refers to subject nodes, 1 refers to predicate nodes and 2 refers to object nodes.  
@@ -111,3 +121,5 @@ The following creates an in memory, graph that returns sorted results using Spri
 }}}
 
 == SPARQL Connection ==
+
+JRDF contains a basic SPARQL implementation that provides the operations JOIN (.), OPTIONAL and UNION.  A connection is required in order to issue SPARQL queries.  JRDFFactory's allow the creation of new connections.  Simply call, "getNewSparqlConnection" and then parse the Graph and query string into "executeQuery".
