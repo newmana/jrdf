@@ -84,7 +84,7 @@ graph.add(node2, node1, node2);
 
 === Resources ===
 
-An RDF Resource is either a blank node or a URI Reference.  JRDF provides a way to create or wrap existing Blank Nodes and URI References and treat them as resources.  It also provides a shorter way of adding or removing values related to the resource and to return any associated values.
+An RDF Resource is either a blank node or a URI Reference.  JRDF provides a way to create new Resource or wrap an existing Blank Node or URI Reference.  Resources provide a shorter , easier, way to add or remove values associated to the resource or to return any associated values.
 
 == Triple Factory ==
 
