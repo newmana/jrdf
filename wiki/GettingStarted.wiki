@@ -118,6 +118,15 @@ _1 urn:node urn:node
 urn:node urn:node _1
 }}}
 
+To create the above graph:
+{{{
+...
+Node node1 = elementFactory.createURIReference(URI.create("urn:node"));
+Node node2 = elementFactory.createBlankNode();
+graph.add(node2, node1, node1);
+graph.add(node1, node1, node2);
+}}}
+
 So they cannot be added using the TripleFactory and must use the Graph Element Factory and add them to the Graph.
 
 === Reifying Triples ===
