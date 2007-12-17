@@ -2,7 +2,7 @@
 
 = Getting Started=
 
-To create an in memory graph you must use a Factory - either an in memory factory or an on disk one.
+To create an in graph you must use a Factory - either an in memory factory or an on disk one.
 
 To create an in memory factory and add the triple "urn:node, urn:node, urn:node" requires the following code:
 
