@@ -122,7 +122,7 @@ So they cannot be added using the TripleFactory and must use the Graph Element F
 
 === Reifying Triples ===
 
-RDF Reification allows you to make statements about a triple.  The triple may or may not exist and reifying a triple does not add it to the graph - it only adds the 4 triples talks about the reified triple.
+RDF Reification allows you to make statements about a triple.  The triple may or may not exist and reifying a triple does not add it to the graph - it only adds the 4 triples indicating that the triple is reified.
 
 To reify a triple:
 {{{
