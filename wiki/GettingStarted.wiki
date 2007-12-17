@@ -106,6 +106,8 @@ finally {
 graph.remove(foo, foo, foo);
 }}}
 
+Finding nodes in the graph allows nodes by value to be specified or for the wildcards ANY_SUBJECT, ANY_PREDICATE and ANY_OBJECT to be used.  In the above example, all three wildcards are used to return the entire graph.
+
 === Resources ===
 
 An RDF Resource is either a blank node or a URI Reference.  JRDF provides a way to create new Resource or wrap an existing Blank Node or URI Reference.  Resources provide an easier way to add or remove values associated to the resource or to return any associated values.  For example, to represent a supplier with a sno, name, status and city:
