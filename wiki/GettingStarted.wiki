@@ -23,7 +23,7 @@ JRDFFactory jrdfFactory = SortedDiskJRDFFactory.getFactory();
 
 === Literals ===
 
-The Element Factory also allows the creation of literals.  To create the typed literal "Hello World"^^xsd:String:
+The Element Factory also allows the creation of literals.  To create the typed literal "Hello World"^^xsd:string:
 
 {{{
 ...
@@ -31,6 +31,26 @@ Node node = elementFactory.createURIReference(URI.create("urn:node"));
 Literal literal = elementFactory.createLiteral("Hello World", org.jrdf.vocabulary.XSD.STRING);
 graph.add(node, node, literal);
 }}}
+
+Literals can also be created from native Java types.  By calling "convertToLiteral" the Java object is converted to a JRDF literal.  For example to create the Literal "7"^^xsd:int:
+{{{
+...
+Literal literal = elementFactory.createLiteral(7);
+}}}
+
+The mapping from Java types to XSD types is as follows:
+|| Java Type || XSD Type ||
+|| NULL_URI  || xsd:string ||
+|| String || xsd:string ||
+|| Boolean || xsd:boolean ||
+|| Decimal || xsd:decimal ||
+|| Float || xsd:float ||
+|| Double || xsd:double ||
+|| GregorianCalendar || xsd:dateTime ||
+|| java.sql.Date || xsd:dateTime ||
+|| java.util.Date || xsd:DateTime ||
+|| QName || xsd:QName ||
+|| BigInteger
 
 === Blank Nodes ===
 
