@@ -14,7 +14,7 @@ URI node = URI.create("urn:node");
 tripleFactory.add(node, node, node);
 }}}
 
-To create an on disk graph replace the first line with:
+To create an on disk graph replace the first line with (this current requires db4o and BDB Java Edition installed in the class path):
 {{{
 JRDFFactory jrdfFactory = SortedDiskJRDFFactory.getFactory();
 }}}
