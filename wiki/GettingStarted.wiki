@@ -143,9 +143,9 @@ ClosableIterator<SubjectNode> subjects = smith.getSubjects(name);
 == Triple Factory ==
 
 The Triple factory offers a short cut for some frequent operations such as adding RDF standard data structures.  It allows:
-* adding triples directly to the Graph without having to create the individual nodes first, 
-* triple reification and 
-* creation of RDF Containers and Collections (Bag, Alt, Collection and Sequence).
+  * adding triples directly to the Graph without having to create the individual nodes first, 
+  * triple reification and 
+  * creation of RDF Containers and Collections (Bag, Alt, Collection and Sequence).
 
 === URI Reference ===
 
