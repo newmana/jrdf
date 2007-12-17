@@ -50,7 +50,14 @@ The mapping from Java types to XSD types is as follows:
 || java.sql.Date || xsd:dateTime ||
 || java.util.Date || xsd:DateTime ||
 || QName || xsd:QName ||
-|| BigInteger
+|| BigInteger (positive value) || xsd:nonNegativeInteger ||
+|| BigInteger (negative value) || xsd:nonPositiveInteger ||
+|| Long || xsd:long ||
+|| Integer || xsd:int ||
+|| Short || xsd:short ||
+|| Byte || xsd:byte ||
+
+The default, if no mapping is found is xsd:string.
 
 === Blank Nodes ===
 
