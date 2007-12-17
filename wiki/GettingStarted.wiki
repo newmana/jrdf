@@ -93,6 +93,14 @@ supplier.addValue(status, elementFactory.convertToLiteral(20));
 supplier.addValue(city, elementFactory.convertToLiteral("London"));
 }}}
 
+This creates a graph with 4 triples in it:
+{{{
+_:1 urn:sno "sno"^^xsd:string
+_:1 urn:name "Smith"^^xsd:string
+_:1 urn:status "20"^^xsd:int
+_:1 urn:city "London"^^xsd:string
+}}}
+
 == Triple Factory ==
 
 The Triple factory offers a short cut for some frequent operations such as adding RDF standard data structures.  It allows you to add triples directly to the Graph without having to create the individual nodes first, reify triples and create RDF containers (Bag, Alt, Collection and Sequence).
