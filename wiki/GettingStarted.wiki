@@ -13,3 +13,11 @@ TripleFactory tripleFactory = tripleFactory.getTripleFactory();
 URI node = URI.create("urn:node");
 tripleFactory.add(node, node, node);
 }}}
+
+To create literals, replace the last parameter with one or two parameters specifying the Literal.  For example, to create a literal with a data type of "xsd:string" requires the following code:
+
+{{{
+...
+URI node = URI.create("urn:node");
+tripleFactory.add(node, node, "Hello World", org.jrdf.vocabulary.XSD.STRING);
+}}}
