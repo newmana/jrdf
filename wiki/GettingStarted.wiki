@@ -23,6 +23,16 @@ To create an on disk graph replace the first line with (this current requires db
 JRDFFactory jrdfFactory = SortedDiskJRDFFactory.getFactory();
 }}}
 
+=== URI References ===
+
+URI References in RDF must be absolute URIs.  This is the default behaviour in JRDF.  However, it can be expensive or unnecessary to check that an URI is absolute to create a URI.  Both of these methods of creating URI References is supported: 
+{{{
+// Check if URI is absolute
+Node node1 = elementFactory.createURIReference(URI.create("urn:node"));
+// Don't check if URI is absolute
+Node node2 = elementFactory.createURIReference(URI.create("urn:node"), false);
+}}}
+
 === Literals ===
 
 The Element Factory also allows the creation of literals.  To create the typed literal "Hello World"^^xsd:string:
