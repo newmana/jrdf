@@ -88,7 +88,7 @@ An RDF Resource is either a blank node or a URI Reference.  JRDF provides a way 
 {{{
 Resource supplier = elementFactory.createResource();
 supplier.addValue(sno, elementFactory.convertToLiteral("sno"));
-supplier.addValue(name, elementFactory.convertToLiteral("Smith"));
+supplier.addValue(name, elementFactory.createResource("urn:Smith"));
 supplier.addValue(status, elementFactory.convertToLiteral(20));
 supplier.addValue(city, elementFactory.convertToLiteral("London"));
 }}}
@@ -96,10 +96,12 @@ supplier.addValue(city, elementFactory.convertToLiteral("London"));
 This creates a graph with 4 triples in it:
 {{{
 _:1 urn:sno "sno"^^xsd:string
-_:1 urn:name "Smith"^^xsd:string
+_:1 urn:name urn:Smith
 _:1 urn:status "20"^^xsd:int
 _:1 urn:city "London"^^xsd:string
 }}}
+
+Resources give you a way to get all the values of a given predicate for a Resource or to get all the subjects of a Resource of a given predicate.
 
 == Triple Factory ==
 
