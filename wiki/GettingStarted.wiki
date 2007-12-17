@@ -201,4 +201,25 @@ _:1 rdf:Predicate urn:node
 _:1 rdf:Object urn:node
 }}}
 
-=== RDF Containers ===
+=== RDF Containers and Collections ===
+RDF Containers and Collections have many similarities with Java's Collection classes.  JRDF has taken the Java Collections and implemented the 3 different types of RDF Containers and the one RDF Collection.  They have the following properties:
+|| Type || Ordered || Duplicates || Closed ||
+|| Alt || No || No || No ||
+|| Bag || No || Yes || No ||
+|| Collection || Yes, Linked list || Yes || Yes ||
+|| Sequence || Yes, FIFO (First In, First Out) || Yes || No ||
+
+Being closed means being able to say that there are only the currently specified number of members that belong to the group.
+
+You can create a collection, add triples to it and then add it to the graph using the Triple Factory.  For example:
+{{{
+Collection collection = new CollectionImpl();
+URIReference fruit1 = elementFactory.createURIReference(URI.create("http://example.org/banana"));
+URIReference fruit2 = elementFactory.createURIReference(URI.create("http://example.org/kiwi"));
+collection.add(fruit1);
+collection.add(fruit2);
+BlankNode list = elementFactory.createBlankNode();
+tripleFactory.add(list, collection);
+}}}
+
+After the collection has been added new values can be added but the collection must be re-added to the graph.
