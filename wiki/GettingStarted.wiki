@@ -82,6 +82,19 @@ Node node2 = elementFactory.createBlankNode();
 graph.add(node2, node1, node2);
 }}}
 
+=== Using the Graph ===
+The Graph has methods that allow you to add, remove, and find triples.
+
+The following is an example showing all three operations:
+{{{
+TripleFactory tripleFactory = graph.getTripleFactory();
+GraphElementFactory elementFactory = graph.getElementFactory();
+URIReference foo = elementFactory.createURIReference(URI.create("urn:foo"));
+URIReference bar = elementFactory.createURIReference(URI.create("urn:bar"));
+graph.add(foo, foo, foo);
+graph.add(bar, bar, bar);
+}}}
+
 === Resources ===
 
 An RDF Resource is either a blank node or a URI Reference.  JRDF provides a way to create new Resource or wrap an existing Blank Node or URI Reference.  Resources provide an easier way to add or remove values associated to the resource or to return any associated values.  For example, to represent a supplier with a sno, name, status and city:
