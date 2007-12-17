@@ -9,15 +9,53 @@ To create an in memory factory and add the triple "urn:node, urn:node, urn:node"
 {{{
 JRDFFactory jrdfFactory = SortedMemoryJRDFFactory.getFactory();
 Graph graph = jrdfFactory.getNewGraph();
-TripleFactory tripleFactory = tripleFactory.getTripleFactory();
-URI node = URI.create("urn:node");
-tripleFactory.add(node, node, node);
+GraphElementFactory elementFactory = graph.getElementFactory();
+Node node = elementFactory.createURIReference(URI.create("urn:node"));
+graph.add(node, node, node);
 }}}
 
 To create an on disk graph replace the first line with (this current requires db4o and BDB Java Edition installed in the class path):
 {{{
 JRDFFactory jrdfFactory = SortedDiskJRDFFactory.getFactory();
 }}}
+
+== Literals ==
+
+The Element Factory also allows the creation of literals:
+
+{{{
+...
+Node node = elementFactory.createURIReference(URI.create("urn:node"));
+Literal literal = elementFactory.createLiteral("Hello World", org.jrdf.vocabulary.XSD.STRING);
+graph.add(node, node, literal);
+}}}
+
+== Blank Nodes ==
+
+Blank nodes can also be created using the Element Factory:
+
+{{{
+...
+Node node1 = elementFactory.createURIReference(URI.create("urn:node"));
+Node node2 = elementFactory.createBlankNode();
+graph.add(node1, node, node1);
+}}}
+
+== Triple Factory ==
+
+The Triple factory allows you to add triples directly to the Graph without having to create the individual nodes first.
+
+== URI Reference ==
+
+To create a triple with URI References requires the following code:
+
+{{{
+...
+URI node = URI.create("urn:node");
+tripleFactory.add(node, node, node);
+}}}
+
+== Literals ==
 
 To create literals, replace the last parameter with one or two parameters specifying the Literal.  For example, to create a literal with a data type of "xsd:string" requires the following code:
 
@@ -26,3 +64,13 @@ To create literals, replace the last parameter with one or two parameters specif
 URI node = URI.create("urn:node");
 tripleFactory.add(node, node, "Hello World", org.jrdf.vocabulary.XSD.STRING);
 }}}
+
+== Blank Nodes ==
+Blank nodes are a more difficult to add as the blank node made need to be added to many triples.  For example:
+
+{{{
+_1 urn:node urn:node
+urn:node urn:node _1
+}}}
+
+So they cannot be added using the TripleFactory and must use the Graph Element Factory and add them to the Graph.
