@@ -128,14 +128,14 @@ tripleFactory.add(node, node, "Hello World", org.jrdf.vocabulary.XSD.STRING);
 }}}
 
 === Blank Nodes ===
-Blank nodes are a more difficult to add as the blank node made need to be added to many triples.  For example:
+Blank nodes are difficult to add across multiple triples.  As a reference to the same blank node must be kept.  For example:
 
 {{{
 _1 urn:node urn:node
 urn:node urn:node _1
 }}}
 
-To create the above graph:
+Requires the following code:
 {{{
 ...
 Node node1 = elementFactory.createURIReference(URI.create("urn:node"));
@@ -144,7 +144,7 @@ graph.add(node2, node1, node1);
 graph.add(node1, node1, node2);
 }}}
 
-So they cannot be added using the TripleFactory and must use the Graph Element Factory and add them to the Graph.
+Each time createBlankNode() is called a new blank node is created so they cannot be added using the TripleFactory.  The combination of using a variable, the Graph Element Factory and then adding them to the Graph is therefore required.
 
 === Reifying Triples ===
 
