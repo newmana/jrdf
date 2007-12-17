@@ -111,8 +111,9 @@ graph.remove(foo, foo, foo);
 An RDF Resource is either a blank node or a URI Reference.  JRDF provides a way to create new Resource or wrap an existing Blank Node or URI Reference.  Resources provide an easier way to add or remove values associated to the resource or to return any associated values.  For example, to represent a supplier with a sno, name, status and city:
 {{{
 Resource supplier = elementFactory.createResource();
+Resource smith = elementFactory.createResource("urn:Smith");
 supplier.addValue(sno, elementFactory.convertToLiteral("sno"));
-supplier.addValue(name, elementFactory.createResource("urn:Smith"));
+supplier.addValue(name, smith);
 supplier.addValue(status, elementFactory.convertToLiteral(20));
 supplier.addValue(city, elementFactory.convertToLiteral("London"));
 }}}
@@ -126,6 +127,16 @@ _:1 urn:city "London"^^xsd:string
 }}}
 
 Resources give you a way to get all the values of a given predicate for a Resource or to get all the subjects of a Resource of a given predicate.
+
+For example, to find the status of the supplier:
+{{{
+ClosableIterator<ObjectNode> objects = supplier.getObjects(status);
+}}}
+
+Or to find the supplier(s) with the name "urn:Smith":
+{{{
+ClosableIterator<SubjectNode> subjects = smith.getSubjects(name);
+}}}
 
 == Triple Factory ==
 
