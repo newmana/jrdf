@@ -122,4 +122,22 @@ So they cannot be added using the TripleFactory and must use the Graph Element F
 
 === Reifying Triples ===
 
+RDF Reification allows you to make statements about a triple.  The triple may or may not exist and reifying a triple does not add it to the graph - it only adds the 4 triples talks about the reified triple.
+
+To reify a triple:
+{{{
+// Note: Creating a triple - not adding it to the Graph.
+Triple triple = tripleFactory.createTriple(node, node, node);
+BlankNode bnode = elementFactory.createBlankNode();
+tripleFactory.reifyTriple(triple, bnode);
+}}}
+
+This creates four triples:
+{{{
+_:1 rdf:Type rdf:Statement 
+_:1 rdf:Subject urn:node
+_:1 rdf:Predicate urn:node
+_:1 rdf:Object urn:node
+}}}
+
 === RDF Containers ===
