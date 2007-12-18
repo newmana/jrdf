@@ -4,6 +4,12 @@
 
 JRDF has a simple to use interface that follows the RDF standard for the creation and management of RDF graphs.  Local graphs are graphs that rely on a node pool and string pool for the creation of RDF data structures.  This places certain limits on how these items are used.
 
+== Nodes ==
+
+JRDF's model of RDF nodes uses a hierarchy of interfaces.  At the top of the class hierarchy is the Node.  This is subclassed by positional nodes: Subject, Predicate and Object.  These are then further subclasses by the appropriate typed nodes: bnode (blank node), URI and Literal.
+
+[http://jrdf.googlecode.com/files/JRDFGraphNodes.png]
+
 == Graph and Graph Element Factory ==
 
 To create a local graph you must use a Factory - either an in memory factory or an on disk one.  A local graph requires the creation of RDF structures (triples, literals, URI References, etc.) from a specific RDF graph.  This is done using a Graph Element Factory and Triple Factory to create these structures.
