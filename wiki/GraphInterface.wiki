@@ -1,9 +1,0 @@
-#summary One-sentence summary of this page.
-
-= JRDF's Graph Interface =
-
-== Nodes ==
-
-JRDF's model of RDF nodes uses a hierarchy of interfaces.  At the top of the class hierarchy is the Node.  This is subclassed by positional nodes: Subject, Predicate and Object.  These are then further subclasses by the appropriate typed nodes: bnode (blank node), URI and Literal.
-
-[http://jrdf.googlecode.com/files/JRDFGraphNodes.png]
