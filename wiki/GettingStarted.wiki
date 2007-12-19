@@ -33,7 +33,7 @@ JRDFFactory jrdfFactory = SortedDiskJRDFFactory.getFactory();
 
 === URI References ===
 
-A URI Reference in RDF must be an absolute URI.  This is the default behaviour in JRDF.  However, it can be expensive or unnecessary to check that a URI is absolute before creating a URI Reference.  Both of these methods of creating URI References is supported: 
+A URI Reference in RDF must be an absolute URI.  This is the default behaviour in JRDF.  However, it can be expensive or unnecessary to check that a URI is absolute before creating a URI Reference.  Both of these methods for creating URI References is supported: 
 {{{
 // Check if URI is absolute
 Node node1 = elementFactory.createURIReference(URI.create("urn:node"));
