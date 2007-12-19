@@ -22,7 +22,7 @@ The use of IoC can be taken to the finest level, where each object is created th
 In order to find a balance between wiring everything and wiring very few things entry points have been defined to allow the user of a system determine not only how to use JRDF without an IoC container but it also reduces the complexity in determining what to wire up if a container is already being used.  This makes it easier to switch to another IoC container too.
 
 = Entry Points =
-In order to use JRDF it must be obvious where to start, to be able to create the initial set of object.
+In order to use JRDF it must be obvious where to start, to be able to create the initial set of objects.
 
 The [http://jrdf.sourceforge.net/0.5.1/doc/javadoc/org/jrdf/JRDFFactory.html JRDFFactory] interface is the main entry point to JRDF.  It provides access to JRDF graphs and SPARQL connections.
 
