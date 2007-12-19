@@ -216,7 +216,7 @@ _:1 rdf:Object urn:node
 
 === RDF Containers and Collections ===
 RDF Containers and Collections have many similarities with Java's Collection classes.  JRDF has taken the Java Collections and implemented the 3 different types of RDF Containers and the one RDF Collection.  They have the following properties:
-|| Type || Ordered || Duplicates || Closed ||
+|| *Type* || *Ordered* || *Duplicates* || *Closed* ||
 || Alt || No || No || No ||
 || Bag || No || Yes || No ||
 || Collection || Yes, Linked list || Yes || Yes ||
