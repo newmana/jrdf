@@ -1,0 +1,24 @@
+#summary Notes on using the Java BDB implementation.
+
+= Using Java BDB in JRDF =
+
+Currently, one of the implementations used to store triples in JRDF is BDB.  It has its own set of idioms to be aware of when being used.
+
+= Creating a new MapFactory =
+Unlike the in memory map factory the BDB MapFactory is tied to a BDB Environment which must be carefully managed.
+
+If you wish to use a the MapFactory outside of the JRDF Graph Factory the way to construct a map factory is as follows:
+{{{
+// Create a new directory that implements the DirectoryHandler interface.
+// Do no use the TempDirHandler (this is for the JRDF's use only)
+DirHandler dirHandler = new DirHandler();
+BdbEnvironmentHandler envHanlder = new BdbEnvironmentHandlerImpl(dirHandler);
+// Ensure that the database name, the second entry, is unique
+MapFactory mapFactory = new BdbMapFactory(handler, "seqDB");
+}}}
+
+If you wish to cleanup (delete directories and remove memory used) ensure to call close on the mapFactory:
+{{{
+mapFactory.close();
+dirHandler.removeDir();
+}}}
