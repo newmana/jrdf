@@ -201,7 +201,7 @@ RDF Reification allows you to make statements about a triple.  The triple may or
 To reify a triple:
 {{{
 // Note: Creating a triple - not adding it to the Graph.
-Triple triple = tripleFactory.createTriple(node, node, node);
+Triple triple = tripleFactory.createTriple(uriNode, uriNode, uriNode);
 BlankNode bnode = elementFactory.createBlankNode();
 tripleFactory.reifyTriple(triple, bnode);
 }}}
