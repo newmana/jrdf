@@ -101,7 +101,7 @@ URIReference foo = elementFactory.createURIReference(URI.create("urn:foo"));
 URIReference bar = elementFactory.createURIReference(URI.create("urn:bar"));
 graph.add(foo, foo, foo);
 graph.add(bar, bar, bar);
-ClosableIterator<Triple> tripleIter = graph.find(AnySubject.ANY_SUBJECT, AnyPredicate.ANY_PREDICATE, AnyObject.ANY_OBJECT);
+ClosableIterator<Triple> tripleIter = graph.find(AnySubjectNode.ANY_SUBJECT, AnyPredicateNode.ANY_PREDICATE, AnyObjectNode.ANY_OBJECT);
 try {
   while (tripleIter.hasNext()) {
     Triple triple = tripleIter.next();
