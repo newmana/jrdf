@@ -186,10 +186,10 @@ urn:node urn:node _1
 Requires the following code:
 {{{
 ...
-Node node1 = elementFactory.createURIReference(URI.create("urn:node"));
-Node node2 = elementFactory.createBlankNode();
-graph.add(node2, node1, node1);
-graph.add(node1, node1, node2);
+Node uriNode = elementFactory.createURIReference(URI.create("urn:node"));
+Node bnode = elementFactory.createBlankNode();
+graph.add(bnode, uriNode, uriNode);
+graph.add(uriNode, uriNode, bnode);
 }}}
 
 Each time createBlankNode() is called a new blank node is created so they cannot be added using the TripleFactory.  The combination of using a variable, the Graph Element Factory and then adding them to the Graph is therefore required.
