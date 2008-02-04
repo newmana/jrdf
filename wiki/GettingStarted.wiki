@@ -52,7 +52,7 @@ Literal literal = elementFactory.createLiteral("Hello World", org.jrdf.vocabular
 graph.add(node, node, literal);
 }}}
 
-Literals can also be created from native Java types.  By calling "convertToLiteral" the Java object is converted to a JRDF literal.  For example to create the Literal "7"^^xsd:int:
+Literals can also be created from native Java types.  By calling "createLiteral" the Java object is converted to a JRDF literal.  For example to create the Literal "7"^^xsd:int:
 {{{
 ...
 Literal literal = elementFactory.createLiteral(7);
@@ -121,12 +121,14 @@ Finding nodes in the graph allows nodes by value to be specified or for the wild
 An RDF Resource is either a blank node or a URI Reference.  JRDF provides a way to create new Resource or wrap an existing Blank Node or URI Reference.  Resources provide an easier way to add or remove values associated to the resource or to return any associated values.  For example, to represent a supplier with a sno, name, status and city:
 {{{
 Resource supplier = elementFactory.createResource();
-Resource smith = elementFactory.createResource("urn:Smith");
-supplier.addValue(sno, elementFactory.convertToLiteral("sno"));
+Resource smith = elementFactory.createResource(URI.create("urn:Smith"));
+supplier.addValue(sno, "sno");
 supplier.addValue(name, smith);
-supplier.addValue(status, elementFactory.convertToLiteral(20));
-supplier.addValue(city, elementFactory.convertToLiteral("London"));
+supplier.addValue(status, 20);
+supplier.addValue(city, "London");
 }}}
+
+
 
 This creates a graph with 4 triples in it:
 {{{
