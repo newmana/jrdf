@@ -118,17 +118,14 @@ Finding nodes in the graph allows nodes by value to be specified or for the wild
 
 === Resources ===
 
-An RDF Resource is either a blank node or a URI Reference.  JRDF provides a way to create new Resource or wrap an existing Blank Node or URI Reference.  Resources provide an easier way to add or remove values associated to the resource or to return any associated values.  For example, to represent a supplier with a sno, name, status and city:
+An RDF Resource is either a blank node or a URI Reference.  JRDF provides a way to create new Resource or wrap an existing Blank Node or URI Reference.  Resources provide an easier way to add or remove values associated to the resource or to return any associated values.  For example, to represent a supplier with a supplier number (S1), name ("urn:Smith"), status (20) and city ("London"):
 {{{
 Resource supplier = elementFactory.createResource();
-Resource smith = elementFactory.createResource(URI.create("urn:Smith"));
-supplier.addValue(sno, "sno");
-supplier.addValue(name, smith);
+supplier.addValue(sno, "S1");
+supplier.addValue(name, URI.create("urn:Smith"));
 supplier.addValue(status, 20);
 supplier.addValue(city, "London");
 }}}
-
-
 
 This creates a graph with 4 triples in it:
 {{{
