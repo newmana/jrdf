@@ -78,6 +78,12 @@ The mapping from Java types to XSD types is as follows:
 
 The default, if no mapping is found, is xsd:string.  New mappings can be added through add a DatatypeValue to the DatatypeFactory. 
 
+Note: To create a literal with an xsd:string type use:
+{{{
+...
+Literal literal = elementFactory.createLiteral("foo", XSD.STRING);
+}}}
+
 === Blank Nodes ===
 
 Blank nodes can also be created using the Element Factory:
