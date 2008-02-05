@@ -77,7 +77,7 @@ The mapping from Java types to XSD types is as follows:
 || Short || xsd:short ||
 || Byte || xsd:byte ||
 
-The default, if no mapping is found is xsd:string.  New mappings can be added through add a DatatypeValue to the DatatypeFactory. 
+The default, if no mapping is found, is xsd:string.  New mappings can be added through add a DatatypeValue to the DatatypeFactory. 
 
 === Blank Nodes ===
 
