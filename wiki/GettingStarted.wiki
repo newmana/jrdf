@@ -239,4 +239,4 @@ BlankNode list = elementFactory.createBlankNode();
 tripleFactory.add(list, collection);
 }}}
 
-After the collection has been added new values can be added but the collection must be re-added to the graph.
+After the collection has been added to the graph, via the TripleFactory, new values can be added but the collection must be re-added to the graph.
