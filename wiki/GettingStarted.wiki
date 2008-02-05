@@ -60,7 +60,6 @@ Literal literal = elementFactory.createLiteral(7);
 
 The mapping from Java types to XSD types is as follows:
 || *Java Type* || *XSD Type* ||
-|| NULL_URI  || None ||
 || String || None ||
 || Boolean || xsd:boolean ||
 || Decimal || xsd:decimal ||
