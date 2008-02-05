@@ -129,12 +129,12 @@ Resource supplier = elementFactory.createResource();
 supplier.addValue(sno, "S1");
 supplier.addValue(name, URI.create("urn:Smith"));
 supplier.addValue(status, 20);
-supplier.addValue(city, "London");
+supplier.addValue(city, "London", XSD.STRING);
 }}}
 
 This creates a graph with 4 triples in it:
 {{{
-_:1 urn:sno "sno"^^xsd:string
+_:1 urn:sno "S1"
 _:1 urn:name urn:Smith
 _:1 urn:status "20"^^xsd:int
 _:1 urn:city "London"^^xsd:string
