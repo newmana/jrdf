@@ -27,7 +27,7 @@ Can be represented in an RDF molecule as:
     {_ hasUniprotID ‘p46949’}
 }}}
 
-Where the first level of the molecule contains 2 triples (or root triples), the second level contains 2 triples and each of the 3rd levels contains another triple.  Triples with two blank nodes are know as link triples.  The root triples are the first level triples.
+Where the first level of the molecule contains 2 triples (or root triples), the second level contains 2 triples and each of the 3rd levels contains another triple.  Triples with two blank nodes are know as link triples.
 
 RDF molecules are also ordered.  For two nodes the ordering is determined by the following rules:
   * Subject, predicate and object nodes in a triple are compared with each other.
@@ -40,7 +40,7 @@ RDF molecules are also ordered.  For two nodes the ordering is determined by the
 
 For example: s p o > `_` p o > `_` p `_`
 
-Triples that contain at least one blank node are known as "ungrounded triples".  Triples that contain no blank nodes are "grounded triples".  A "link triple" is a triple that contains two blank nodes (as the subject and object).  A "head triple" is the first triple in a molecule as defined by the above ordering.
+Triples that contain at least one blank node are known as "ungrounded triples".  Triples that contain no blank nodes are "grounded triples".  The "root triples" of a molecule are the first level triples.  A "link triple" is a triple that contains two blank nodes (as the subject and object).  A "head triple" is the first triple in a molecule as defined by the above ordering.
 
 As most RDF data will already be in local RDF format we need a way to decompose RDF graphs into molecules.  This process can also be used to remove redundant RDF triples and so produce a lean RDF graph. 
 
