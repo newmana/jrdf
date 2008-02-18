@@ -7,12 +7,14 @@ Global Graphs contrast with [GettingStarted local graphs] in that they do not re
 = RDF Molecules =
 RDF molecules represent a lossless decomposition of an RDF graph.  The main purpose of molecules is to allow blank nodes to be distributed without loss of information or context.  The context in an RDF molecule allows node ids in blank nodes to be discarded and blank nodes are equal or unequal based on the context within an RDF molecule.
 
+As most RDF data will already be in local RDF format we need a way to decompose RDF graphs into molecules.  This process can also be used to remove redundant RDF triples and so produce a lean RDF graph. 
+
 = Decomposing =
 {{{
 Initialize AT, the set of added triples.
 
 Find from a local graph all triples, sort the triples in descending order defined above
-FOR  EACH Triple T not in AT 
+FOR EACH Triple T not in AT 
      create a new molecule M
      IF T is grounded THEN
            Add T to AT
