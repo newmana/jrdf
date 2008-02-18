@@ -38,7 +38,7 @@ RDF molecules are also ordered.  For two nodes the ordering is determined by the
 
 For example: s p o > `_` p o > `_` p `_`
 
-Triples that contain at least one blank node are known as "ungrounded triples".  Triples that contain no blank nodes are "grounded triples".
+Triples that contain at least one blank node are known as "ungrounded triples".  Triples that contain no blank nodes are "grounded triples".  A "link triple" is a triple that contains two blank nodes (as the subject and object).
 
 As most RDF data will already be in local RDF format we need a way to decompose RDF graphs into molecules.  This process can also be used to remove redundant RDF triples and so produce a lean RDF graph. 
 
@@ -53,7 +53,7 @@ FOR EACH Triple T from LGT not in AT
         Add T to AT
     ELSE IF T is Ungrounded THEN
         find all Triples which contain T’s blank nodes
-        IF T is a Link Triple (contains a blank node as both subject and object) THEN
+        IF T is a Link Triple THEN
             Find any triple T’ which has the same subject as T’s object 
             add T’ to a new molecule SM.  
             IF SM contains a triple that is a link triple and matches the head triple of M THEN
