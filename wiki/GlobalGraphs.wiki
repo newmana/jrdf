@@ -72,8 +72,8 @@ findEnclosedTriples(M)
         ELSE
             Add BT to M.
         END IF
-        Add all triples found to the set AT.
     END FOR
+    Add all triples found to the set AT.
 END findEnclosedTriples
 }}}
 
