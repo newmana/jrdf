@@ -59,10 +59,10 @@ findEnclosedTriples(M)
     T is the HeadTriple of M.
     BTS is all triples which contain T's blank nodes that are not in AT.
     FOR EACH Triple BT from BTS
+        Create a new molecule SM adding BT.
+        Add BT to AT.
+        findEnclosedTriples(SM)
         IF BT is a Link Triple THEN
-            Create a new molecule SM adding BT.
-            Add BT to AT.
-            findEnclosedTriples(SM)
             IF BT's object node equals M's subject node THEN
                 Add M to SM.
                 SM becomes M.
