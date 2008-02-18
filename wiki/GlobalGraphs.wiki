@@ -48,25 +48,24 @@ Initialize AT, the set of added triples.
 
 LGT is Sorted Local Graph Triples in Descending Order (defined above)
 FOR EACH Triple T from LGT not in AT 
-     create a new molecule M
-     IF T is Grounded THEN
-           Add T to AT
-     ELSE IF T is Ungrounded THEN
-           find all Triples which contain T’s blank nodes
-          IF T is a Link Triple (contains a blank node as both subject and object) 
-              THEN
-              Find any triple T’ which has the same subject as T’s object 
-              add T’ to a new molecule SM.  
-              IF SM contains a triple that is a link triple and matches the head triple of M THEN
-                   add M to SM.  
-                   The molecule used now becomes SM – that is M = SM.
-               ELSE 
-                    Add SM to M.
-                    Add all triples found to the set AT.
-               END IF
-           ELSE
-               Add T to the molecule M and the set AT.
-       END IF
+    create a new molecule M
+    IF T is Grounded THEN
+        Add T to AT
+    ELSE IF T is Ungrounded THEN
+        find all Triples which contain T’s blank nodes
+        IF T is a Link Triple (contains a blank node as both subject and object) THEN
+            Find any triple T’ which has the same subject as T’s object 
+            add T’ to a new molecule SM.  
+            IF SM contains a triple that is a link triple and matches the head triple of M THEN
+                add M to SM.  
+                The molecule used now becomes SM – that is M = SM.
+            ELSE 
+                Add SM to M.
+                Add all triples found to the set AT.
+            END IF
+        ELSE
+            Add T to the molecule M and the set AT.
+        END IF
     END IF
 END FOR
 }}}
