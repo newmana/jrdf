@@ -44,8 +44,8 @@ As most RDF data will already be in local RDF format we need a way to decompose 
 
 = Decomposing =
 {{{
-Initialize AT (the set of added triples).
-LGT is Sorted Local Graph Triples in Descending Order (defined above).
+AT is the the set of added triples.
+LGT is a set of Sorted Local Graph Triples in Descending Order (defined above).
 FOR EACH Triple T from LGT not in AT 
     Create a new molecule M adding T.
     IF T is Grounded THEN
@@ -57,8 +57,8 @@ END FOR
 
 findEnclosedTriples(M)
     T is the HeadTriple of M.
-    BTS is all triples which contain T's blank nodes that are not in AT.
-    FOR EACH Triple BT from BTS
+    BTS is a set of all triples which contain T's blank nodes.
+    FOR EACH Triple BT from BTS not in AT
         Create a new molecule SM adding BT.
         Add BT to AT.
         findEnclosedTriples(SM)
