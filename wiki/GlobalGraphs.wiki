@@ -27,8 +27,7 @@ Can be represented in an RDF molecule as:
     {_ hasUniprotID ‘p46949’}
 }}}
 
-Where the first level of the molecule contains 1 triple, the second level contains 2 triples and each of the 3rd levels contains another triple.  Triples with two blank nodes are know as link triples.  The root triple of the first level molecule is 
-{_  observedInteraction _}, the root triples of the second level molecule is {_ participant _} and {_ participant _} and so on.
+Where the first level of the molecule contains 2 triples (or root triples), the second level contains 2 triples and each of the 3rd levels contains another triple.  Triples with two blank nodes are know as link triples.  The root triples are the first level triples.
 
 RDF molecules are also ordered.  For two nodes the ordering is determined by the following rules:
   * Subject, predicate and object nodes in a triple are compared with each other.
