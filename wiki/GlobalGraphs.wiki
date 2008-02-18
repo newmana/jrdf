@@ -46,8 +46,7 @@ FOR EACH Triple T not in AT
               THEN
               Find any triple T’ which has the same subject as T’s object 
               add T’ to a new molecule SM.  
- IF SM contains a triple that is a link triple and matches the head 
-      triple of M THEN
+              IF SM contains a triple that is a link triple and matches the head triple of M THEN
                    add M to SM.  
                    The molecule used now becomes SM – that is M = SM.
                ELSE 
