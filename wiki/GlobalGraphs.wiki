@@ -5,7 +5,72 @@
 Global Graphs contrast with [GettingStarted local graphs] in that they do not require a node pool and unique identifiers for graph nodes.  This means that nodes can be used in a distributed environment.
 
 = Decomposing =
+{{{
+Initialize AT, the set of added triples.
+
+Find from a local graph all triples, sort the triples in descending order defined above
+FOR  EACH Triple T not in AT 
+     create a new molecule M
+     IF T is grounded THEN
+           Add T to AT
+     ELSE IF T is Ungrounded (contains a blank node) THEN
+           find all Triples which contain T’s blank nodes
+          IF T is a Link Triple (contains a blank node as both subject and object) 
+              THEN
+              Find any triple T’ which has the same subject as T’s object 
+              add T’ to a new molecule SM.  
+ IF SM contains a triple that is a link triple and matches the head 
+      triple of M THEN
+                   add M to SM.  
+                   The molecule used now becomes SM – that is M = SM.
+               ELSE 
+                    Add SM to M.
+                    Add all triples found to the set AT.
+               END IF
+           ELSE
+               Add T to the molecule M and the set AT.
+       END IF
+    END IF
+END FOR
+}}}
 
 = Blank Node Mapping =
+{{{
+findBlankNodeMap(m1, m2)
+
+initialize BM, the mapping of blank nodes of m1 and m2
+FOR EACH root triple t1 in m1
+        Find the corresponding blank node t2 in m2
+        LET sm1 = m1.submolecule for t1
+        LET sm2 = m2. submolecule for t2
+        IF sm1 != null AND sm2 != null THEN
+               nm = findBlankNodeMap(sm1, sm2)
+               IF nm = empty THEN
+                      return empty map
+               ELSE
+                      add nm to BM
+               END IF
+        ELSE IF t1.submolecule = null AND t2.submolecule = null THEN
+               add map between blank nodes in t1 and t2
+        ELSE 
+               return empty map
+        END IF
+END FOR
+}}}
 
 = Molecule Merging =
+{{{
+Merge(m1, m2, map)
+
+create new molecule m3
+make the blank nodes in m2 the same using the map
+add root triples of m1 and m2 to root triples of m3
+FOR EACH t1 = root triple of m3
+        LET sm1 = m1.submolecule for t1
+        LET sm2 = m2.submolecule for t1
+        IF sm1 != null AND sm2 != null THEN
+              sm3 = merge(sm1, sm2, map)
+              add sm3 to m3 off root triple t1
+        END IF
+END FOR
+}}}
