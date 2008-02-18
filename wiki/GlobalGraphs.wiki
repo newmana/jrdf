@@ -86,28 +86,30 @@ END findEnclosedTriples
 }}}
 
 = Blank Node Mapping =
+Iterator through all the new molecules creating a mapping of blank nodes between molecules.
+
 {{{
 findBlankNodeMap(m1, m2)
-
-BM is a map of blank nodes from m1 to m2 (initially empty).
-FOR EACH root triple t1 in m1
-    Find the root triple t2 from m2 that corresponds to t1.
-    LET sm1 = m1.submolecule for t1.
-    LET sm2 = m2.submolecule for t2.
-    IF sm1 != null AND sm2 != null THEN
-        nm = findBlankNodeMap(sm1, sm2).
-        IF nm = empty THEN
+    BM is a map of blank nodes from m1 to m2 (initially empty).
+    FOR EACH root triple t1 in m1
+        Find the root triple t2 from m2 that corresponds to t1.
+        LET sm1 = m1.submolecule for t1.
+        LET sm2 = m2.submolecule for t2.
+        IF sm1 != null AND sm2 != null THEN
+            nm = findBlankNodeMap(sm1, sm2).
+            IF nm = empty THEN
+                return empty map.
+            ELSE
+                add nm to BM.
+            END IF
+        ELSE IF t1.submolecule = null AND t2.submolecule = null THEN
+            add map between blank nodes in t1 and t2.
+        ELSE 
             return empty map.
-        ELSE
-            add nm to BM.
         END IF
-    ELSE IF t1.submolecule = null AND t2.submolecule = null THEN
-        add map between blank nodes in t1 and t2.
-    ELSE 
-        return empty map.
-    END IF
+    END FOR
     return BM.
-END FOR
+END findBlankNodeMap
 }}}
 
 = Molecule Merging =
