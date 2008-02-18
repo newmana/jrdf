@@ -28,13 +28,13 @@ Can be represented in an RDF molecule as:
 Where the first level of the molecule contains 1 triple, the second level contains 2 triples and each of the 3rd levels contains another triple.  Triples with two blank nodes are know as link triples.
 
 RDF molecules are also ordered.  For two nodes the ordering is determined by the following rules:
-* Subject, predicate and object nodes in a triple are compared with each other.
-* Node Type
- * Blank node type, is less than;
- * URI Reference node type, is less than;
- * Literal node type.
-* Node Value
- * Comparison of string value based on N3 serialization.
+  * Subject, predicate and object nodes in a triple are compared with each other.
+  * Node Type
+    * Blank node type, is less than;
+    * URI Reference node type, is less than;
+    * Literal node type.
+  * Node Value
+    * Comparison of string value based on N3 serialization.
 
 For example: s p o > _ p o > _ p _
 
