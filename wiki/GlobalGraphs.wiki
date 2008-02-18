@@ -44,7 +44,7 @@ As most RDF data will already be in local RDF format we need a way to decompose 
 {{{
 Initialize AT, the set of added triples.
 
-Find from a local graph all triples, sort the triples in descending order defined above
+Sort Local Graph Triples in Descending Order (defined above)
 FOR EACH Triple T not in AT 
      create a new molecule M
      IF T is grounded THEN
