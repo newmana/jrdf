@@ -44,6 +44,12 @@ Triples that contain at least one blank node are known as "ungrounded triples". 
 
 As most RDF data will already be in local RDF format we need a way to decompose RDF graphs into molecules.  This process can also be used to remove redundant RDF triples and so produce a lean RDF graph. 
 
+= Creating a Global Graph from a Local Graph =
+The current algorithm in creating a global graph from a local graph has three steps:
+  * A graph is decomposed into molecules,
+  * An equivalence blank node map (mapping local blank nodes to other local blank nodes) is created between molecules,
+  * Molecules are merged together using the blank node map.
+
 = Decomposing =
 {{{
 AT is the set of added triples (initially empty).
