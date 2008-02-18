@@ -4,6 +4,9 @@
 
 Global Graphs contrast with [GettingStarted local graphs] in that they do not require a node pool and unique identifiers for graph nodes.  This means that nodes can be used in a distributed environment.
 
+= RDF Molecules =
+RDF molecules represent a lossless decomposition of an RDF graph.  The main purpose of molecules is to allow blank nodes to be distributed without loss of information or context.  The context in an RDF molecule allows node ids in blank nodes to be discarded and blank nodes are equal or unequal based on the context within an RDF molecule.
+
 = Decomposing =
 {{{
 Initialize AT, the set of added triples.
