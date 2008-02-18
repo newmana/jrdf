@@ -86,7 +86,7 @@ END findEnclosedTriples
 }}}
 
 = Blank Node Mapping =
-Iterator through all the new molecules creating a mapping of blank nodes between molecules.
+Iterate through all the new molecules creating a mapping of blank nodes between molecules.
 
 {{{
 findBlankNodeMap(m1, m2)
