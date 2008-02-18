@@ -50,7 +50,7 @@ FOR EACH Triple T from LGT not in AT
     Create a new molecule M adding T.
     IF T is Grounded THEN
         Add T to AT.
-    ELSE IF T is Ungrounded THEN
+    ELSE T is Ungrounded THEN
         findEnclosedTriples(M).
     END IF
 END FOR
