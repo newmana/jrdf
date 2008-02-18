@@ -18,11 +18,11 @@ The structure of an RDF molecule is a recursive structure - RDF molecules contai
 
 Can be represented in an RDF molecule as:
 {{{
-{_:1  observedInteraction _:2}
-  {_:2 participant _:3}
-    {_:3 hasUniprotID ‘p32379’}
-  {_:2 participant _:4}
-    {_:4 hasUniprotID ‘p46949’}
+{_  observedInteraction _}
+  {_ participant _}
+    {_ hasUniprotID ‘p32379’}
+  {_ participant _}
+    {_ hasUniprotID ‘p46949’}
 }}}
 
 Where the first level of the molecule contains 1 triple, the second level contains 2 triples and each of the 3rd levels contains another triple.
