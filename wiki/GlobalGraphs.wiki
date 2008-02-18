@@ -38,35 +38,42 @@ RDF molecules are also ordered.  For two nodes the ordering is determined by the
 
 For example: s p o > `_` p o > `_` p `_`
 
-Triples that contain at least one blank node are known as "ungrounded triples".  Triples that contain no blank nodes are "grounded triples".  A "link triple" is a triple that contains two blank nodes (as the subject and object).
+Triples that contain at least one blank node are known as "ungrounded triples".  Triples that contain no blank nodes are "grounded triples".  A "link triple" is a triple that contains two blank nodes (as the subject and object).  A "head triple" is the first triple in a molecule as defined by the above ordering.
 
 As most RDF data will already be in local RDF format we need a way to decompose RDF graphs into molecules.  This process can also be used to remove redundant RDF triples and so produce a lean RDF graph. 
 
 = Decomposing =
 {{{
-Initialize AT, the set of added triples.
-
-LGT is Sorted Local Graph Triples in Descending Order (defined above)
+Initialize AT (the set of added triples).
+LGT is Sorted Local Graph Triples in Descending Order (defined above).
 FOR EACH Triple T from LGT not in AT 
-    create a new molecule M
+    Create a new molecule M adding T.
     IF T is Grounded THEN
-        Add T to AT
+        Add T to AT.
     ELSE IF T is Ungrounded THEN
-        find all Triples which contain T’s blank nodes
-        IF T is a Link Triple THEN
-            Find any triple T’ which has the same subject as T’s object 
-            add T’ to a new molecule SM.  
-            IF SM contains a triple that is a link triple and matches the head triple of M THEN
-                add M to SM.  
-                The molecule used now becomes SM – that is M = SM.
-            ELSE 
-                Add SM to M.
-                Add all triples found to the set AT.
-            END IF
-        ELSE
-            Add T to the molecule M and the set AT.
-        END IF
+        findEnclosedTriples(M).
     END IF
+END FOR
+
+findEnclosedTriples(M)
+
+T is the HeadTriple of M.
+BTS is All Triples which contain T's blank nodes and not in AT.
+FOR EACH Triple BT from BTS
+    IF BT is a Link Triple THEN
+        Create a new molecule SM adding BT.
+        Add BT to AT.
+        findEnclosedTriples(SM)
+        IF BT's object node equals M's subject node THEN
+            Add M to SM.
+            SM becomes M.
+        ELSE 
+            Add SM to M.
+        END IF
+    ELSE
+        Add BT to M.
+    END IF
+    Add all triples found to the set AT.
 END FOR
 }}}
 
