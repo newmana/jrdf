@@ -36,7 +36,7 @@ RDF molecules are also ordered.  For two nodes the ordering is determined by the
   * Node Value
     * Comparison of string value based on N3 serialization.
 
-For example: s p o > _ p o > _ p _
+For example: s p o > _  p o > _  p _ 
 
 As most RDF data will already be in local RDF format we need a way to decompose RDF graphs into molecules.  This process can also be used to remove redundant RDF triples and so produce a lean RDF graph. 
 
