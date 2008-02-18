@@ -45,7 +45,7 @@ As most RDF data will already be in local RDF format we need a way to decompose 
 = Decomposing =
 {{{
 AT is the set of added triples (initially empty).
-LGT is a set of Sorted Local Graph Triples in Descending Order (defined above).
+LGT is a sorted set in descending order (defined above) of triples from a local graph.
 FOR EACH Triple T from LGT not in AT 
     Create a new molecule M adding T.
     IF T is Grounded THEN
