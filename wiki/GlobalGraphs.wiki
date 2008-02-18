@@ -58,7 +58,7 @@ END FOR
 findEnclosedTriples(M)
 
 T is the HeadTriple of M.
-BTS is All Triples which contain T's blank nodes and not in AT.
+BTS is all triples which contain T's blank nodes that are not in AT.
 FOR EACH Triple BT from BTS
     IF BT is a Link Triple THEN
         Create a new molecule SM adding BT.
