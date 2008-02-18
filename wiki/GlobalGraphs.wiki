@@ -2,12 +2,10 @@
 
 = Global Graphs =
 
-Global Graphs contrast with [LocalGraphs local graphs]
+Global Graphs contrast with [GettingStarted local graphs] in that they do not require a node pool and unique identifiers for graph nodes.  This means that nodes can be used in a distributed environment.
 
+= Decomposing =
 
-= Details =
+= Blank Node Mapping =
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+= Molecule Merging =
