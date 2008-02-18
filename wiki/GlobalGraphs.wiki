@@ -10,6 +10,7 @@ RDF molecules represent a lossless decomposition of an RDF graph.  The main purp
 The structure of an RDF molecule is a recursive structure - RDF molecules contain other RDF molecules through linking triples.  For example, a set of triples:
 {{{
 {_:1  observedInteraction _:2}
+{_:1 type ExperimentalObservation}
 {_:2 participant _:3}
 {_:3 hasUniprotID ‘p32379’}
 {_:2 participant _:4}
@@ -18,6 +19,7 @@ The structure of an RDF molecule is a recursive structure - RDF molecules contai
 
 Can be represented in an RDF molecule as:
 {{{
+{_ type ExperimentalObservation}
 {_  observedInteraction _}
   {_ participant _}
     {_ hasUniprotID ‘p32379’}
@@ -25,7 +27,8 @@ Can be represented in an RDF molecule as:
     {_ hasUniprotID ‘p46949’}
 }}}
 
-Where the first level of the molecule contains 1 triple, the second level contains 2 triples and each of the 3rd levels contains another triple.  Triples with two blank nodes are know as link triples.
+Where the first level of the molecule contains 1 triple, the second level contains 2 triples and each of the 3rd levels contains another triple.  Triples with two blank nodes are know as link triples.  The root triple of the first level molecule is 
+{_  observedInteraction _}, the root triples of the second level molecule is {_ participant _} and {_ participant _} and so on.
 
 RDF molecules are also ordered.  For two nodes the ordering is determined by the following rules:
   * Subject, predicate and object nodes in a triple are compared with each other.
