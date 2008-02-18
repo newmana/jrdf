@@ -56,25 +56,25 @@ FOR EACH Triple T from LGT not in AT
 END FOR
 
 findEnclosedTriples(M)
-
-T is the HeadTriple of M.
-BTS is all triples which contain T's blank nodes that are not in AT.
-FOR EACH Triple BT from BTS
-    IF BT is a Link Triple THEN
-        Create a new molecule SM adding BT.
-        Add BT to AT.
-        findEnclosedTriples(SM)
-        IF BT's object node equals M's subject node THEN
-            Add M to SM.
-            SM becomes M.
-        ELSE 
-            Add SM to M.
+    T is the HeadTriple of M.
+    BTS is all triples which contain T's blank nodes that are not in AT.
+    FOR EACH Triple BT from BTS
+        IF BT is a Link Triple THEN
+            Create a new molecule SM adding BT.
+            Add BT to AT.
+            findEnclosedTriples(SM)
+            IF BT's object node equals M's subject node THEN
+                Add M to SM.
+                SM becomes M.
+            ELSE 
+                Add SM to M.
+            END IF
+        ELSE
+            Add BT to M.
         END IF
-    ELSE
-        Add BT to M.
-    END IF
-    Add all triples found to the set AT.
-END FOR
+        Add all triples found to the set AT.
+    END FOR
+END findEnclosedTriples
 }}}
 
 = Blank Node Mapping =
