@@ -25,7 +25,9 @@ Can be represented in an RDF molecule as:
     {_ hasUniprotID ‘p46949’}
 }}}
 
-Where the first level of the molecule contains 1 triple, the second level contains 2 triples and each of the 3rd levels contains another triple.
+Where the first level of the molecule contains 1 triple, the second level contains 2 triples and each of the 3rd levels contains another triple.  Triples with two blank nodes are know as link triples.
+
+RDF molecules are also ordered.
 
 As most RDF data will already be in local RDF format we need a way to decompose RDF graphs into molecules.  This process can also be used to remove redundant RDF triples and so produce a lean RDF graph. 
 
