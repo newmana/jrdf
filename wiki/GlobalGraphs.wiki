@@ -114,17 +114,20 @@ END findBlankNodeMap
 
 = Molecule Merging =
 {{{
-Merge(m1, m2, map)
-
-create new molecule m3
-make the blank nodes in m2 the same using the map
-add root triples of m1 and m2 to root triples of m3
-FOR EACH t1 = root triple of m3
-        LET sm1 = m1.submolecule for t1
-        LET sm2 = m2.submolecule for t1
-        IF sm1 != null AND sm2 != null THEN
-              sm3 = merge(sm1, sm2, map)
-              add sm3 to m3 off root triple t1
-        END IF
-END FOR
+merge(m1, m2, blankNodeMap)
+    IF m1 subsumes m2 THEN
+        create new molecule m3.
+        replace the blank nodes in m2 with m1's using the blankNodeMap.
+        add the root triples from m1 and m2 to the root triples of m3.
+        FOR EACH root triple t1 in m3
+            LET sm1 = m1.submolecule for t1.
+            LET sm2 = m2.submolecule for t1.
+            IF sm1 != null AND sm2 != null THEN
+                sm3 = merge(sm1, sm2, blankNodeMap).
+                add sm3 to m3 using the root triple t1.
+            END IF
+        END FOR
+    END IF
+    return m3
+END merge
 }}}
