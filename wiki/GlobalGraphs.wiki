@@ -133,6 +133,6 @@ END merge
 }}}
 
 = Node Distribution =
-Within a computing node an implementation of global graphs will use local identifiers.  These are only considered unique within a single computing node.  A graph can be split across multiple nodes leading to potentially duplicate node identifiers.  At least we consider it possible - even though GUID generation within the nodes makes this extremely unlikely.  It may simply be faster to have a counter rather than use GUID generation for example.
+Within a computing node an implementation of global graphs use identifiers local to that node (local identifiers).  These are only considered unique within a single computing node.  A graph can be split across multiple nodes leading to potentially duplicate node identifiers.  At least we consider it possible - even though GUID generation within the nodes makes this extremely unlikely.  It may simply be faster to have a counter rather than use GUID generation for example.
 
 When adding or querying RDF triples or molecules the equality of a molecule is ascertained by ignoring the node ids from molecules across nodes.  Molecules are compared and if equal one is discarded if similar but contain slightly different information then the properties are added to the molecule using the above merging function.
