@@ -2,7 +2,7 @@
 
 = Global Graphs =
 
-Global Graphs contrast with [GettingStarted local graphs] in that they do not require a node pool and unique identifiers for graph nodes.  This means that nodes can be used in a distributed environment.
+Global Graphs contrast with [GettingStarted local graphs] in that they do not require a node pool and globally unique identifiers for graph nodes.  This means that nodes can be used in a distributed environment.
 
 = RDF Molecules =
 RDF molecules represent a lossless decomposition of an RDF graph.  The main purpose of molecules is to allow blank nodes to be distributed without loss of information or context.  The context in an RDF molecule allows node ids in blank nodes to be discarded and blank nodes are equal or unequal based on the context within an RDF molecule.
@@ -131,3 +131,8 @@ merge(m1, m2, blankNodeMap)
     return m3
 END merge
 }}}
+
+= Node Distribution =
+Within a computing node an implementation of global graphs will use local identifiers.  These are only considered unique within a single computing node.  A graph can be split across multiple nodes leading to potentially duplicate node identifiers.  At least we consider it possible - even though GUID generation within the nodes makes this extremely unlikely.  It may simply be faster to have a counter rather than use GUID generation for example.
+
+When adding or querying RDF triples or molecules the equality of a molecule is ascertained by ignoring the node ids from molecules across nodes.  Molecules are compared and if equal one is discarded if similar but contain slightly different information then the properties are added to the molecule using the above merging function.
