@@ -10,7 +10,7 @@ Spring is a popular IoC container.  Using Spring with JRDF allows:
   * The use of existing Spring libraries and extensions.  This includes declarative transactions, JPA, Spring Rich Client, and AOP.
   * Allows integration into other Spring enabled projects (such as [http://springmodules.dev.java.net/ Spring Modules]).
 
-The creation of objects through the container is often called wiring.  JRDF comes with a XML configuration file ([http://jrdf.svn.sourceforge.net/viewvc/jrdf/trunk/jrdf/conf wiring.xml?view=markup wiring.xml]) that defines the creation of various objects.  This includes the lifecycle of the beans and whether the a bean is a singleton (only one instance) or a prototype (instances created new every time).  Spring 2.0 provides a new, custom scope, which allows scopes to be tied to other lifecycles such as threads or HTTP sessions.
+The creation of objects through the container is often called wiring.  JRDF comes with a XML configuration file ([http://jrdf.svn.sourceforge.net/viewvc/jrdf/trunk/jrdf/conf/wiring.xml?view=markup wiring.xml]) that defines the creation of various objects.  This includes the lifecycle of the beans and whether the a bean is a singleton (only one instance) or a prototype (instances created new every time).  Spring 2.0 provides a new, custom scope, which allows scopes to be tied to other lifecycles such as threads or HTTP sessions.
 
 However, it is clear that Spring and most IoC containers are a rather large requirement for most projects.  With this is mind, the use JRDF without an IoC framework is also supported.
 
