@@ -10,7 +10,7 @@ Spring is a popular IoC container.  Using Spring with JRDF allows:
   * The use of existing Spring libraries and extensions.  This includes declarative transactions, JPA, Spring Rich Client, and AOP.
   * Allows integration into other Spring enabled projects (such as [http://springmodules.dev.java.net/ Spring Modules]).
 
-The creation of objects through the container is often called wiring.  JRDF comes with a XML configuration file ([http://jrdf.svn.sourceforge.net/viewvc/jrdf/trunk/jrdf/conf/wiring.xml?view=markup wiring.xml]) that defines the creation of various objects.  This includes the lifecycle of the beans and whether the a bean is a singleton (only one instance) or a prototype (instances created new every time).  Spring 2.0 provides a new, custom scope, which allows scopes to be tied to other lifecycles such as threads or HTTP sessions.
+The creation of objects through the container is often called wiring.  JRDF comes with a XML configuration file ([http://jrdf.svn.sourceforge.net/viewvc/jrdf/trunk/jrdf/conf wiring.xml?view=markup wiring.xml]) that defines the creation of various objects.  This includes the lifecycle of the beans and whether the a bean is a singleton (only one instance) or a prototype (instances created new every time).  Spring 2.0 provides a new, custom scope, which allows scopes to be tied to other lifecycles such as threads or HTTP sessions.
 
 However, it is clear that Spring and most IoC containers are a rather large requirement for most projects.  With this is mind, the use JRDF without an IoC framework is also supported.
 
@@ -48,7 +48,7 @@ tripleFactory.add(node, node, node);
 
 === Implementations of LongIndex and NodePool ===
 
-There is in memory, BDB and db4o implementations of both LongIndex and NodePool interfaces.  JRDF requires three long indexes (in order to index each combination of triples which is through the GraphHandler interface),  These indexes are arranged in 012, 120 and 201, where 0 refers to subject nodes, 1 refers to predicate nodes and 2 refers to object nodes.  
+There is an memory, Sesame and BDB implementation of the LongIndexes and an in memory and BDB implementation of the NodePool interfaces.  JRDF requires three long indexes (in order to index each combination of triples which is through the GraphHandler interface),  These indexes are arranged in 012, 120 and 201, where 0 refers to subject nodes, 1 refers to predicate nodes and 2 refers to object nodes.  
 
 ==== In Memory ====
 In order to create in memory implementations the following code is required:
@@ -57,7 +57,7 @@ LongIndex[] indexes = new LongIndex[]{new LongIndexMem(), new LongIndexMem(), ne
 NodePoolMem nodePool = new NodePoolMemImpl();
 }}}
 
-==== BDB and db4o ===
+==== BDB ===
 To create BDB indexes and node pools requires a few more steps.
 {{{
 StoredMapHandler handler = new StoredMapHandlerImpl(new TempDirectoryHandler());
@@ -67,8 +67,6 @@ MapFactory factory3 = new BdbMapFactory(handler, "osp" + graphNumber);
 LongIndex[] indexes = new LongIndex[]{new LongIndexBdb(factory1), new LongIndexBdb(factory2), new LongIndexBdb(factory3)};
 NodePoolFactory nodePoolFactory = new BdbNodePoolFactory(HANDLER);
 }}}
-
-Db4o requires similar steps except the implementations are Db4oMapFactory and Db4oNodePoolFactory.
 
 === Constructing GraphFactories ===
 
