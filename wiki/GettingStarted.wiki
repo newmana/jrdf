@@ -20,7 +20,7 @@ To create an in memory graph factory, create a new graph and add the triple "urn
 
 {{{
 JRDFFactory jrdfFactory = SortedMemoryJRDFFactory.getFactory();
-Graph graph = jrdfFactory.getNewGraph();
+Graph graph = jrdfFactory.getGraph();
 GraphElementFactory elementFactory = graph.getElementFactory();
 Node node = elementFactory.createURIReference(URI.create("urn:node"));
 graph.add(node, node, node);
