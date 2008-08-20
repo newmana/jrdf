@@ -28,6 +28,15 @@ Currently, there is only one DirectoryHandler implementation called TempDirector
 
 = System Graph =
 
+The system graph is an NTriples file, "graphs.nt", that is stored with the other indexes.  Each graph consist of three triples in the file, for example:
+{{{
+_:aab9678917277486a8b6ae2ce962918003 <http://jrdf.sf.net/name> "graph1" .
+_:aab9678917277486a8b6ae2ce962918003 <http://jrdf.sf.net/id> "1"^^<http://www.w3.org/2001/XMLSchema#long> .
+_:aab9678917277486a8b6ae2ce962918003 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://jrdf.sf.net/graph> .
+}}}
+
+The indicates that the resources for "graph1" uses the id 1.  So there should be files associated with this id including the node pool/string pool and indexes, for example: "filename.jdb" and indexes "spo1", "osp1" and "pos1".
+
 All persistent graph implementation track the creation and deletion of named graphs.  The interface has the following methods that operate on the system graph:
  * hasGraph(String), which returns true if a graph exists with that name.  
  * getNewGraph(String), which creates a new graph with the given name or fails if a graph with that name already exists.
