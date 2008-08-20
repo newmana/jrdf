@@ -89,7 +89,7 @@ Node node2 = elementFactory.createBlankNode();
 graph.add(node2, node1, node2);
 }}}
 
-=== Using the Graph ===
+== Using the Graph ==
 The Graph has methods that allow you to add, remove, and find triples.
 
 The following is an example showing all three operations:
