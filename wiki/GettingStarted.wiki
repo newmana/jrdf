@@ -43,6 +43,11 @@ Got triple: <urn:bar> <urn:bar> <urn:bar>
 
 }}}
 
+It then removes the triple "<urn:foo> <urn:foo> <urn:foo>" and the graph has only one triple in it by the end:
+{{{
+urn:bar urn:bar urn:bar .
+}}}
+
 == Nodes ==
 
 JRDF's model of RDF nodes uses a hierarchy of interfaces.  At the top of the class hierarchy is the Node.  This is subclassed by positional nodes: Subject, Predicate and Object.  These are then further subclasses by the appropriate typed nodes: bnode (blank node), URI and Literal.
