@@ -120,4 +120,4 @@ The following creates an in memory, graph that returns sorted results using Spri
 
 == SPARQL Connection ==
 
-JRDF contains a basic SPARQL implementation that provides the operations JOIN (.), OPTIONAL and UNION.  A connection is required in order to issue SPARQL queries.  JRDFFactory's allow the creation of new connections.  Simply call, "getNewSparqlConnection" and then parse the Graph and query string into "executeQuery".
+JRDF contains a basic SPARQL implementation that provides the operations JOIN (.), OPTIONAL, UNION and simple FILTER (= and != so far).  A connection is required in order to issue SPARQL queries.  JRDFFactory's allow the creation of new connections.  Simply call, "getNewSparqlConnection" and then parse the Graph and query string into "executeQuery".
