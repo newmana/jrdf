@@ -30,6 +30,8 @@ There are factories available for using [http://jrdf.sourceforge.net/0.5.5.3/doc
 
 The Spring enabled entry point, [http://jrdf.sourceforge.net/0.5.5.3/doc/javadoc/org/jrdf/SpringJRDFFactory.html SpringJRDFFactory], reads a wiring.xml file and is configured in exactly the same way as the SortedMemoryJRDFFactory.
 
+JRDF also supports [PersistentGraphs persistent graphs].
+
 == JRDF Graph ==
 
 The JRDF Graph API supports pluggable storage through the LongIndex and NodePool interfaces and the ability to produce results from simple graph queries that are sorted or unsorted.  A third optional interface, NodePoolComparator, is required by sorted graphs.
