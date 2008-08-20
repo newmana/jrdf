@@ -86,6 +86,8 @@ JRDF's model of RDF nodes uses a hierarchy of interfaces.  At the top of the cla
 
 The Resource interface extends both the URI References and blank nodes.
 
+== Element Factory ==
+
 === URI References ===
 
 A URI Reference in RDF must be an absolute URI.  This is the default behaviour in JRDF.  However, it can be expensive or unnecessary to check that a URI is absolute before creating a URI Reference.  Both of these methods for creating URI References is supported: 
