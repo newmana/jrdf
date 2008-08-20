@@ -43,13 +43,11 @@ Node node2 = elementFactory.createURIReference(URI.create("urn:node"), false);
 
 === Literals ===
 
-The Element Factory also allows the creation of literals.  To create the typed literal "Hello World"^^xsd:string:
+The Element Factory also allows the creation of literals.  To create a typed literal with the value "Hello World"^^xsd:string, the following code is required:
 
 {{{
 ...
-Node node = elementFactory.createURIReference(URI.create("urn:node"));
 Literal literal = elementFactory.createLiteral("Hello World", org.jrdf.vocabulary.XSD.STRING);
-graph.add(node, node, literal);
 }}}
 
 Literals can also be created from native Java types.  By calling "createLiteral" the Java object is converted to a JRDF literal.  For example to create the Literal "7"^^xsd:int:
