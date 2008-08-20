@@ -30,9 +30,9 @@ Currently, there is only one DirectoryHandler implementation called TempDirector
 
 The system graph is an NTriples file, "graphs.nt", that is stored with the other indexes.  Each named graph adds three statements to the file, for example:
 {{{
-_:aab9678917277486a8b6ae2ce962918003 <http://jrdf.sf.net/name> "graph1" .
-_:aab9678917277486a8b6ae2ce962918003 <http://jrdf.sf.net/id> "1"^^<http://www.w3.org/2001/XMLSchema#long> .
-_:aab9678917277486a8b6ae2ce962918003 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://jrdf.sf.net/graph> .
+_:a <http://jrdf.sf.net/name> "graph1" .
+_:a <http://jrdf.sf.net/id> "1"^^<http://www.w3.org/2001/XMLSchema#long> .
+_:a <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://jrdf.sf.net/graph> .
 }}}
 
 The indicates that the resources for "graph1" uses the id 1.  So there should be files associated with this id including the node pool/string pool and indexes, for example: "filename.jdb" and indexes "spo1", "osp1" and "pos1".
