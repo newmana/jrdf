@@ -75,6 +75,8 @@ PersistentJRDFFactory factory = PersistentJRDFFactoryImpl.getFactory(handler);
 
 The factory must also be closed in order for the changes to be written to disk, see [PersistentGraphs persistent graphs].
 
+== Graph Element Factory and Triple Factory ==
+A local JRDF graph requires the creation of RDF structures (triples, literals, URI References, etc.) from a specific RDF graph.  This is done using a Graph Element Factory and Triple Factory to create these structures.
 
 == Nodes ==
 
@@ -83,9 +85,6 @@ JRDF's model of RDF nodes uses a hierarchy of interfaces.  At the top of the cla
 [http://jrdf.googlecode.com/files/JRDFGraphNodes.png]
 
 The Resource interface extends both the URI References and blank nodes.
-
-== Graph Element Factory and Triple Factory ==
-A local JRDF graph requires the creation of RDF structures (triples, literals, URI References, etc.) from a specific RDF graph.  This is done using a Graph Element Factory and Triple Factory to create these structures.
 
 === URI References ===
 
