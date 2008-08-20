@@ -36,7 +36,7 @@ urn:foo urn:foo urn:foo .
 urn:bar urn:bar urn:bar .
 }}}
 
-The graph.find(SubjectNode, PredicateNode, ObjectNode) allows nodes by value to be specified or for the wildcards ANY_SUBJECT, ANY_PREDICATE and ANY_OBJECT to be used.  In the above example, all three wildcards are used to return the entire graph.  So the code will print out: 
+The graph.find(SubjectNode, PredicateNode, ObjectNode) allows nodes by value to be specified or for the wildcards ANY_SUBJECT, ANY_PREDICATE and ANY_OBJECT to be used.  In the above example, all three wildcards are used to return the entire graph.  The code will print out: 
 {{{
 Got triple: <urn:foo> <urn:foo> <urn:foo>
 Got triple: <urn:bar> <urn:bar> <urn:bar>
