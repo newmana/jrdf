@@ -24,11 +24,7 @@ In order to find a balance between wiring everything and wiring very few things 
 = Entry Points =
 In order to use JRDF it must be obvious where to start, to be able to create the initial set of objects.
 
-The [http://jrdf.sourceforge.net/0.5.5.3/doc/javadoc/org/jrdf/JRDFFactory.html JRDFFactory] interface is the main entry point to JRDF.  It provides access to JRDF graphs and SPARQL connections.
-
-There are factories available for using [http://jrdf.sourceforge.net/0.5.5.3/doc/javadoc/org/jrdf/SortedMemoryJRDFFactory.html in memory] and [http://jrdf.sourceforge.net/0.5.5.3/doc/javadoc/org/jrdf/SortedDiskBdbJRDFFactory.html BDB] implementations.
-
-The Spring enabled entry point, [http://jrdf.sourceforge.net/0.5.5.3/doc/javadoc/org/jrdf/SpringJRDFFactory.html SpringJRDFFactory], reads a wiring.xml file and is configured in exactly the same way as the SortedMemoryJRDFFactory.
+The [http://jrdf.sourceforge.net/0.5.5.3/doc/javadoc/org/jrdf/JRDFFactory.html JRDFFactory] interface is the main entry point to JRDF.  It provides access to JRDF graphs and SPARQL connections.  There are factories available for using [http://jrdf.sourceforge.net/0.5.5.3/doc/javadoc/org/jrdf/SortedMemoryJRDFFactory.html in memory] and [http://jrdf.sourceforge.net/0.5.5.3/doc/javadoc/org/jrdf/SortedDiskBdbJRDFFactory.html BDB] implementations.  The Spring enabled entry point, [http://jrdf.sourceforge.net/0.5.5.3/doc/javadoc/org/jrdf/SpringJRDFFactory.html SpringJRDFFactory], reads a wiring.xml file and is configured in exactly the same way as the SortedMemoryJRDFFactory.
 
 JRDF also supports [PersistentGraphs persistent graphs] and [GlobalGraphs global graphs] via persistent and global graph factories (for example, [http://jrdf.sourceforge.net/0.5.5.3/doc/javadoc/org/jrdf/PersistentJRDFFactoryImpl.html PersistentJRDFFactoryImpl] and [http://jrdf.sourceforge.net/0.5.5.3/doc/javadoc/org/jrdf/SortedDiskGlobalJRDFFactory.html SortedDiskGlobalJRDFFactory]).
 
