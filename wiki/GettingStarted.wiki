@@ -48,7 +48,7 @@ It then removes the triple "<urn:foo> <urn:foo> <urn:foo>" and the graph has onl
 urn:bar urn:bar urn:bar .
 }}}
 
-== Creating graphs ==
+== Creating Graphs ==
 
 Local graphs are graphs that rely on a node pool and string pool for the creation of RDF data structures.  This places certain limits on how these items are used. To create a local graph you must use a Factory - either an in memory factory or an on disk one.
 
