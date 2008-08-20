@@ -50,7 +50,7 @@ tripleFactory.add(node, node, node);
 
 === Implementations of LongIndex and NodePool ===
 
-There is an memory, Sesame and BDB implementation of the LongIndexes and an in memory and BDB implementation of the NodePool interfaces.  JRDF requires three long indexes (in order to index each combination of triples which is through the GraphHandler interface),  These indexes are arranged in 012, 120 and 201, where 0 refers to subject nodes, 1 refers to predicate nodes and 2 refers to object nodes.  
+There is an memory, Sesame and BDB implementation of the LongIndexes and an in memory and BDB implementation of the NodePool interfaces.  JRDF uses three long indexes (in order to index each combination of triples which is through the GraphHandler interface).  These indexes are arranged in 012, 120 and 201, where 0 refers to subject nodes, 1 refers to predicate nodes and 2 refers to object nodes.  
 
 ==== In Memory ====
 In order to create in memory implementations the following code is required:
