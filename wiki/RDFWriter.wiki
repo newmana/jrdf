@@ -4,7 +4,7 @@
 
 JRDF comes with a set of interfaces for implementing various RDF output formats.  These interfaces are currently implemented to support RDF/XML.
 
-= Interfaces =
+== Interfaces ==
 
 There are two interfaces: BlankNodeRegistry (TODO: May integrate with Parser's ParserBlankNodeFactory) and RdfWriter.
 
