@@ -19,7 +19,7 @@ try {
 }
 }}}
 
-Until the factory is closed, the operations made on the graphs cannot be considered persisted to disk.  Graphs are not treated individually.  The persistence lifecycle still follows the original lifecyce, that is, load RDF, do some work, save to RDF.  This restriction is currently being worked on, graphs will be able to be persisted individually.
+Until the factory is closed, the operations made on the graphs cannot be considered persisted to disk.  Graphs are not treated individually.  The persistence lifecycle still follows the original lifecyce, that is, load RDF, do some work, save to RDF.  This restriction is currently being worked on allowing graphs to be persisted individually.
 
 = Directory Handler =
 The DirectoryHandler interface is designed to manage the location where the indexes and system graph is stored.  It is used by the persistent graph factories.
