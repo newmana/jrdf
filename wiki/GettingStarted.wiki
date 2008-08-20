@@ -74,7 +74,7 @@ The mapping from Java types to XSD types is as follows:
 || Short || xsd:short ||
 || Byte || xsd:byte ||
 
-If a Java type is used that has no mapping an exception will be thrown.  New mappings can be added through add a DatatypeValue to the DatatypeFactory. 
+If a Java type is used that has no mapping an exception will be thrown.  New mappings can be added through calling addValueCreator(URI, Class<?>, ValueCreator) on the DatatypeFactory. 
 
 Note: To create a literal with an xsd:string type use:
 {{{
