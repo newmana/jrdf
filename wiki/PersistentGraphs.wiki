@@ -22,7 +22,7 @@ try {
 Until the factory is closed, the operations made on the graphs cannot be considered persisted to disk.  Graphs are not treated individually.  The persistence lifecycle still follows the original lifecyce, that is, load RDF, do some work, then save.  Allowing graphs to be persisted indvidually is currently being worked on.
 
 = Directory Handler =
-The DirectoryHandler interface is designed to manage the location where the indexes and system graph is stored.  It is used by the persistent graph factories.
+The DirectoryHandler interface is designed to manage the location where the indexes and system graph are stored.  It is used by the persistent graph factories.
 
 Currently, there is only one DirectoryHandler implementation called TempDirectoryHandler.  it uses the current user name and system temporary directory property ("java.io.tmpdir") to create a directory.  For example, with a username of "andrew" on Windows it creates a "C:\temp\jrdf_andrew" directory.
 
