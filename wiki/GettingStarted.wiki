@@ -70,9 +70,15 @@ Node node = elementFactory.createURIReference(URI.create("urn:node"));
 graph.add(node, node, node);
 }}}
 
-To create an on disk graph replace the first line with (this current requires db4o and BDB Java Edition installed in the class path):
+To create an on disk graph replace the first line with (this current requires BDB Java Edition installed in the class path):
 {{{
 JRDFFactory jrdfFactory = SortedDiskJRDFFactory.getFactory();
+}}}
+
+To create an persistent, named graph requires the first line to be replaced with:
+{{{
+DirectoryHandler handler = new TempDirectoryHandler();
+PersistentJRDFFactory factory = PersistentJRDFFactoryImpl.getFactory(handler);
 }}}
 
 === URI References ===
