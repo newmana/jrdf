@@ -30,7 +30,7 @@ finally {
 graph.remove(foo, foo, foo);
 }}}
 
-This code create a graph with two triples in it:
+This code creates a graph with two triples in it:
 {{{
 urn:foo urn:foo urn:foo .
 urn:bar urn:bar urn:bar .
