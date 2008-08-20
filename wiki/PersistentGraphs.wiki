@@ -2,4 +2,11 @@
 
 = Persistent JRDF Graphs =
 
-JRDF has evolved to support basic persistence of graphs.  It supports namin
+JRDF has evolved to support basic persistence of graphs.  Graphs can be created using the PersistentJRDFFactoryImpl.  This requires a DirectoryHandler in order to be created.
+
+= Directory Handler =
+The DirectoryHandler interface is designed to manage the location where the indexes and system graph is stored.  It is used by the persistent graph factories.
+
+Currently, there is only one DirectoryHandler implementation called TempDirectoryHandler.  it uses the current user name and system temporary directory property ("java.io.tmpdir") to create a directory.  For example, with a username of "andrew" on Windows it creates a "C:\temp\jrdf_andrew" directory.
+
+= System Graph =
