@@ -2,7 +2,7 @@
 
 = Getting Started with JRDF Graphs =
 
-This document is not a primer for RDF, [http://www.w3.org/TR/REC-rdf-syntax/ this is].  JRDF is a library that has a simple to use interface that follows the RDF standard for the creation and management of RDF graphs.
+This document is not a primer for RDF, [http://www.w3.org/TR/REC-rdf-syntax/ this is].  JRDF is a library that has a simple to use interface that follows the [http://www.w3.org/RDF/ RDF standard] for the creation and management of RDF graphs.
 
 == Using the Graph ==
 The Graph interface is the primary way to manipulate RDF graphs.  It has methods that allow you to add, remove, and find triples.  A graph is created through a graph factory.  Triples and elements (nodes) in a graph are created through triple and element factories.
