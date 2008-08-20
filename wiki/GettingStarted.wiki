@@ -76,12 +76,6 @@ The mapping from Java types to XSD types is as follows:
 
 If a Java type is used that has no mapping an exception will be thrown.  New mappings can be added through calling addValueCreator(URI, Class<?>, ValueCreator) on the DatatypeFactory. 
 
-Note: To create a literal with an xsd:string type use:
-{{{
-...
-Literal literal = elementFactory.createLiteral("foo", XSD.STRING);
-}}}
-
 === Blank Nodes ===
 
 Blank nodes can also be created using the Element Factory:
