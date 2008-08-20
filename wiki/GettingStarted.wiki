@@ -1,6 +1,6 @@
 #summary Getting Started with Local JRDF Graphs
 
-= Getting Started with Local JRDF Graphs =
+= Getting Started with JRDF Graphs =
 
 JRDF has a simple to use interface that follows the RDF standard for the creation and management of RDF graphs.  Local graphs are graphs that rely on a node pool and string pool for the creation of RDF data structures.  This places certain limits on how these items are used.
 
