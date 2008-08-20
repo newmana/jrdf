@@ -28,7 +28,7 @@ Currently, there is only one DirectoryHandler implementation called TempDirector
 
 = System Graph =
 
-The system graph is an NTriples file, "graphs.nt", that is stored with the other indexes.  Each graph consist of three triples in the file, for example:
+The system graph is an NTriples file, "graphs.nt", that is stored with the other indexes.  Each named graph adds three statements to the file, for example:
 {{{
 _:aab9678917277486a8b6ae2ce962918003 <http://jrdf.sf.net/name> "graph1" .
 _:aab9678917277486a8b6ae2ce962918003 <http://jrdf.sf.net/id> "1"^^<http://www.w3.org/2001/XMLSchema#long> .
