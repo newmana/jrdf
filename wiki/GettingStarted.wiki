@@ -1,4 +1,4 @@
-#summary Getting Started with Local JRDF Graphs
+#summary Getting Started with JRDF
 
 = Getting Started with JRDF Graphs =
 
