@@ -1,6 +1,6 @@
 #summary Getting Started with JRDF
 
-= Getting Started with JRDF Graphs =
+= Getting Started with JRDF =
 
 This document is not a primer for RDF, [http://www.w3.org/TR/REC-rdf-syntax/ this is].  JRDF is a library that has a simple to use interface that follows the [http://www.w3.org/RDF/ RDF standard] for the creation and management of RDF graphs.
 
