@@ -30,7 +30,7 @@ There are factories available for using [http://jrdf.sourceforge.net/0.5.5.3/doc
 
 The Spring enabled entry point, [http://jrdf.sourceforge.net/0.5.5.3/doc/javadoc/org/jrdf/SpringJRDFFactory.html SpringJRDFFactory], reads a wiring.xml file and is configured in exactly the same way as the SortedMemoryJRDFFactory.
 
-JRDF also supports [PersistentGraphs persistent graphs] and [GlobalGraphs global graphs] via persistent and global graph factories (for example, [http://jrdf.sourceforge.net/0.5.5.3/doc/javadoc/org/jrdf/PersistentJRDFFactoryImpl.html PersistentJRDFFactoryImpl] and [http://jrdf.sourceforge.net/0.5.5.3/doc/javadoc/org/jrdf/SortedDiskGlobalJRDFFactory.html SortedDiskGlobalJRDFFactory].
+JRDF also supports [PersistentGraphs persistent graphs] and [GlobalGraphs global graphs] via persistent and global graph factories (for example, [http://jrdf.sourceforge.net/0.5.5.3/doc/javadoc/org/jrdf/PersistentJRDFFactoryImpl.html PersistentJRDFFactoryImpl] and [http://jrdf.sourceforge.net/0.5.5.3/doc/javadoc/org/jrdf/SortedDiskGlobalJRDFFactory.html SortedDiskGlobalJRDFFactory]).
 
 == JRDF Graph ==
 
