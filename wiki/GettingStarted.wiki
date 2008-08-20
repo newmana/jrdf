@@ -50,7 +50,7 @@ The Element Factory also allows the creation of literals.  To create a typed lit
 Literal literal = elementFactory.createLiteral("Hello World", org.jrdf.vocabulary.XSD.STRING);
 }}}
 
-Literals can also be created from native Java types.  By calling "createLiteral" the Java object is converted to a JRDF literal.  For example to create the Literal "7"^^xsd:int:
+Literals can also be created from native Java types.  By calling "createLiteral" the Java object is converted to a JRDF Literal.  For example to create the Literal "7"^^xsd:int:
 {{{
 ...
 Literal literal = elementFactory.createLiteral(7);
