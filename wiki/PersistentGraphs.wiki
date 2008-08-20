@@ -24,7 +24,7 @@ Until the factory is closed, the operations made on the graphs cannot be conside
 = Directory Handler =
 The DirectoryHandler interface is designed to manage the location where the indexes and system graph are stored.  It is used by the persistent graph factories.
 
-Currently, there is only one DirectoryHandler implementation called TempDirectoryHandler.  it uses the current user name and system temporary directory property ("java.io.tmpdir") to create a directory.  For example, with a username of "andrew" on Windows it creates a "C:\temp\jrdf_andrew" directory.
+Currently, there is only one DirectoryHandler implementation called TempDirectoryHandler.  It uses the current user name and system temporary directory property ("java.io.tmpdir") to create a directory.  For example, with a username of "andrew" on Windows it creates a "C:\temp\jrdf_andrew" directory.
 
 = System Graph =
 
