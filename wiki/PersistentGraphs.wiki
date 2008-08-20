@@ -10,3 +10,9 @@ The DirectoryHandler interface is designed to manage the location where the inde
 Currently, there is only one DirectoryHandler implementation called TempDirectoryHandler.  it uses the current user name and system temporary directory property ("java.io.tmpdir") to create a directory.  For example, with a username of "andrew" on Windows it creates a "C:\temp\jrdf_andrew" directory.
 
 = System Graph =
+
+All persistent graph implementation track the creation and deletion of named graphs.  The interface has the following methods that operate on the system graph:
+ * hasGraph(String), which returns true if a graph exists with that name.  
+ * getNewGraph(String), which creates a new graph with the given name or fails if a graph with that name already exists.
+ * getExistingGraph(String), which gets an existing graph or fails if the graph doesn't exist.
+ * getGraph(String), which gets an existing graph or creates a new one if it doesn't exist.
