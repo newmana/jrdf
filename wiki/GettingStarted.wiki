@@ -172,7 +172,7 @@ tripleFactory.add(node, node, "Hello World", org.jrdf.vocabulary.XSD.STRING);
 }}}
 
 === Blank Nodes ===
-Blank nodes are difficult to add across multiple triples.  As a reference to the same blank node must be kept.  For example:
+Blank nodes are difficult to add across multiple triples as a reference to the same blank node must be kept.  For example:
 
 {{{
 _1 urn:node urn:node
