@@ -81,6 +81,8 @@ DirectoryHandler handler = new TempDirectoryHandler();
 PersistentJRDFFactory factory = PersistentJRDFFactoryImpl.getFactory(handler);
 }}}
 
+The factory must also be closed in order for the changes to be written to disk, see [PersistentGraphs persistent graphs].
+
 === URI References ===
 
 A URI Reference in RDF must be an absolute URI.  This is the default behaviour in JRDF.  However, it can be expensive or unnecessary to check that a URI is absolute before creating a URI Reference.  Both of these methods for creating URI References is supported: 
