@@ -33,6 +33,32 @@ To create an on disk graph replace the first line with (this current requires db
 JRDFFactory jrdfFactory = SortedDiskJRDFFactory.getFactory();
 }}}
 
+== Using the Graph ==
+The Graph has methods that allow you to add, remove, and find triples.
+
+The following is an example showing all three operations:
+{{{
+TripleFactory tripleFactory = graph.getTripleFactory();
+GraphElementFactory elementFactory = graph.getElementFactory();
+URIReference foo = elementFactory.createURIReference(URI.create("urn:foo"));
+URIReference bar = elementFactory.createURIReference(URI.create("urn:bar"));
+graph.add(foo, foo, foo);
+graph.add(bar, bar, bar);
+ClosableIterator<Triple> tripleIter = graph.find(AnySubjectNode.ANY_SUBJECT, AnyPredicateNode.ANY_PREDICATE, AnyObjectNode.ANY_OBJECT);
+try {
+  while (tripleIter.hasNext()) {
+    Triple triple = tripleIter.next();
+    System.out.println("Got triple: " + triple);
+  }
+}
+finally {
+  tripleIter.close();
+}
+graph.remove(foo, foo, foo);
+}}}
+
+Finding nodes in the graph allows nodes by value to be specified or for the wildcards ANY_SUBJECT, ANY_PREDICATE and ANY_OBJECT to be used.  In the above example, all three wildcards are used to return the entire graph.
+
 === URI References ===
 
 A URI Reference in RDF must be an absolute URI.  This is the default behaviour in JRDF.  However, it can be expensive or unnecessary to check that a URI is absolute before creating a URI Reference.  Both of these methods for creating URI References is supported: 
@@ -88,32 +114,6 @@ Node node1 = elementFactory.createURIReference(URI.create("urn:node"));
 Node node2 = elementFactory.createBlankNode();
 graph.add(node2, node1, node2);
 }}}
-
-== Using the Graph ==
-The Graph has methods that allow you to add, remove, and find triples.
-
-The following is an example showing all three operations:
-{{{
-TripleFactory tripleFactory = graph.getTripleFactory();
-GraphElementFactory elementFactory = graph.getElementFactory();
-URIReference foo = elementFactory.createURIReference(URI.create("urn:foo"));
-URIReference bar = elementFactory.createURIReference(URI.create("urn:bar"));
-graph.add(foo, foo, foo);
-graph.add(bar, bar, bar);
-ClosableIterator<Triple> tripleIter = graph.find(AnySubjectNode.ANY_SUBJECT, AnyPredicateNode.ANY_PREDICATE, AnyObjectNode.ANY_OBJECT);
-try {
-  while (tripleIter.hasNext()) {
-    Triple triple = tripleIter.next();
-    System.out.println("Got triple: " + triple);
-  }
-}
-finally {
-  tripleIter.close();
-}
-graph.remove(foo, foo, foo);
-}}}
-
-Finding nodes in the graph allows nodes by value to be specified or for the wildcards ANY_SUBJECT, ANY_PREDICATE and ANY_OBJECT to be used.  In the above example, all three wildcards are used to return the entire graph.
 
 === Resources ===
 
