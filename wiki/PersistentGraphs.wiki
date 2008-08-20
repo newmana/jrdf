@@ -6,7 +6,7 @@ JRDF has evolved to support basic persistence of graphs.  Graphs can be created 
 
 = Lifecycle =
 The lifecycle of a JRDF graph is currently tied to the factory that creates it.  Typically, the code to use is:
-{{
+{{{
 DirectoryHandler handler = new TempDirectoryHandler();
 PersistentJRDFFactory factory = PersistentJRDFFactoryImpl.getFactory(handler);
 try {
@@ -17,7 +17,7 @@ try {
 } finally {
   factory.close();
 }
-}}
+}}}
 
 Until the factory is closed, the operations to the graphs cannot be considered persisted to disk.  This may seem a little odd in that graphs cannot be individually operated on similar to a database table.  JRDF graphs were first used as a throw away structure, that is, load RDF/XML, do some work, save to RDF/XML.  The persistence lifecycle still follows this structure.  It is a current restriction of the persistence infrastructure that is currently being worked on - and will allow individual graphs to be operated on.
 
