@@ -48,17 +48,9 @@ It then removes the triple "<urn:foo> <urn:foo> <urn:foo>" and the graph has onl
 urn:bar urn:bar urn:bar .
 }}}
 
-== Nodes ==
+== Creating graphs ==
 
-JRDF's model of RDF nodes uses a hierarchy of interfaces.  At the top of the class hierarchy is the Node.  This is subclassed by positional nodes: Subject, Predicate and Object.  These are then further subclassed by the appropriate typed nodes: bnode (blank node), URI and Literal.
-
-[http://jrdf.googlecode.com/files/JRDFGraphNodes.png]
-
-The Resource interface extends both the URI References and blank nodes.
-
-== Graph and Graph Element Factory ==
-
-Local graphs are graphs that rely on a node pool and string pool for the creation of RDF data structures.  This places certain limits on how these items are used. To create a local graph you must use a Factory - either an in memory factory or an on disk one.  A local graph requires the creation of RDF structures (triples, literals, URI References, etc.) from a specific RDF graph.  This is done using a Graph Element Factory and Triple Factory to create these structures.
+Local graphs are graphs that rely on a node pool and string pool for the creation of RDF data structures.  This places certain limits on how these items are used. To create a local graph you must use a Factory - either an in memory factory or an on disk one.
 
 To create an in memory graph factory, create a new graph and add the triple "urn:node, urn:node, urn:node" requires the following code:
 
@@ -82,6 +74,18 @@ PersistentJRDFFactory factory = PersistentJRDFFactoryImpl.getFactory(handler);
 }}}
 
 The factory must also be closed in order for the changes to be written to disk, see [PersistentGraphs persistent graphs].
+
+
+== Nodes ==
+
+JRDF's model of RDF nodes uses a hierarchy of interfaces.  At the top of the class hierarchy is the Node.  This is subclassed by positional nodes: Subject, Predicate and Object.  These are then further subclassed by the appropriate typed nodes: bnode (blank node), URI and Literal.
+
+[http://jrdf.googlecode.com/files/JRDFGraphNodes.png]
+
+The Resource interface extends both the URI References and blank nodes.
+
+== Graph Element Factory and Triple Factory ==
+A local JRDF graph requires the creation of RDF structures (triples, literals, URI References, etc.) from a specific RDF graph.  This is done using a Graph Element Factory and Triple Factory to create these structures.
 
 === URI References ===
 
