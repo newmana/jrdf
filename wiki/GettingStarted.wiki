@@ -73,7 +73,7 @@ DirectoryHandler handler = new TempDirectoryHandler();
 PersistentJRDFFactory factory = PersistentJRDFFactoryImpl.getFactory(handler);
 }}}
 
-The factory must also be closed in order for the changes to be written to disk, see [PersistentGraphs persistent graphs].  JRDF has many different types of graphs that can be created through [http://code.google.com/p/jrdf/wiki/JRDFWiring Spring or factories].
+The factory must also be closed in order for the changes to be written to disk, see [PersistentGraphs persistent graphs].  JRDF has many different types of graphs that can be created through [http://code.google.com/p/jrdf/wiki/JRDFWiring Spring, other IoC containers or standard configurations through factories].
 
 == Graph Element Factory and Triple Factory ==
 A local JRDF graph requires the creation of RDF structures (triples, literals, URI References, etc.) from a specific RDF graph.  This is done using a Graph Element Factory and Triple Factory to create these structures.
