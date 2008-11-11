@@ -84,7 +84,7 @@ JRDF's model of RDF nodes uses a hierarchy of interfaces.  At the top of the cla
 
 [http://jrdf.googlecode.com/files/JRDFGraphNodes.png]
 
-The Resource interface extends both the URI References and blank nodes.
+The Resource interface extends both URIReference and BlankNode.
 
 == Element Factory ==
 
