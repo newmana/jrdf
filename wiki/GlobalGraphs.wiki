@@ -44,6 +44,8 @@ Participant
 || PT1 || p32379 ||
 || PT2 || p46949 ||
 
+Like [RelationalSPARQLOperations untyped relations] each row can have it's own set of name/value pairs.
+
 RDF molecules are also ordered.  For two nodes the ordering is determined by the following rules:
   * Subject, predicate and object nodes in a triple are compared with each other.
   * Node Type
