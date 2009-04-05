@@ -1,0 +1,42 @@
+#summary Local and Distributed Querying of JRDF
+
+= Local and Distributed Querying of JRDF =
+
+The server component of JRDF provides a way to expose graphs for remote querying using RESTful model.
+
+= Starting a Single Servers =
+To start a single local server run the SpringLocalServer Java application.  This can be done by running:
+{{{
+java -jar jrdf-server-0.5.5.5.jar
+}}}
+
+The server can be view by going to port 8182 on the local machine:
+{{{
+http://localhost:8182/graphs
+}}}
+
+This will show a list of graphs on the current machine - which will typically be empty on initialization.
+
+To create a new graph simply go to the URI of the graph you wish to query, for example graph "foo" will be created when you go to "http://localhost:8182/graphs/foo".  Using a web browser, you will be presented by a HTML presentation of the resource - which is a form to allow you to submit queries to the graph.
+
+Queries can be submitted by GETting a encoded SPARQL query.  For example, the SPARQL query:
+{{{
+SELECT *
+WHERE {
+    ?s ?p ?o .
+}
+}}}
+
+Is equivalent to:
+{{{
+http://localhost:8182/graphs/foo/?query=SELECT+*%0D%0AWHERE+{%0D%0A++++%3Fs+%3Fp+%3Fo+.%0D%0A}%0D%0A++++
+}}}
+
+You can override the format of the query by submitting a query parameter called "format", for example:
+{{{
+http://localhost:8182/graphs/foo/?query=SELECT+*%0D%0AWHERE+{%0D%0A++++%3Fs+%3Fp+%3Fo+.%0D%0A}%0D%0A++++&format=html
+}}}
+
+The current representation supported are XML and HTML with JSON to follow.
+
+= Distributed Querying =
