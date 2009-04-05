@@ -19,6 +19,8 @@ This will show a list of graphs on the current machine - which will typically be
 
 To create a new graph simply go to the URI of the graph you wish to query, for example graph "foo" will be created when you go to "http://localhost:8182/graphs/foo".  Using a web browser, you will be presented by a HTML presentation of the resource - which is a form to allow you to submit queries to the graph.
 
+By default, new graphs will be created under the temporary directory of your operating system under "perstGraph" subdirectory.  For Windows, this will probably be "C:\temp\perstGraph" and for Unix "/tmp/perstGraph".  Under this directory a file is created called "graphs.nt" this is a NTriples formatted RDF file that lists the available graphs in the system and their id (an number beginning from 1).  The id references the various graph files used in the directory, for example the graph "foo" with an id of 1 will have the files "dmspo1", "ospmd1", "posmd1" and "spomd1" as well as a shared node pool/string pool file(s) in Berkley JDB (usually called "00000000.jdb").
+
 Queries can be submitted by GETting a encoded SPARQL query.  For example, the SPARQL query:
 {{{
 SELECT *
@@ -38,5 +40,12 @@ http://localhost:8182/graphs/foo/?query=SELECT+*%0D%0AWHERE+{%0D%0A++++%3Fs+%3Fp
 }}}
 
 The current representation supported are XML and HTML with JSON to follow.
+
+== Setting up Persistent Directories and Adding Triples ==
+The default directory handler for JRDF Graphs is the Temporary Directory handler.  This can be modified in the wiring configuration by changing the "directoryHandler" bean and implementing your own "DirectoryHandler".
+
+Currently, while the server is running the files will be locked for concurrent access.  This means that while the server is running you cannot use external programs to modify them.
+
+In the future, extensions to SPARQL and the JRDF access point will allow external programs to update the code via the web interface.  An external Java API could also be added in the future.
 
 = Distributed Querying =
