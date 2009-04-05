@@ -29,6 +29,21 @@ Can be represented in an RDF molecule as:
 
 Where the first level of the molecule contains 2 triples (or root triples), the second level contains 2 triples and each of the 3rd levels contains another triple.  Triples with two blank nodes are know as link triples.
 
+Another perspective of this is that it represents foreign key relations and can be seen as an extension to [RelationalSPARQLOperations untyped relations].  The above RDF molecule could be seen as three relations (tables):
+Experimental Observation
+|| Primary Key || Observed Interaction ||
+|| EO1 || OI1 ||
+
+Observed Interaction
+|| Primary Key || Participant ||
+|| OI1 || PT1 ||
+|| OI1 || PT2 ||
+
+Participant
+|| Primary Key || UniProtID ||
+|| PT1 || p32379 ||
+|| PT2 || p46949 ||
+
 RDF molecules are also ordered.  For two nodes the ordering is determined by the following rules:
   * Subject, predicate and object nodes in a triple are compared with each other.
   * Node Type
