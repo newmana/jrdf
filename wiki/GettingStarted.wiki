@@ -6,7 +6,9 @@ This document is not a primer for RDF, [http://www.w3.org/TR/REC-rdf-syntax/ thi
 
 == Loading an RDF/XML File with the JRDF GUI ==
 
-JRDF comes distributed with a separate GUI that allows you to read RDF/XML and N3 files and query them using SPARQL.  Download the JRDF GUI from:
+JRDF comes distributed with a separate GUI that allows you to read RDF/XML and N3 files and query them using SPARQL.  
+
+Download the JRDF GUI from:
 https://sourceforge.net/projects/jrdf/files/jrdf/jrdf-gui-0.5.5.5.jar/download
 
 Run the JRDF GUI (using Java 6):
@@ -18,7 +20,9 @@ The GUI should then startup.
 
 == Loading an RDF/XML File with the JRDF JAR ==
 
-The distributable JRDF jar comes with several examples of using JRDF including one that will download an RDF/XML file and display all the triples in the file.  Download the JRDF JAR from:
+The distributable JRDF jar comes with several examples of using JRDF including one that will download an RDF/XML file and display all the triples in the file.  
+
+Download the JRDF JAR from:
 https://sourceforge.net/projects/jrdf/files/jrdf/jrdf-0.5.5.5.jar/download
 
 Run the JRDF GUI (using Java 6):
