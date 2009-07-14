@@ -71,15 +71,15 @@ graph.remove(foo, foo, foo);
 
 This can be simplified a little using Java 5's for loop:
 {{{
-            ClosableIterable<Triple> triples = jrdfMem.find(AnySubjectNode.ANY_SUBJECT, AnyPredicateNode.ANY_PREDICATE, AnyObjectNode.ANY_OBJECT);
-            try {
-                for (Triple triple : triples) {
-                    System.out.println("Graph: " + triple);
-                }
-                System.out.println("Total number of statements: " + jrdfMem.getNumberOfTriples());
-            } finally {
-                triples.iterator().close();
-            }
+ClosableIterable<Triple> triples = jrdfMem.find(AnySubjectNode.ANY_SUBJECT, AnyPredicateNode.ANY_PREDICATE, AnyObjectNode.ANY_OBJECT);
+try {
+  for (Triple triple : triples) {
+    System.out.println("Graph: " + triple);
+  }
+  System.out.println("Total number of statements: " + jrdfMem.getNumberOfTriples());
+} finally {
+  triples.iterator().close();
+}
 }}}
 
 This code creates a graph with two triples in it:
