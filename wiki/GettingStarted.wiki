@@ -16,9 +16,14 @@ Run the JRDF GUI (using Java 6):
 java -jar jrdf-gui-0.5.5.5.jar
 }}}
 
-The GUI should then startup.
+The GUI should then startup.  Select "Open File", navigate to a file and select "Open".  The client will then parse the file and will display the number of triples loaded and the time taken.
 
-[screen1.png]
+[http://jrdf.googlecode.com/svn/wiki/screen1.png]
+
+SPARQL queries can then be submitted and the results are displayed in tabular form:
+
+[http://jrdf.googlecode.com/svn/wiki/screen2.png]
+
 
 == Loading an RDF/XML File with the JRDF JAR ==
 
