@@ -18,7 +18,7 @@ java -jar jrdf-gui-0.5.5.5.jar
 
 The GUI should then startup.
 
-screen1.png
+[screen1.png]
 
 == Loading an RDF/XML File with the JRDF JAR ==
 
