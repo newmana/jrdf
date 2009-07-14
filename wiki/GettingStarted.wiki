@@ -31,7 +31,7 @@ The distributable JRDF jar comes with several examples of using JRDF including o
 Download the JRDF JAR from:
 https://sourceforge.net/projects/jrdf/files/jrdf/jrdf-0.5.5.5.jar/download
 
-Run the JRDF GUI:
+Run the example RDF/XML parser:
 {{{
 java -cp jrdf-0.5.5.5.jar org.jrdf.example.RdfXmlParserExample
 }}}
