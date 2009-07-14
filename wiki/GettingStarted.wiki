@@ -11,7 +11,7 @@ JRDF comes distributed with a separate GUI that allows you to read RDF/XML and N
 Download the JRDF GUI from:
 https://sourceforge.net/projects/jrdf/files/jrdf/jrdf-gui-0.5.5.5.jar/download
 
-Run the JRDF GUI (using Java 6):
+Run the JRDF GUI:
 {{{
 java -jar jrdf-gui-0.5.5.5.jar
 }}}
@@ -24,7 +24,6 @@ SPARQL queries can then be submitted and the results are displayed in tabular fo
 
 [http://jrdf.googlecode.com/svn/wiki/screen2.png]
 
-
 == Loading an RDF/XML File with the JRDF JAR ==
 
 The distributable JRDF jar comes with several examples of using JRDF including one that will download an RDF/XML file and display all the triples in the file.  
@@ -32,7 +31,7 @@ The distributable JRDF jar comes with several examples of using JRDF including o
 Download the JRDF JAR from:
 https://sourceforge.net/projects/jrdf/files/jrdf/jrdf-0.5.5.5.jar/download
 
-Run the JRDF GUI (using Java 6):
+Run the JRDF GUI:
 {{{
 java -cp jrdf-0.5.5.5.jar org.jrdf.example.RdfXmlParserExample
 }}}
