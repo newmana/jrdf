@@ -18,6 +18,8 @@ java -jar jrdf-gui-0.5.5.5.jar
 
 The GUI should then startup.
 
+screen1.png
+
 == Loading an RDF/XML File with the JRDF JAR ==
 
 The distributable JRDF jar comes with several examples of using JRDF including one that will download an RDF/XML file and display all the triples in the file.  
