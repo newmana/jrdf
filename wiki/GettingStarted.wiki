@@ -20,7 +20,7 @@ The GUI should then startup.  Select "Open File", navigate to a file and select 
 
 [http://jrdf.googlecode.com/svn/wiki/screen1.png]
 
-SPARQL queries can then be submitted and the results are displayed in tabular form:
+SPARQL queries can then be entered, run by selecting "Run Query", and the results will be displayed in tabular form:
 
 [http://jrdf.googlecode.com/svn/wiki/screen2.png]
 
