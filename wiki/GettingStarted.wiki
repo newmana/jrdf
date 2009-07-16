@@ -145,7 +145,18 @@ PersistentJRDFFactory factory = PersistentJRDFFactoryImpl.getFactory(handler);
 
 The factory must also be closed in order for the changes to be written to disk, see [PersistentGraphs persistent graphs].  JRDF has many different types of graphs that can be created through [http://code.google.com/p/jrdf/wiki/JRDFWiring Spring, other IoC containers or through factories].
 
+== Loading RDF from Files ==
+
+The simplest way to load various RDF files using is to RdfParser.  For example, to load in a file into an in memory graph:
+{{{
+RdfReader reader = new RdfReader();
+Graph graph = reader.parseNTriples(new File("test001.nt"));
+}}}
+
+It also supports parseN3 or parseRdfXml using InputStreams or Files.
+
 == Graph Element Factory and Triple Factory ==
+
 A local JRDF graph requires the creation of RDF structures (triples, literals, URI References, etc.) from a specific RDF graph.  This is done using a Graph Element Factory and Triple Factory to create these structures.
 
 == Nodes ==
