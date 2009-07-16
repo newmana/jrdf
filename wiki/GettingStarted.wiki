@@ -43,7 +43,18 @@ Graph: [http://apple.slashdot.org/story/09/07/13/1229250/What-To-Expect-From-App
 ...
 }}}
 
+== Loading RDF from Files ==
+
+The simplest way to load various RDF files using is to RdfParser.  For example, to load in a file into an in memory graph:
+{{{
+RdfReader reader = new RdfReader();
+Graph graph = reader.parseNTriples(new File("test001.nt"));
+}}}
+
+It also supports parseN3 or parseRdfXml using InputStreams or Files.
+
 == Using the Graph ==
+
 The Graph interface is the primary way to manipulate RDF graphs.  It has methods that allow you to add, remove, and find triples.  A graph is created through a graph factory.  Triples and elements (nodes) in a graph are created through triple and element factories.
 
 The following is an example showing the creation and use of a graph:
