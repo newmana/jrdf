@@ -67,27 +67,27 @@ URIReference foo = elementFactory.createURIReference(URI.create("urn:foo"));
 URIReference bar = elementFactory.createURIReference(URI.create("urn:bar"));
 graph.add(foo, foo, foo);
 graph.add(bar, bar, bar);
-ClosableIterator<Triple> tripleIter = graph.find(AnySubjectNode.ANY_SUBJECT, AnyPredicateNode.ANY_PREDICATE, AnyObjectNode.ANY_OBJECT);
+ClosableIterator<Triple> triples = graph.find(AnySubjectNode.ANY_SUBJECT, AnyPredicateNode.ANY_PREDICATE, AnyObjectNode.ANY_OBJECT);
 try {
-  while (tripleIter.hasNext()) {
-    Triple triple = tripleIter.next();
+  while (triples.hasNext()) {
+    Triple triple = triples.next();
     System.out.println("Got triple: " + triple);
   }
 }
 finally {
-  tripleIter.close();
+  triples.close();
 }
 graph.remove(foo, foo, foo);
 }}}
 
 This can be simplified a little using Java 5's for loop:
 {{{
-ClosableIterable<Triple> triples = jrdfMem.find(AnySubjectNode.ANY_SUBJECT, AnyPredicateNode.ANY_PREDICATE, AnyObjectNode.ANY_OBJECT);
+ClosableIterable<Triple> triples = graph.find(AnySubjectNode.ANY_SUBJECT, AnyPredicateNode.ANY_PREDICATE, AnyObjectNode.ANY_OBJECT);
 try {
   for (Triple triple : triples) {
     System.out.println("Graph: " + triple);
   }
-  System.out.println("Total number of statements: " + jrdfMem.getNumberOfTriples());
+  System.out.println("Total number of statements: " + graph.getNumberOfTriples());
 } finally {
   triples.iterator().close();
 }
