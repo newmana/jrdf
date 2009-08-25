@@ -11,6 +11,12 @@ The current version of JRDF supports the following versions of Java:
 
 Java 1.4 is only supported in 0.3 series and is no longer being actively developed.
 
+== Help? ==
+To get support for JRDF you can:
+ * [ http://jrdf.sourceforge.net/documentation.html | Check the Documentation ],
+ * [ https://lists.sourceforge.net/lists/listinfo/jrdf-general | Ask a question on the mailing list ],
+ * Leave a comment on this page.
+
 == Loading an RDF/XML File with the JRDF GUI ==
 
 JRDF comes distributed with a separate GUI that allows you to read RDF/XML and N3 files and query them using SPARQL.
