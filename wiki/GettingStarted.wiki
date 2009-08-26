@@ -115,7 +115,7 @@ for (Triple triple : graph.find(ANY_SUBJECT_NODE, ANY_PREDICATE_NODE, ANY_OBJECT
 ...
 }}}
 
-This code creates a graph with two triples in it:
+This code initially creates a graph with two triples in it:
 {{{
 urn:foo urn:foo urn:foo .
 urn:bar urn:bar urn:bar .
