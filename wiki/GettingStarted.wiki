@@ -137,7 +137,7 @@ urn:bar urn:bar urn:bar .
 
 Local graphs are graphs that rely on a node pool and string pool for the creation of RDF data structures.  This places certain limits on how these items are used. To create a local graph you must use a Factory - either an in memory factory or an on disk one.
 
-To create an in memory graph factory, create a new graph and add the triple "urn:node, urn:node, urn:node" requires the following code:
+To get an in memory graph factory, create a new graph and add the triple "urn:node, urn:node, urn:node" requires the following code:
 
 {{{
 JRDFFactory jrdfFactory = SortedMemoryJRDFFactory.getFactory();
