@@ -162,7 +162,7 @@ The factory must also be closed in order for the changes to be written to disk, 
 
 == Loading RDF from Files ==
 
-The simplest way to load various RDF files using is to RdfParser.  For example, to load in a file into an in memory graph:
+The simplest way to load various RDF files using is to RdfParser.  For example, to load a file into an in memory graph:
 {{{
 RdfReader reader = new RdfReader();
 Graph graph = reader.parseNTriples(new File("test001.nt"));
