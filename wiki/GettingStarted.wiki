@@ -106,11 +106,13 @@ try {
 ...
 }}}
 
-Putting the iterator.close() in a finally block ensures that any resources used are released.  However, as we are using the in memory store this is not required (in a disk based store it is) - so it can be further simplified:
+Putting the iterator.close() in a finally block ensures that any resources used are released.  However, by default JRDF uses an in memory store, so this is not required (when using a disk based store it is).  This allows it to be further simplified:
 {{{
-for (Triple triple : jrdfMem.find(ANY_SUBJECT_NODE, ANY_PREDICATE_NODE, ANY_OBJECT_NODE)) {
+...
+for (Triple triple : graph.find(ANY_SUBJECT_NODE, ANY_PREDICATE_NODE, ANY_OBJECT_NODE)) {
   System.out.println("Graph: " + triple);
 }
+...
 }}}
 
 This code creates a graph with two triples in it:
