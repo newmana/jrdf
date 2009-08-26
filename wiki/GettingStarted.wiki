@@ -152,7 +152,7 @@ To create an on disk graph replace the first line with (this current requires BD
 JRDFFactory jrdfFactory = SortedDiskJRDFFactory.getFactory();
 }}}
 
-To create an persistent, named graph requires the first line to be replaced with:
+To create a persistent, named graph requires the first line to be replaced with:
 {{{
 DirectoryHandler handler = new TempDirectoryHandler();
 PersistentJRDFFactory factory = PersistentJRDFFactoryImpl.getFactory(handler);
