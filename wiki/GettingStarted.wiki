@@ -11,7 +11,7 @@ The current version of JRDF supports the following versions of Java:
 
 Java 1.4 is only supported before version 0.4 and is no longer being actively used.
 
-== Help? ==
+== Help ==
 To get support for JRDF you can:
  * [http://jrdf.sourceforge.net/documentation.html Check the Documentation],
  * [https://lists.sourceforge.net/lists/listinfo/jrdf-general Ask a question on the mailing list], or
@@ -94,6 +94,7 @@ graph.remove(foo, foo, foo);
 
 This can be simplified a little using Java 5's for loop:
 {{{
+...
 ClosableIterable<Triple> triples = graph.find(AnySubjectNode.ANY_SUBJECT, AnyPredicateNode.ANY_PREDICATE, AnyObjectNode.ANY_OBJECT);
 try {
   for (Triple triple : triples) {
@@ -102,6 +103,7 @@ try {
 } finally {
   triples.iterator().close();
 }
+...
 }}}
 
 Putting the iterator.close() in a finally block ensures that any resources used are released.  However, as we are using the in memory store this is not required (in a disk based store it is) - so it can be further simplified:
