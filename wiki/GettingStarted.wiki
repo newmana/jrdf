@@ -9,7 +9,7 @@ The current version of JRDF supports the following versions of Java:
  * 1.5 (but requires the StAX library for XML Parsing),
  * 1.6.
 
-Java 1.4 is only supported before version 0.4 and is no longer being actively developed.
+Java 1.4 is only supported before version 0.4 and is no longer being actively used.
 
 == Help? ==
 To get support for JRDF you can:
