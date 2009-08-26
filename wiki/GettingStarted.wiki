@@ -14,7 +14,7 @@ Java 1.4 is only supported before version 0.4 and is no longer being actively us
 == Help? ==
 To get support for JRDF you can:
  * [http://jrdf.sourceforge.net/documentation.html Check the Documentation],
- * [https://lists.sourceforge.net/lists/listinfo/jrdf-general Ask a question on the mailing list],
+ * [https://lists.sourceforge.net/lists/listinfo/jrdf-general Ask a question on the mailing list], or
  * Leave a comment on this page.
 
 == Loading an RDF/XML File with the JRDF GUI ==
