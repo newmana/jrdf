@@ -100,7 +100,6 @@ try {
   for (Triple triple : triples) {
     System.out.println("Graph: " + triple);
   }
-  System.out.println("Total number of statements: " + graph.getNumberOfTriples());
 } finally {
   triples.iterator().close();
 }
