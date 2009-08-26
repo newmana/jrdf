@@ -86,8 +86,7 @@ try {
     Triple triple = triples.next();
     System.out.println("Got triple: " + triple);
   }
-}
-finally {
+} finally {
   triples.close();
 }
 graph.remove(foo, foo, foo);
