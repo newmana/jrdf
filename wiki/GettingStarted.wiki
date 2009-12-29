@@ -115,7 +115,7 @@ for (Triple triple : graph.find(ANY_SUBJECT_NODE, ANY_PREDICATE_NODE, ANY_OBJECT
 ...
 }}}
 
-Since JRDF 0.5.6.1, you can also use the AnyTriple.ANY_TRIPLE constant and use a more functional style to ensure closing the iterator.  For example,
+Since JRDF 0.5.6.1, you can also use the AnyTriple.ANY_TRIPLE constant and use a more functional style to ensure that the iterator is closed.  For example,
 {{{
     ClosableIterators.with(graph.find(ANY_TRIPLE), new Function<Void, ClosableIterable<Triple>>() {
             public Void apply(ClosableIterable<Triple> object) {
