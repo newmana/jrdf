@@ -76,3 +76,5 @@ http://localhost:8183/
 This will list the configured servers to be queried at the same time.  Each time the server is started the list of servers will have to be added as the list of servers is not saved.
 
 Querying remote servers assumes that the data being queried on the whole is different on each server and there is no post processing done on the queries returned.  This means, that unlike SPARQL queries against a local JRDF server, duplicates can be returned.
+
+Future implementations will rely on the specifications from the W3C, [http://www.w3.org/2009/sparql/docs/fed/service SPARQL 1.1 Federation Extensions].
