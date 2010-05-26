@@ -39,7 +39,19 @@ You can override the format of the query by submitting a query parameter called 
 http://localhost:8182/graph/foo/?query=SELECT+*%0D%0AWHERE+{%0D%0A++++%3Fs+%3Fp+%3Fo+.%0D%0A}%0D%0A++++&format=html
 }}}
 
-The current representation supported are XML and HTML with JSON to follow.
+JRDF supports the following methods:
+* GET (for returning a representation of a graph),
+* POST (for adding more triples to a graph),
+* PUT (for uploading/replacing a graph), and
+* DELETE (for removing all triples in a graph).
+
+JRDF supports the following representations of a graph:
+* RDF/XML,
+* SPARQL HTML (a simple web page),
+* SPARQL JSON, and
+* SPARQL XML.
+
+It's important to note that currently all of these are representations are currently limited by memory (although storage of the graphs are not).
 
 == Setting up Persistent Directories and Adding Triples ==
 The default directory handler for JRDF Graphs is the Temporary Directory handler.  This can be modified in the wiring configuration by changing the "directoryHandler" bean and implementing your own "DirectoryHandler".
