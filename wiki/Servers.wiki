@@ -40,16 +40,16 @@ http://localhost:8182/graph/foo/?query=SELECT+*%0D%0AWHERE+{%0D%0A++++%3Fs+%3Fp+
 }}}
 
 JRDF supports the following methods:
-* GET (for returning a representation of a graph),
-* POST (for adding more triples to a graph),
-* PUT (for uploading/replacing a graph), and
-* DELETE (for removing all triples in a graph).
+  * GET (for returning a representation of a graph),
+  * POST (for adding more triples to a graph),
+  * PUT (for uploading/replacing a graph), and
+  * DELETE (for removing all triples in a graph).
 
 JRDF supports the following representations of a graph:
-* RDF/XML,
-* SPARQL HTML (a simple web page),
-* SPARQL JSON, and
-* SPARQL XML.
+  * RDF/XML,
+  * SPARQL HTML (a simple web page),
+  * SPARQL JSON, and
+  * SPARQL XML.
 
 It's important to note that currently all of these are representations are currently limited by memory (although storage of the graphs are not).
 
