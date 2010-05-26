@@ -34,10 +34,7 @@ Is equivalent to:
 http://localhost:8182/graph/foo/?query=SELECT+*%0D%0AWHERE+{%0D%0A++++%3Fs+%3Fp+%3Fo+.%0D%0A}%0D%0A++++
 }}}
 
-You can override the format of the query by submitting a query parameter called "format", for example:
-{{{
-http://localhost:8182/graph/foo/?query=SELECT+*%0D%0AWHERE+{%0D%0A++++%3Fs+%3Fp+%3Fo+.%0D%0A}%0D%0A++++&format=html
-}}}
+A HTTP request allows you to specify the method and acceptable content type.  JRDF RESTful representation of graphs allows 4 methods and various representations to be specified.
 
 JRDF supports the following methods:
   * GET (for returning a representation of a graph),
