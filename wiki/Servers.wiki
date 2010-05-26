@@ -4,7 +4,7 @@
 
 The server component of JRDF provides a way to expose graphs for remote querying using RESTful model.  This follows the W3C's [http://www.w3.org/TR/sparql11-http-rdf-update/ SPARQL 1.1 Uniform HTTP Protocol for Managing RDF Graphs].
 
-= Starting a Single Servers =
+= Starting a Single Server =
 To start a single local server run the SpringLocalServer Java application.  This can be done by running:
 {{{
 java -jar jrdf-server-0.5.6.jar
