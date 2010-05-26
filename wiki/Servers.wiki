@@ -1,6 +1,6 @@
-#summary Local and Distributed Querying of JRDF
+#summary RESTful Querying of JRDF
 
-= Local and Distributed Querying of JRDF =
+= RESTful Querying of JRDF =
 
 The server component of JRDF provides a way to expose graphs for remote querying using RESTful model.  This follows the W3C's [http://www.w3.org/TR/sparql11-http-rdf-update/ SPARQL 1.1 Uniform HTTP Protocol for Managing RDF Graphs].
 
