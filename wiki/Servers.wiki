@@ -51,7 +51,7 @@ JRDF supports the following representations of a graph:
   * SPARQL JSON, and
   * SPARQL XML.
 
-It's important to note that currently all of these are representations are currently limited by memory (although storage of the graphs are not).
+It's important to note that currently all of these representations are currently limited by memory (although storage of the graphs are not).
 
 == Setting up Persistent Directories and Adding Triples ==
 The default directory handler for JRDF Graphs is the Temporary Directory handler.  This can be modified in the wiring configuration by changing the "directoryHandler" bean and implementing your own "DirectoryHandler".
