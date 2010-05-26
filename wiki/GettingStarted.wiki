@@ -170,7 +170,7 @@ DirectoryHandler handler = new TempDirectoryHandler();
 PersistentJRDFFactory factory = PersistentJRDFFactoryImpl.getFactory(handler);
 }}}
 
-Up to version 0.5.6, the factory must also be closed in order for the changes to be written to disk, subsequent version require you to call close on the graph not on the factory, see [PersistentGraphs persistent graphs].  JRDF has many different types of graphs that can be created through [http://code.google.com/p/jrdf/wiki/JRDFWiring Spring, other IoC containers or through factories].
+Up to version 0.5.6, the factory must also be closed in order for the changes to be written to disk, subsequent versions require you to call close on the graph not on the factory, see [PersistentGraphs persistent graphs].  JRDF has many different types of graphs that can be created through [http://code.google.com/p/jrdf/wiki/JRDFWiring Spring, other IoC containers or through factories].
 
 == Graph Element Factory and Triple Factory ==
 
