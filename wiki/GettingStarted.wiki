@@ -218,11 +218,12 @@ The mapping from Java types to XSD types is as follows:
 || java.math.BigDecimal || xsd:decimal ||
 || Float, float || xsd:float ||
 || Double, double || xsd:double ||
+|| Duration || xsd:duration ||
 || GregorianCalendar || xsd:dateTime ||
 || java.sql.Date || xsd:dateTime ||
 || java.util.Date || xsd:dateTime ||
 || QName || xsd:QName ||
-|| BigInteger || xsd:integer ||
+|| java.math.BigInteger || xsd:integer ||
 || Long, long || xsd:long ||
 || Integer, int || xsd:int ||
 || Short, short || xsd:short ||
