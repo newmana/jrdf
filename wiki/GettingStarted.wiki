@@ -218,7 +218,6 @@ The mapping from Java types to XSD types is as follows:
 || java.math.BigDecimal || xsd:decimal ||
 || Float, float || xsd:float ||
 || Double, double || xsd:double ||
-|| Duration || xsd:duration ||
 || GregorianCalendar || xsd:dateTime ||
 || java.sql.Date || xsd:dateTime ||
 || java.util.Date || xsd:dateTime ||
