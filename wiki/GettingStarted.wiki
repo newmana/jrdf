@@ -214,20 +214,19 @@ Literal literal = elementFactory.createLiteral(7);
 The mapping from Java types to XSD types is as follows:
 || *Java Type* || *XSD Type* ||
 || String || None ||
-|| Boolean || xsd:boolean ||
-|| Decimal || xsd:decimal ||
-|| Float || xsd:float ||
-|| Double || xsd:double ||
+|| Boolean, boolean || xsd:boolean ||
+|| java.math.BigDecimal || xsd:decimal ||
+|| Float, float || xsd:float ||
+|| Double, double || xsd:double ||
 || GregorianCalendar || xsd:dateTime ||
 || java.sql.Date || xsd:dateTime ||
 || java.util.Date || xsd:dateTime ||
 || QName || xsd:QName ||
-|| BigInteger (positive value) || xsd:nonNegativeInteger ||
-|| BigInteger (negative value) || xsd:nonPositiveInteger ||
-|| Long || xsd:long ||
-|| Integer || xsd:int ||
-|| Short || xsd:short ||
-|| Byte || xsd:byte ||
+|| BigInteger || xsd:integer ||
+|| Long, long || xsd:long ||
+|| Integer, int || xsd:int ||
+|| Short, short || xsd:short ||
+|| Byte, byte || xsd:byte ||
 
 If a Java type is used that has no mapping an exception will be thrown.  New mappings can be added through calling addValueCreator(URI, Class<?>, ValueCreator) on the DatatypeFactory. 
 
