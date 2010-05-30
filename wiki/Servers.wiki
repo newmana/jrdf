@@ -42,9 +42,9 @@ JRDF supports the following methods:
   * PUT (for uploading/replacing a graph), and
   * DELETE (for removing all triples in a graph).
 
-JRDF supports RDF/XML as the representation format.
+The currently supported representation format is RDF/XML.
 
-It also supports returning different representations of querying graphs:
+When querying graphs is supports the following representations:
   * SPARQL HTML (a simple web page),
   * SPARQL JSON, and
   * SPARQL XML.
