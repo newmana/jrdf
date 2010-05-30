@@ -72,11 +72,13 @@ If the graph contained one triple: <http://hello.com/foo>, <http://hello.com/foo
 
 If "org.jrdf.writer.rdfxml.writeLocalNamespace" is set to "true", the RDF/XML becomes:
 {{{
-<?xml version='1.0' encoding='UTF-8'?><!DOCTYPE rdf:RDF[
-     <!ENTITY rdf 'http://www.w3.org/1999/02/22-rdf-syntax-ns#'>
- ]><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-    <rdf:Description rdf:about="http://hello.com/foo">
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE rdf:RDF[
+  <!ENTITY rdf 'http://www.w3.org/1999/02/22-rdf-syntax-ns#'>
+]>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+  <rdf:Description rdf:about="http://hello.com/foo">
     <wstxns1:foo xmlns:wstxns1="http://hello.com/" rdf:resource="http://hello.com/foo"/>
-</rdf:Description>
+  </rdf:Description>
 </rdf:RDF>
 }}}
