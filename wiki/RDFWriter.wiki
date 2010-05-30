@@ -16,9 +16,9 @@ Writer.writeRdfXml(new File("foo.rdf"), graph);
 == Design ==
 
 There are three components used to serialize RDF:
-* RdfWriter - which takes a graph and object to write the results to,
-* BlankNodeRegistry - which maintains a map of blank node ids and their objects, and
-* RdfNamespaceMap - which is used to prefix URI References with an XML name space.
+  * RdfWriter - which takes a graph and object to write the results to,
+  * BlankNodeRegistry - which maintains a map of blank node ids and their objects, and
+  * RdfNamespaceMap - which is used to prefix URI References with an XML name space.
 
 == RdfWriter ==
 
