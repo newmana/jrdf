@@ -79,7 +79,7 @@ URI uri1 = URI.create("urn:foo");
 URI uri2 = URI.create("urn:bar")
 Triple t1 = tripleFactory.add(uri1, uri1, uri1);
 Triple t2 = tripleFactory.add(uri2, uri2, uri2);
-ClosableIterator<Triple> triples = graph.find(AnySubjectNode.ANY_SUBJECT, AnyPredicateNode.ANY_PREDICATE, AnyObjectNode.ANY_OBJECT);
+ClosableIterator<Triple> triples = graph.find(AnyTriple.ANY_TRIPLE);
 try {
   while (triples.hasNext()) {
     Triple triple = triples.next();
@@ -94,7 +94,7 @@ graph.remove(t1);
 This can be simplified a little using Java 5's for loop:
 {{{
 ...
-ClosableIterable<Triple> triples = graph.find(AnySubjectNode.ANY_SUBJECT, AnyPredicateNode.ANY_PREDICATE, AnyObjectNode.ANY_OBJECT);
+ClosableIterable<Triple> triples = graph.find(AnyTriple.ANY_TRIPLE);
 try {
   for (Triple triple : triples) {
     System.out.println("Got triple: " + triple);
@@ -108,15 +108,15 @@ try {
 Putting the iterator.close() in a finally block ensures that any resources used are released.  By default JRDF uses an in memory store, so this is not required (when using a disk based store it is).  This allows it to be further simplified:
 {{{
 ...
-for (Triple triple : graph.find(ANY_SUBJECT_NODE, ANY_PREDICATE_NODE, ANY_OBJECT_NODE)) {
+for (Triple triple : graph.find(AnyTriple.ANY_TRIPLE)) {
   System.out.println("Got triple: " + triple);
 }
 ...
 }}}
 
-Since JRDF 0.5.6.1, you can also use the AnyTriple.ANY_TRIPLE constant and use a more functional style to ensure that the iterator is closed.  For example,
+The ClosableIterators utility provides an alternatives means to ensure that the iterator is closed.  For example:
 {{{
-    ClosableIterators.with(graph.find(ANY_TRIPLE), new Function<Void, ClosableIterable<Triple>>() {
+    ClosableIterators.with(graph.find(AnyTriple.ANY_TRIPLE), new Function<Void, ClosableIterable<Triple>>() {
             public Void apply(ClosableIterable<Triple> object) {
                 for (Triple triple : object) {
                     System.out.println("Got triple: " + triple);
