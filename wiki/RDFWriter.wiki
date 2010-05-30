@@ -40,7 +40,7 @@ map.addNamespace("owl", "http://www.w3.org/2002/07/owl#");
 
 == RDF/XML Implementation ==
 
-By default, the unique partial URIs are extracted from all of the predicates found in a given Graph (using the load method).  To disable this feature, so that only the RDF name space is used an predicates have a local namespace set the property "org.jrdf.writer.rdfxml.writeLocalNamespace" to "true".
+By default, the unique partial URIs are extracted from all of the predicates found in a given Graph (using the load method).  To disable this feature, so that only the RDF name space is used and predicates have a local namespace set the property "org.jrdf.writer.rdfxml.writeLocalNamespace" to "true".
 
 To create an RdfXmlWriter the following code is used (assuming a JRDF Graph, graph, already contains triples):
 {{{
