@@ -75,11 +75,10 @@ The following is an example showing the creation and use of a graph:
 JRDFFactory jrdfFactory = SortedMemoryJRDFFactory.getFactory();
 Graph graph = jrdfFactory.getGraph();
 TripleFactory tripleFactory = graph.getTripleFactory();
-GraphElementFactory elementFactory = graph.getElementFactory();
-URIReference foo = elementFactory.createURIReference(URI.create("urn:foo"));
-URIReference bar = elementFactory.createURIReference(URI.create("urn:bar"));
-graph.add(foo, foo, foo);
-graph.add(bar, bar, bar);
+URI uri1 = URI.create("urn:foo");
+URI uri2 = URI.create("urn:bar")
+Triple t1 = tripleFactory.add(uri1, uri1, uri1);
+Triple t2 = tripleFactory.add(uri2, uri2, uri2);
 ClosableIterator<Triple> triples = graph.find(AnySubjectNode.ANY_SUBJECT, AnyPredicateNode.ANY_PREDICATE, AnyObjectNode.ANY_OBJECT);
 try {
   while (triples.hasNext()) {
@@ -89,7 +88,7 @@ try {
 } finally {
   triples.close();
 }
-graph.remove(foo, foo, foo);
+graph.remove(t1);
 }}}
 
 This can be simplified a little using Java 5's for loop:
