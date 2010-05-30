@@ -2,7 +2,16 @@
 
 = Writing RDF with JRDF =
 
-JRDF comes with a set of interfaces for implementing various RDF output formats.  These interfaces are currently implemented to support RDF/XML.
+JRDF comes with a set of interfaces for implementing various RDF output formats.  RDF/XML and NTriples are currently supported.
+
+== Getting Started ==
+The simplest way to persist graphs is to use org.jrdf.writer.Writer which provides default, in memory implementations persisting to NTriples or RDF/XML.
+
+For example, to write NTriples and RDF/XML versions of the same graph,
+{{{
+Writer.writeNTriples(new File("foo.nt"), graph);
+Writer.writeRdfXml(new File("foo.rdf"), graph);
+}}}
 
 == Interfaces ==
 
@@ -14,14 +23,7 @@ When writing out blank nodes in RDF/XML it is important the the same blank node 
 
 == RdfNamespaceMap ==
 
-In order to reduce the verbosity of the RDF/XML that is produced a standard set of namespaces is used.  This includes:
-  * RDF,
-  * RDFS,
-  * OWL,
-  * DC (Dublic Core), and
-  * DC Terms (Dublic Core Terms).
-
-Others can be added either directly (using add) or the unique partial URIs are extracted from the predicates of statements found in a given Graph (using the load method).
+In order to reduce the verbosity of the RDF/XML that is produced, a map tracks name spaces used and abbreviates the triples produced.  By default only the RDF name space is abbreviated (rdf -> http://www.w3.org/1999/02/22-rdf-syntax-ns#). Others can be added either directly (using add).
 
 == RdfWriter ==
 
@@ -29,9 +31,11 @@ The interface RdfWriter provides a generic way to implement various ways of pers
 
 = RDF/XML Implementation =
 
-The RDF/XML implementation requires a JRDF Graph where all the triples in the graph are written to.  It currently does not support setting XML namespaces or different ways of writing the RDF/XML.
+The RDF/XML implementation requires a JRDF Graph where all the triples in the graph are written to.  
 
-To create an RDF/XML implementation the following code is used (assuming a JRDF Graph, graph, already contains triples):
+By default, the unique partial URIs are extracted from all of the predicates found in a given Graph (using the load method).  To disable this feature, so that only the RDF name space is used an predicates have a local namespace set the property "org.jrdf.writer.rdfxml.writeLocalNamespace" to "true".
+
+To create an RdfXmlWriter the following code is used (assuming a JRDF Graph, graph, already contains triples):
 {{{
 StringWriter out = new StringWriter();
 try {
