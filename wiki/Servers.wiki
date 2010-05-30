@@ -17,9 +17,23 @@ http://localhost:8182/graph
 
 This will show a list of graphs on the current machine - which will typically be empty on initialization.
 
-To create a new graph simply go to the URI of the graph you wish to query, for example graph "foo" will be created when you go to "http://localhost:8182/graph/foo".  Using a web browser, you will be presented by a HTML presentation of the resource - which is a form to allow you to submit queries to the graph.
-
 By default, new graphs will be created under the temporary directory of your operating system under "perstGraph" subdirectory.  For Windows, this will probably be "C:\temp\perstGraph" and for Unix "/tmp/perstGraph".  Under this directory a file is created called "graphs.nt" this is a NTriples formatted RDF file that lists the available graphs in the system and their id (an number beginning from 1).  The id references the various graph files used in the directory, for example the graph "foo" with an id of 1 will have the files "dmspo1", "ospmd1", "posmd1" and "spomd1" as well as a shared node pool/string pool file(s) in Berkley JDB (usually called "00000000.jdb").  There is more detail on the [PersistentGraphs persistent graphs page].
+
+To add the RDF/XML "slashdot.rdf" to a graph called "test" requires the following code:
+{{{
+Graph graph = MemoryJRDFFactory.getFactory().getGraph();
+Parser parser = new GraphRdfXmlParser(graph, new MemMapFactory());
+parser.parse(new FileInputStream("slashdot.rdf"), "");
+Client client = new Client("http");
+Map<String, Object> dataModel = new HashMap<String, Object>();
+dataModel.put("graphRef", graph);
+Representation representation = new RdfXmlRepresentationFactory().createRepresentation(
+  APPLICATION_RDF_XML, dataModel);
+Request request = new Request(PUT, createRef("test"), representation);
+Response response = client.handle(request);
+}}}
+
+The getStatus() of the response should indicate a success.
 
 Queries can be submitted by GETting a encoded SPARQL query.  For example, the SPARQL query:
 {{{
