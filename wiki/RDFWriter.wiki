@@ -7,7 +7,7 @@ JRDF comes with a set of interfaces for implementing various RDF output formats.
 == Getting Started ==
 The simplest way to persist graphs is to use org.jrdf.writer.Writer which provides default, in memory implementations persisting to NTriples or RDF/XML.
 
-For example, to write NTriples and RDF/XML versions of the same graph,
+For example, to write NTriples and RDF/XML versions of the same graph:
 {{{
 Writer.writeNTriples(new File("foo.nt"), graph);
 Writer.writeRdfXml(new File("foo.rdf"), graph);
@@ -21,9 +21,15 @@ There are two interfaces: BlankNodeRegistry (TODO: May integrate with Parser's P
 
 When writing out blank nodes in RDF/XML it is important the the same blank node stored in a graph is persisted with the same blank node identifier.  The BlankNodeRegistry is used to map blank node instances with unique identifiers.
 
+There are currently two implementations: an in memory (MemBlankNodeRegistryImpl) and BDB (BdbBlankNodeRegistryImpl).
+
 == RdfNamespaceMap ==
 
-In order to reduce the verbosity of the RDF/XML that is produced, a map tracks name spaces used and abbreviates the triples produced.  By default only the RDF name space is abbreviated (rdf -> http://www.w3.org/1999/02/22-rdf-syntax-ns#). Others can be added either directly (using add).
+In order to reduce the verbosity of the RDF/XML that is produced, a map tracks name spaces used and abbreviates the triples produced.  By default only the RDF name space is abbreviated (rdf -> http://www.w3.org/1999/02/22-rdf-syntax-ns#). Others can be added directly using addNamespace.  For example:
+{{{
+RdfNamespaceMap map = new RdfNamespaceMapImpl();
+map.addNamespace("owl", "http://www.w3.org/2002/07/owl#");
+}}}
 
 == RdfWriter ==
 
