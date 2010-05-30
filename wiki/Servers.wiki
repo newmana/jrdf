@@ -7,7 +7,7 @@ The server component of JRDF provides a way to expose graphs for remote querying
 = Starting a Single Server =
 To start a single local server run the SpringLocalServer Java application.  This can be done by running:
 {{{
-java -jar jrdf-server-0.5.6.jar
+java -jar jrdf-server-0.5.6.1.jar
 }}}
 
 The server can be view by going to port 8182 on the local machine:
@@ -62,7 +62,7 @@ Distributed querying in JRDF allows a single point to be used to query multiple 
 
 This can be done by running:
 {{{
-java -jar jrdf-distributed-server-0.5.6.jar
+java -jar jrdf-distributed-server-0.5.6.1.jar
 }}}
 
 The server can be view by going to port 8183 on the local machine:
