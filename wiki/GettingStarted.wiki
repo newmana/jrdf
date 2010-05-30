@@ -58,7 +58,7 @@ Graph: [http://apple.slashdot.org/story/09/07/13/1229250/What-To-Expect-From-App
 
 == Loading RDF from Files ==
 
-The simplest way to load various RDF files using is to RdfParser.  For example, to load in a file into an in memory graph:
+The simplest way to load RDF files is to use RdfParser.  For example, to load in a file into an in memory graph:
 {{{
 RdfReader reader = new RdfReader();
 Graph graph = reader.parseNTriples(new File("test001.nt"));
