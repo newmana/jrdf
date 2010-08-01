@@ -21,15 +21,20 @@ By default, new graphs will be created under the temporary directory of your ope
 
 To add the RDF/XML "slashdot.rdf" to a graph called "test" requires the following code:
 {{{
+// Parse an RDF/XML File.
 Graph graph = MemoryJRDFFactory.getFactory().getGraph();
 Parser parser = new GraphRdfXmlParser(graph, new MemMapFactory());
 parser.parse(new FileInputStream("slashdot.rdf"), "");
-Client client = new Client("http");
+// Create a JRDF/Restlet representation of a RDF Graph (serialized a RDF/XML)
 Map<String, Object> dataModel = new HashMap<String, Object>();
 dataModel.put("graphRef", graph);
 Representation representation = new RdfXmlRepresentationFactory().createRepresentation(
   APPLICATION_RDF_XML, dataModel);
-Request request = new Request(PUT, createRef("test"), representation);
+// Put the RDF/XML graph representation at http://127.0.0.1:8182/graph/test
+Reference ref = new Reference("http://127.0.0.1:8182/graph/test");
+Request request = new Request(PUT, ref, representation);
+// Check response
+Client client = new Client("http");
 Response response = client.handle(request);
 }}}
 
