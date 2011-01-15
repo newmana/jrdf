@@ -156,7 +156,7 @@ BlankNode b2 = elementFactory.createBlankNode();
 URIReference foo = elementFactory.createURIReference(URI.create("urn:foo"));
 graph.add(foo, foo, b1);
 graph.add(foo, foo, b2);
-ClosableIterable<BlankNode> nodes = (ClosableIterable<BlankNode>) graph.findNodes(new BlankNodeType());
+ClosableIterable<BlankNode> nodes = (ClosableIterable<BlankNode>) graph.findNodes(BlankNodeType.BNODE_TYPE);
 for (BlankNode node : nodes) {
   System.out.println("Blank nodes: " + node);
 }
