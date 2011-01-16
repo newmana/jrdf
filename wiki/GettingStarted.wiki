@@ -203,7 +203,7 @@ ClosableIterators.with(graph.find(AnyTriple.ANY_TRIPLE), new Function<Void, Clos
 
 }}}
 
-=== Finding Nodes by Type in Graphs ===
+=== Finding Nodes by Type ===
 
 Apart from finding nodes by position, for example all the triples that contain <urn:foo> as the subject, JRDF allows you to search based on node type.  For example,
 {{{
