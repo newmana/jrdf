@@ -65,10 +65,11 @@ Run the example RDF/XML parser:
 java -cp jrdf-0.5.6.2.jar org.jrdf.example.RdfXmlParserExample
 }}}
 
-By default it will download Slashdot RSS feed, parse it and display all of the triples:
+By default it will download Planet RDF RSS feed, parse it and display all of the triples:
 {{{
-First argument empty so using: http://rss.slashdot.org/Slashdot/slashdot
-Graph: [http://apple.slashdot.org/story/09/07/13/1229250/What-To-Expect-From-Apples-Rumored-MacPad?from=rss, http://purl.org/dc/elements/1.1/creator, "CmdrTaco"]
+First argument empty so using: http://planetrdf.com/index.rdf
+...
+Graph: [http://apassant.net/blog/2011/01/07/internship-positions-deri-smob-pubsubhubbub-privacy-etc, http://purl.org/dc/elements/1.1/creator, "Alexandre Passant"]
 ...
 }}}
 
