@@ -156,7 +156,8 @@ graph.find(AnySubject.ANY_SUBJECT, AnyPredicate.ANY_PREDICATE, AnyObject.ANY_OBJ
 
 To find any triples with <urn:foo> as the subject you would use:
 {{{
-graph.find(uri1, ANY_PREDICATE_NODE, ANY_OBJECT_NODE)
+URIReference foo = graph.getElementFactory().createURIReference(URI.create("urn:foo"));
+graph.find(foo, ANY_PREDICATE_NODE, ANY_OBJECT_NODE);
 }}}
 
 The code then removes the triple "<urn:foo> <urn:foo> <urn:foo>" (using graph.remove) and the graph has only one triple in it by the end:
