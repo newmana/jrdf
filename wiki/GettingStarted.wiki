@@ -149,7 +149,12 @@ Got triple: <urn:foo> <urn:foo> <urn:foo>
 Got triple: <urn:bar> <urn:bar> <urn:bar>
 }}}
 
-To find only the triples with <urn:foo> as the subject you would use:
+The equivalent code using individual nodes is:
+{{{
+graph.find(AnySubject.ANY_SUBJECT, AnyPredicate.ANY_PREDICATE, AnyObjectANY_OBJECT)
+}}}
+
+To find any triples with <urn:foo> as the subject you would use:
 {{{
 graph.find(uri1, ANY_PREDICATE_NODE, ANY_OBJECT_NODE)
 }}}
