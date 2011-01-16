@@ -139,6 +139,11 @@ Got triple: <urn:bar> <urn:bar> <urn:bar>
 
 }}}
 
+To find only the triples with <urn:foo> as the subject use:
+{{{
+graph.find(uri1, ANY_PREDICATE_NODE, ANY_OBJECT_NODE)
+}}}
+
 It then removes the triple "<urn:foo> <urn:foo> <urn:foo>" and the graph has only one triple in it by the end:
 {{{
 urn:bar urn:bar urn:bar .
