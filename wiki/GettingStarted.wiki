@@ -66,6 +66,22 @@ Graph graph = reader.parseNTriples(new File("test001.nt"));
 
 It also supports parseN3 or parseRdfXml using InputStreams or Files.
 
+== Querying with SPARQL ==
+
+{{{
+JRDFFactory jrdfFactory = SortedMemoryJRDFFactory.getFactory();
+SparqlConnection connection = jrdfFactory.getNewSparqlConnection();
+Answer answer = connection.executeQuery(graph, "SELECT ?s ?p ?o WHERE { ?s ?p ?o }");
+ClosableIterator<TypeValue[]> closableIterator = answer.columnValuesIterator();
+try {
+  while (closableIterator.hasNext()) {
+  TypeValue[] next = closableIterator.next();
+  System.out.println("Row: " + Arrays.asList(next));
+} finally {
+  closableIterator.close();
+}
+}}}
+
 == Using the Graph ==
 
 The Graph interface is the primary way to manipulate RDF graphs.  It has methods that allow you to add, remove, and find triples.  A graph is created through a graph factory.  Triples and elements (nodes) in a graph are created through triple and element factories.
