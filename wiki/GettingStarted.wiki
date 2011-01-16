@@ -11,19 +11,19 @@ The current version of JRDF supports the following versions of Java:
 
 Libraries required:
  * Spring Wiring
-  # /spring/spring-beans-2.5.6
-  # /spring/spring-context-2.5.6
-  # /spring/spring-core-2.5.6
+  * /spring/spring-beans-2.5.6
+  * /spring/spring-context-2.5.6
+  * /spring/spring-core-2.5.6
  * Disk based Triple Store
-  # je-4.0.71.jar
+  * je-4.0.71.jar
  * Distributed Query Results
-  # /woodstox/stax-api-1.0.1.jar
-  # /woodstox/stax2-api-3.0.2.jar
-  # /woodstox/woodstox-core-asl-4.0.8.jar
+  * /woodstox/stax-api-1.0.1.jar
+  * /woodstox/stax2-api-3.0.2.jar
+  * /woodstox/woodstox-core-asl-4.0.8.jar
  * Trie based Triple Store
-  # patricia-trie-0.2.jar
+  * patricia-trie-0.2.jar
  * Logging
-  # /jakarta-commons/commons-logging-1.1.jar
+  * /jakarta-commons/commons-logging-1.1.jar
 
 Java 1.4 is only supported before version 0.4 and is no longer being developed.
 
