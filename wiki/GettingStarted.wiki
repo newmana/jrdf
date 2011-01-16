@@ -159,14 +159,15 @@ for (Triple triple : graph.find(AnyTriple.ANY_TRIPLE)) {
 
 The ClosableIterators utility provides an alternative means to ensure that the iterator is closed.  For example:
 {{{
-    ClosableIterators.with(graph.find(AnyTriple.ANY_TRIPLE), new Function<Void, ClosableIterable<Triple>>() {
-            public Void apply(ClosableIterable<Triple> object) {
-                for (Triple triple : object) {
-                    System.out.println("Got triple: " + triple);
-                }
-                return null;
-            }
-        });
+ClosableIterators.with(graph.find(AnyTriple.ANY_TRIPLE), new Function<Void, ClosableIterable<Triple>>() {
+  public Void apply(ClosableIterable<Triple> object) {
+    for (Triple triple : object) {
+      System.out.println("Got triple: " + triple);
+    }
+    return null;
+  }
+});
+
 }}}
 
 This code initially creates a graph with two triples in it:
