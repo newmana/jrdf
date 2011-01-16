@@ -84,7 +84,7 @@ It also supports parseN3 or parseRdfXml using InputStreams or Files.
 
 == Querying with SPARQL ==
 
-JRDF provides an functional but rudimentary version of SPARQL - the basic operations (JOIN, OPTIONAL) are support as well as most FILTER operations.  To perform SPARQL operations you need to use a JRDF Factory, create a SparqlConnection options and perform the query against a graph.  For example:
+JRDF provides a functional but incomplete (missing LIMIT, OFFSET and some FILTER operations) version of SPARQL - the basic operations (JOIN, OPTIONAL) are support as well as most FILTER operations.  To perform SPARQL operations you need to use a JRDF Factory, create a SparqlConnection options and perform the query against a graph.  For example:
 
 {{{
 JRDFFactory jrdfFactory = SortedMemoryJRDFFactory.getFactory();
