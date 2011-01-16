@@ -75,7 +75,7 @@ Graph: [http://apassant.net/blog/2011/01/07/internship-positions-deri-smob-pubsu
 
 == Loading RDF from Files ==
 
-The simplest way to load RDF files is to use RdfParser.  For example, to load in a file into an in memory graph:
+The simplest way to load RDF files is to use RdfParser.  For example, to load a file into a new in memory graph:
 {{{
 RdfReader reader = new RdfReader();
 Graph graph = reader.parseNTriples(new File("test001.nt"));
