@@ -103,7 +103,9 @@ try {
 This will produce results such as:
 {{{
 ...
-Row: [Type: bnode Value: 5cd45a74-b071-4ef4-b813-ae04f34029e3#2 Suffix Type: none Suffix: , Type: uri Value: http://example.org/terms#street Suffix Type: none Suffix: , Type: literal Value: 1501 Grant Avenue Suffix Type: none Suffix: ]
+Row: [Type: bnode Value: 5cd45a74-b071-4ef4-b813-ae04f34029e3#2 Suffix Type: none Suffix: , 
+Type: uri Value: http://example.org/terms#street Suffix Type: none Suffix: , 
+Type: literal Value: 1501 Grant Avenue Suffix Type: none Suffix: ]
 ...
 }}}
 
