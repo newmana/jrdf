@@ -38,7 +38,7 @@ To get support for JRDF you can:
 JRDF comes distributed with a separate GUI that allows you to read RDF/XML and N3 files and query them using SPARQL.
 
 Download the JRDF GUI from:
-http://sourceforge.net/projects/jrdf/files/jrdf/jrdf-gui-0.5.6.2.jar/download
+http://sourceforge.net/projects/jrdf/files/jrdf/jrdf-0.5.6.2/jrdf-gui-0.5.6.2.jar/download
 
 Run the JRDF GUI:
 {{{
