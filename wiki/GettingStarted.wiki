@@ -9,7 +9,7 @@ The current version of JRDF supports the following versions of Java:
  * 1.5 (up to 0.5.6.2 - requires the StAX library for XML Parsing),
  * 1.6.
 
-Libraries required (<a href="http://sourceforge.net/projects/jrdf/files/jrdf/jrdf-0.5.6.2/jrdf-0.5.6.2.zip/download">included in the zip file</a>):
+JRDF will run with a single JAR, however for certain functionality extra libraries are required (<a href="http://sourceforge.net/projects/jrdf/files/jrdf/jrdf-0.5.6.2/jrdf-0.5.6.2.zip/download">included in the zip file</a>):
  * Spring Wiring
   * /spring/spring-beans-2.5.6
   * /spring/spring-context-2.5.6
