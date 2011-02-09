@@ -6,10 +6,10 @@ This document is not a primer for RDF, [http://www.w3.org/TR/REC-rdf-syntax/ thi
 
 == Supported Java Versions ==
 The current version of JRDF supports the following versions of Java:
- * 1.5 (up to 0.5.6.2 - requires the StAX library for XML Parsing),
+ * 1.5 (up to 0.5.6.3 - requires the StAX library for XML Parsing),
  * 1.6.
 
-JRDF will run with a single JAR, however for certain functionality extra libraries are required (<a href="http://sourceforge.net/projects/jrdf/files/jrdf/jrdf-0.5.6.2/jrdf-0.5.6.2.zip/download">included in the zip file</a>):
+JRDF will run with a single JAR, however for certain functionality extra libraries are required (<a href="http://sourceforge.net/projects/jrdf/files/jrdf/jrdf-0.5.6.3/jrdf-0.5.6.3.zip/download">included in the zip file</a>):
  * Spring Wiring
   * /spring/spring-beans-2.5.6
   * /spring/spring-context-2.5.6
@@ -38,11 +38,11 @@ To get support for JRDF you can:
 JRDF comes distributed with a separate GUI that allows you to read RDF/XML and N3 files and query them using SPARQL.
 
 Download the JRDF GUI from:
-http://sourceforge.net/projects/jrdf/files/jrdf/jrdf-0.5.6.2/jrdf-gui-0.5.6.2.jar/download
+http://sourceforge.net/projects/jrdf/files/jrdf/jrdf-0.5.6.3/jrdf-gui-0.5.6.3.jar/download
 
 Run the JRDF GUI:
 {{{
-java -jar jrdf-gui-0.5.6.2.jar
+java -jar jrdf-gui-0.5.6.3.jar
 }}}
 
 The GUI should then startup.  Select "Open File", navigate to a file and select "Open".  The client will then parse the file and will display the number of triples loaded and the time taken.
@@ -58,11 +58,11 @@ SPARQL queries can then be entered, run by selecting "Run Query", and the result
 The distributable JRDF jar comes with several examples of using JRDF including one that will download an RDF/XML file and display all the triples in the file.  
 
 Download the JRDF JAR from:
-http://sourceforge.net/projects/jrdf/files/jrdf/jrdf-0.5.6.2.jar/download
+http://sourceforge.net/projects/jrdf/files/jrdf/jrdf-0.5.6.3.jar/download
 
 Run the example RDF/XML parser:
 {{{
-java -cp jrdf-0.5.6.2.jar org.jrdf.example.RdfXmlParserExample
+java -cp jrdf-0.5.6.3.jar org.jrdf.example.RdfXmlParserExample
 }}}
 
 By default it will download Planet RDF RSS feed, parse it and display all of the triples:
