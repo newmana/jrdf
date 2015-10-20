@@ -1,0 +1,119 @@
+# JRDF and IoC #
+Inversion of Control (IoC) is used to decouple the various dependencies in JRDF.  The IoC container used in the JRDF GUI and testing is Spring (2.5.6).  For the main code base (everything except org.jrdf.gui at the moment) constructors are injected with their dependencies and there is no explict use of Spring code or interfaces.  This allows objects to be constructed normally or another IoC container to be used.
+
+## Using Spring ##
+Spring is a popular IoC container.  Using Spring with JRDF allows:
+  * Easier testing that comes with the use of inversion of control,
+  * The ability to switch in different implementations (such as different implementations of query operations such as OPTIONAL),
+  * The use of existing Spring libraries and extensions.  This includes declarative transactions, JPA, Spring Rich Client, and AOP.
+  * Allows integration into other Spring enabled projects (such as [Spring Modules](http://springmodules.dev.java.net/)).
+
+The creation of objects through the container is often called wiring.  JRDF comes with a XML configuration file ([wiring.xml](http://jrdf.svn.sourceforge.net/viewvc/jrdf/trunk/jrdf/conf/wiring.xml?view=markup)) that defines the creation of various objects.  This includes the lifecycle of the beans and whether a bean is a singleton (only one instance) or a prototype (instances created new every time).  Spring 2.0 provides a new, custom scope, which allows scopes to be tied to other lifecycles such as threads or HTTP sessions.
+
+However, it is clear that Spring and most IoC containers are a rather large requirement for most projects.  With this is mind, the use JRDF without an IoC framework is also supported.
+
+## Without Spring ##
+The use of IoC can be taken to the finest level, where each object is created through the container and constructors are never used.  This finest level of control has two main drawbacks:
+  * It is not clear through the list of bean wiring the exact order in which beans are created or what objects are at the top of the depency tree.
+  * That no objects can be created without an IoC framework.
+
+In order to find a balance between wiring everything and wiring very few things entry points have been defined to allow the user of a system determine not only how to use JRDF without an IoC container but it also reduces the complexity in determining what to wire up if a container is already being used.  This makes it easier to switch to another IoC container too.
+
+# Entry Points #
+In order to use JRDF it must be obvious where to start, to be able to create the initial set of objects.
+
+The [JRDFFactory](http://jrdf.sourceforge.net/0.5.6.1/doc/javadoc/org/jrdf/JRDFFactory.html) interface is the main entry point to JRDF.  It provides access to JRDF graphs and SPARQL connections.  There are factories available for using [in memory](http://jrdf.sourceforge.net/0.5.6.1/doc/javadoc/org/jrdf/SortedMemoryJRDFFactory.html) and [BDB](http://jrdf.sourceforge.net/0.5.6.1/doc/javadoc/org/jrdf/SortedDiskBdbJRDFFactory.html) implementations.  The Spring enabled entry point, [SpringJRDFFactory](http://jrdf.sourceforge.net/0.5.6.1/doc/javadoc/org/jrdf/SpringJRDFFactory.html), reads a wiring.xml file and is configured in exactly the same way as the SortedMemoryJRDFFactory.
+
+JRDF also supports [persistent graphs](PersistentGraphs.md) and [global graphs](GlobalGraphs.md) via persistent and global graph factories (for example, [PersistentJRDFFactoryImpl](http://jrdf.sourceforge.net/0.5.6.1/doc/javadoc/org/jrdf/PersistentJRDFFactoryImpl.html) and [SortedDiskGlobalJRDFFactory](http://jrdf.sourceforge.net/0.5.6.1/doc/javadoc/org/jrdf/SortedDiskGlobalJRDFFactory.html)).
+
+## JRDF Graph ##
+
+The JRDF Graph API supports pluggable storage through the LongIndex and NodePool interfaces and the ability to produce results from simple graph queries that are sorted or unsorted.  A third optional interface, NodePoolComparator, is required by sorted graphs.
+
+If you use one of the factories the resources required by the Indexes and Nodepool will be created automatically.  The directories used by on disk implementations automatically create new files and directories using a [DirectoryHandler](http://jrdf.sourceforge.net/0.5.6.1/doc/javadoc/org/jrdf/util/DirectoryHandler.html).
+
+To get create a new graph from the entry points simple call "getGraph" or wire one in.  For example, the code to get a new graph and add the triple "urn:node", "urn:node", "urn:node" is:
+
+```
+JRDFFactory jrdfFactory = SortedMemoryJRDFFactory.getFactory();
+Graph graph = jrdfFactory.getGraph();
+TripleFactory tripleFactory = tripleFactory.getTripleFactory();
+URI node = URI.create("urn:node");
+tripleFactory.add(node, node, node); 
+```
+
+### Implementations of LongIndex and NodePool ###
+
+There is an memory, Sesame and BDB implementation of the LongIndexes and an in memory and BDB implementation of the NodePool interfaces.  JRDF uses three long indexes (in order to index each combination of triples which is through the GraphHandler interface).  These indexes are arranged in 012, 120 and 201, where 0 refers to subject nodes, 1 refers to predicate nodes and 2 refers to object nodes.
+
+#### In Memory ####
+In order to create in memory implementations the following code is required:
+```
+LongIndex[] indexes = new LongIndex[]{new LongIndexMem(), new LongIndexMem(), new LongIndexMem()};
+NodePoolMem nodePool = new NodePoolMemImpl();
+```
+
+#### BDB ####
+To create BDB indexes and node pools requires a few more steps.
+```
+StoredMapHandler handler = new StoredMapHandlerImpl(new TempDirectoryHandler());
+MapFactory factory1 = new BdbMapFactory(handler, "spo" + graphNumber);
+MapFactory factory2 = new BdbMapFactory(handler, "pos" + graphNumber);
+MapFactory factory3 = new BdbMapFactory(handler, "osp" + graphNumber);
+LongIndex[] indexes = new LongIndex[]{new LongIndexBdb(factory1), new LongIndexBdb(factory2), new LongIndexBdb(factory3)};
+NodePoolFactory nodePoolFactory = new BdbNodePoolFactory(HANDLER);
+```
+
+### Constructing GraphFactories ###
+
+The GraphFactory interface has two implementations GraphFactoryImpl (unsorted results returned) and OrderedGraphFactoryImpl (sorted results returned).
+
+To construct an unsorted GraphFactory the following code is required:
+```
+GraphFactory orderedGraphFactory = new GraphFactoryImpl(indexes, nodePool);
+```
+
+To construct a sorted GraphFactory:
+```
+NodeTypeComparator nodeTypeComparator = new NodeTypeComparatorImpl();
+NodeComparator comparator = new NodeComparatorImpl(nodeTypeComparator);
+GraphFactory orderedGraphFactory = new OrderedGraphFactoryImpl(indexes, nodePool, comparator);
+```
+
+Sorted graphs copies any results and puts them into sorted order.  The order is defined by a [TripleComparator](http://jrdf.sourceforge.net/0.5.6.1/doc/javadoc/org/jrdf/graph/TripleComparator.html).
+
+### Spring Wiring Fragment ###
+
+The following creates an in memory, graph that returns sorted results using Spring's XML configuration file instead.
+
+```
+    <bean class="org.jrdf.graph.index.longindex.mem.LongIndexMem" singleton="false"/>
+
+    <bean class="org.jrdf.graph.index.nodepool.mem.NodePoolMemImpl" singleton="false"/>
+
+    <bean id="graphFactory" class="org.jrdf.graph.mem.OrderedGraphFactoryImpl" singleton="false">
+        <constructor-arg>
+            <list>
+                <ref bean="org.jrdf.graph.index.longindex.mem.LongIndexMem"/>
+                <ref bean="org.jrdf.graph.index.longindex.mem.LongIndexMem"/>
+                <ref bean="org.jrdf.graph.index.longindex.mem.LongIndexMem"/>
+            </list>
+        </constructor-arg>
+        <constructor-arg ref="org.jrdf.graph.index.nodepool.mem.NodePoolMemImpl"/>
+        <constructor-arg>
+            <ref bean="nodeComparator"/>
+        </constructor-arg>
+    </bean>
+
+    <bean id="nodeTypeComparator" class="org.jrdf.util.NodeTypeComparatorImpl"/>
+
+    <bean id="nodeComparator" class="org.jrdf.graph.mem.NodeComparatorImpl">
+        <constructor-arg>
+            <ref bean="nodeTypeComparator"/>
+        </constructor-arg>
+    </bean>
+```
+
+## SPARQL Connection ##
+
+JRDF contains a basic SPARQL implementation that provides the operations JOIN (.), OPTIONAL, UNION and simple FILTER (= and != so far).  A connection is required in order to issue SPARQL queries.  JRDFFactory's allow the creation of new connections.  Simply call, "getNewSparqlConnection" and then parse the Graph and query string into "executeQuery".

@@ -1,0 +1,65 @@
+# SPARQL Operations using Relational Operations #
+SPARQL operations JOIN, UNION and OPTIONAL can be defined using modified relational algebra.  The following is a formal definition of these operations by modifying the relational algebra to support untyped relations and operations.
+
+# Untyped Relations #
+An untyped relation is a convenient way to represent differently typed tuples in a single data structure.   It contains a heading that is a super set of attributes of the contained tuples. The following is an example of an untyped relation:
+| SNO| sno | SNAME | name | STATUS | integer | CITY | char |
+|:---|:----|:------|:-----|:-------|:--------|:-----|:-----|
+| S1 | | "Smith" | | 20    | | "London" | |
+| S2 | | "Jones" | | 10    | |      | |
+| S3 | | "Blake" | |       | |      | |
+
+Which represents three different typed relations (which can be derived by projecting away the relevant columns):
+| SNO| sno | SNAME | name | STATUS | integer | CITY | char |
+|:---|:----|:------|:-----|:-------|:--------|:-----|:-----|
+| S1 | | "Smith" | | 20    | | "London" | |
+
+| SNO | sno | SNAME | name | STATUS | integer |
+|:----|:----|:------|:-----|:-------|:--------|
+| S1  | | "Smith" | | 20    | |
+| S2  | | "Jones" | | 10    | |
+
+| SNO | sno | SNAME | name |
+|:----|:----|:------|:-----|
+| S1  | | "Smith" | |
+| S2  | | "Jones" | |
+| S3  | | "Blake" | |
+
+Note: There are no NULLs just tuples of differing types - they are sets of attribute value pairs and some attribute values are missing in certain tuples (for example the tuple with a SNO of "S3" is missing the STATUS and CITY attributes).
+
+This idea was presented by C. Galindo-Legaria in "[Algebraic Optimization of Outerjoin Queries](ftp://ftp.deas.harvard.edu/techreports/tr-12-92.ps.gz)".
+
+# Untyped Operations #
+
+To support untyped relations, untyped operations must be defined to work with tuples of differing attributes.  Specifically, what must be done when an operation encounters tuples of different types.  In SQL, a NULL causes join failure and the SQL and relational union operator requires tuples of the same type in order for the ooperation to proceed.
+
+## Join ##
+This is equivalent to the "." operator in SPARQL.
+
+A formal definition of an untyped JOIN (based on Date’s definition of Join):
+
+Let r and s have attributes X1,X2,...,Xm, Y1,Y2,...,Yn, Z1,Z2,...,Zp.  Where Y’s are the common attributes, X’s are other attributes of r and Z’s are the other attributes of s.  The untyped JOIN of r and s is a relation t with a heading that is the set theoretic union of the headings r and s {X, Y, Z} and a body that consists of the set of all tuples {X x, Y y, Z z} such that a tuple appears in r with X value x or no value for X and Y value y and a tuple appears in s with Y value y and Z value z or no value for Z.  Y values for r and s may both be unbound or either maybe unbound - this does not lead to a successful join.  A successful join occurs if at least one Y value y for r and s are equal and are not unbound.  If no attributes are shared this will result in a cartesian product of results.
+
+Using untyped join in SPARQL was suggested by R. Cyganiak in "[A Relational Algebra for SPARQL](http://www.hpl.hp.com/techreports/2005/HPL-2005-170.html)".  This version of untyped join, however, does not use NULL values but instead relies on untyped relations.
+
+## Union ##
+This is equivalent to the UNION operator in SPARQL.
+
+The outer union of relations r and s is the set theoretic union of the headings of r and s with a body consisting of all tuples t such that t appears in r or s or both.  It does not require that r and s have the same attributes (types) as specified by the regular relational union.
+
+## Left Outer Join ##
+This is equivalent to the OPTIONAL operator in SPARQL.
+
+A formal definition of LEFT OUTER JOIN (LOJ):
+
+The left outer join of relations r and s is the outer union of the join of r and s and the antijoin of r and s. Or formally: [R1](https://code.google.com/p/jrdf/source/detail?r=1) LOJ [R2](https://code.google.com/p/jrdf/source/detail?r=2) := ([R1](https://code.google.com/p/jrdf/source/detail?r=1) ⋈  [R2](https://code.google.com/p/jrdf/source/detail?r=2)) ⊎ ([R1](https://code.google.com/p/jrdf/source/detail?r=1) ⊳ [R2](https://code.google.com/p/jrdf/source/detail?r=2)).  Antijoin is composed of difference and semijoin.  Semijoin is composed of join and project.  The fully expanded version can therefore be expressed as: [R1](https://code.google.com/p/jrdf/source/detail?r=1) LOJ [R2](https://code.google.com/p/jrdf/source/detail?r=2) := ([R1](https://code.google.com/p/jrdf/source/detail?r=1) ⋈ [R2](https://code.google.com/p/jrdf/source/detail?r=2)) ⊎ ([R1](https://code.google.com/p/jrdf/source/detail?r=1) － (π([R1](https://code.google.com/p/jrdf/source/detail?r=1)) ([R1](https://code.google.com/p/jrdf/source/detail?r=1) ⋈ [R2](https://code.google.com/p/jrdf/source/detail?r=2)))).  Where: “－” denotes difference and “π” denotes project.
+
+A second formal definition of LEFT OUTER JOIN (LOJ):
+
+[R1](https://code.google.com/p/jrdf/source/detail?r=1) LOJ [R2](https://code.google.com/p/jrdf/source/detail?r=2) := [R1](https://code.google.com/p/jrdf/source/detail?r=1) ⋈  [R2](https://code.google.com/p/jrdf/source/detail?r=2) ⊕ [R1](https://code.google.com/p/jrdf/source/detail?r=1).  Where, minimum union operator (⊕), which has the same effect as performing outer union with the results of the antijoin of r and s.
+
+A formal definition of MINIMUM UNION:
+
+The minimum union of relations r and s is the outer union of r and s followed by removing subsumed tuples. Tuple subsumption is defined as t1 subsumes t2 if t1 has more values that are bound than t2 and that the values in t2 that are bound are equal to t1.  The removal of subsumed tuples in R is denoted as R￬.
+
+Outer union, minimum union and both formalisms of left outer join were all presented in C. Galindo-Legarai's paper "[Outerjoins as Disjunctions](http://citeseer.ist.psu.edu/446711.html)".

@@ -1,0 +1,469 @@
+##summary Getting Started with JRDF
+
+# Getting Started with JRDF #
+
+This document is not a primer for RDF, [this is](http://www.w3.org/TR/REC-rdf-syntax/).  JRDF is a library that has a simple to use interface that follows the [RDF standard](http://www.w3.org/RDF/) for the creation and management of RDF graphs.
+
+## Supported Java Versions ##
+The current version of JRDF supports the following versions of Java:
+  * 1.5 (up to 0.5.6.3 - requires the StAX library for XML Parsing),
+  * 1.6.
+
+JRDF will run with a single JAR, however for certain functionality extra libraries are required (<a href='http://sourceforge.net/projects/jrdf/files/jrdf/jrdf-0.5.6.3/jrdf-0.5.6.3.zip/download'>included in the zip file</a>):
+  * Spring Wiring
+    * /spring/spring-beans-2.5.6
+    * /spring/spring-context-2.5.6
+    * /spring/spring-core-2.5.6
+  * Disk based Triple Store
+    * je-4.0.71.jar
+  * Distributed Query Results
+    * /woodstox/stax-api-1.0.1.jar
+    * /woodstox/stax2-api-3.0.2.jar
+    * /woodstox/woodstox-core-asl-4.0.8.jar
+  * Trie based Triple Store
+    * patricia-trie-0.2.jar
+  * Logging
+    * /jakarta-commons/commons-logging-1.1.jar
+
+Java 1.4 is only supported before version 0.4 and is no longer being developed.
+
+## Help ##
+To get support for JRDF you can:
+  * [Check the Documentation](http://jrdf.sourceforge.net/documentation.html),
+  * [Ask a question on the mailing list](https://lists.sourceforge.net/lists/listinfo/jrdf-general), or
+  * Leave a comment on this page.
+
+## Loading an RDF/XML File with the JRDF GUI ##
+
+JRDF comes distributed with a separate GUI that allows you to read RDF/XML and N3 files and query them using SPARQL.
+
+Download the JRDF GUI from:
+http://sourceforge.net/projects/jrdf/files/jrdf/jrdf-0.5.6.3/jrdf-gui-0.5.6.3.jar/download
+
+Run the JRDF GUI:
+```
+java -jar jrdf-gui-0.5.6.3.jar
+```
+
+The GUI should then startup.  Select "Open File", navigate to a file and select "Open".  The client will then parse the file and will display the number of triples loaded and the time taken.
+
+![http://jrdf.googlecode.com/svn/wiki/screen1.png](http://jrdf.googlecode.com/svn/wiki/screen1.png)
+
+SPARQL queries can then be entered, run by selecting "Run Query", and the results will be displayed in tabular form:
+
+![http://jrdf.googlecode.com/svn/wiki/screen2.png](http://jrdf.googlecode.com/svn/wiki/screen2.png)
+
+## Loading an RDF/XML File with the JRDF JAR ##
+
+The distributable JRDF jar comes with several examples of using JRDF including one that will download an RDF/XML file and display all the triples in the file.
+
+Download the JRDF JAR from:
+http://sourceforge.net/projects/jrdf/files/jrdf/jrdf-0.5.6.3.jar/download
+
+Run the example RDF/XML parser:
+```
+java -cp jrdf-0.5.6.3.jar org.jrdf.example.RdfXmlParserExample
+```
+
+By default it will download Planet RDF RSS feed, parse it and display all of the triples:
+```
+First argument empty so using: http://planetrdf.com/index.rdf
+...
+Graph: [http://apassant.net/blog/2011/01/07/internship-positions-deri-smob-pubsubhubbub-privacy-etc, http://purl.org/dc/elements/1.1/creator, "Alexandre Passant"]
+...
+```
+
+## Loading RDF from Files ##
+
+The simplest way to load RDF files is to use RdfParser.  For example, to load a file into a new in memory graph:
+```
+RdfReader reader = new RdfReader();
+Graph graph = reader.parseNTriples(new File("test001.nt"));
+```
+
+It also supports parseN3 or parseRdfXml using InputStreams or Files.
+
+## Querying with SPARQL ##
+
+JRDF provides a functional but incomplete version of SPARQL (missing LIMIT, OFFSET and some FILTER operations)  - the basic operations (JOIN, OPTIONAL) are supported as well as most FILTER operations.  To perform SPARQL operations you need to use a JRDF Factory, create a SparqlConnection and perform the query against a graph.  To perform a query against an existing graph:
+
+```
+...
+SparqlConnection connection = jrdfFactory.getNewSparqlConnection();
+Answer answer = connection.executeQuery(graph, "SELECT ?s ?p ?o WHERE { ?s ?p ?o }");
+ClosableIterator<TypeValue[]> closableIterator = answer.columnValuesIterator();
+try {
+  while (closableIterator.hasNext()) {
+  TypeValue[] next = closableIterator.next();
+  System.out.println("Row: " + Arrays.asList(next));
+} finally {
+  closableIterator.close();
+}
+```
+
+This will produce results such as:
+```
+...
+Row: [Type: bnode Value: 5cd45a74-b071-4ef4-b813-ae04f34029e3#2 Suffix Type: none Suffix: , 
+Type: uri Value: http://example.org/terms#street Suffix Type: none Suffix: , 
+Type: literal Value: 1501 Grant Avenue Suffix Type: none Suffix: ]
+...
+```
+
+## Using the Graph ##
+
+The Graph interface is the primary way to manipulate RDF graphs.  It has methods that allow you to add, remove, and find triples.  A graph is created through a graph factory.  Triples and elements (nodes) in a graph are created through triple and element factories.
+
+The following is an example showing the creation and use of a graph:
+```
+JRDFFactory jrdfFactory = SortedMemoryJRDFFactory.getFactory();
+Graph graph = jrdfFactory.getGraph();
+TripleFactory tripleFactory = graph.getTripleFactory();
+URI uri1 = URI.create("urn:foo");
+URI uri2 = URI.create("urn:bar")
+Triple t1 = tripleFactory.add(uri1, uri1, uri1);
+Triple t2 = tripleFactory.add(uri2, uri2, uri2);
+ClosableIterator<Triple> triples = graph.find(AnyTriple.ANY_TRIPLE);
+try {
+  while (triples.hasNext()) {
+    Triple triple = triples.next();
+    System.out.println("Got triple: " + triple);
+  }
+} finally {
+  triples.close();
+}
+graph.remove(t1);
+```
+
+This code initially creates a graph (using jrdfFactory.getGraph) and adds two triples (using tripleFactory.add):
+```
+urn:foo urn:foo urn:foo .
+urn:bar urn:bar urn:bar .
+```
+
+The graph.find(Triple) or graph.find(SubjectNode, PredicateNode, ObjectNode) allows specific node values or wildcard values.  For individual nodes the wildcards are: AnySubject.ANY\_SUBJECT, AnyPredicate.ANY\_PREDICATE and AnyObject.ANY\_OBJECT.  And for triples there is AnyTriple.ANY\_TRIPLE.
+
+The ANY\_TRIPLE wildcard (using graph.find) is used to return the entire graph.  The code will print out:
+```
+Got triple: <urn:foo> <urn:foo> <urn:foo>
+Got triple: <urn:bar> <urn:bar> <urn:bar>
+```
+
+The equivalent code using individual nodes is:
+```
+graph.find(AnySubject.ANY_SUBJECT, AnyPredicate.ANY_PREDICATE, AnyObject.ANY_OBJECT)
+```
+
+To find any triples with 
+
+&lt;urn:foo&gt;
+
+ as the subject you would use:
+```
+URIReference foo = graph.getElementFactory().createURIReference(URI.create("urn:foo"));
+graph.find(foo, ANY_PREDICATE_NODE, ANY_OBJECT_NODE);
+```
+
+The code then removes the triple "
+
+&lt;urn:foo&gt;
+
+ 
+
+&lt;urn:foo&gt;
+
+ 
+
+&lt;urn:foo&gt;
+
+" (using graph.remove) and the graph has only one triple in it by the end:
+```
+urn:bar urn:bar urn:bar .
+```
+
+### Simplfying Graph Finds ###
+
+The proceeding code can be simplified a little using Java 5's for loop:
+```
+...
+ClosableIterable<Triple> triples = graph.find(AnyTriple.ANY_TRIPLE);
+try {
+  for (Triple triple : triples) {
+    System.out.println("Got triple: " + triple);
+  }
+} finally {
+  triples.iterator().close();
+}
+...
+```
+
+Putting the iterator.close() in a finally block ensures that any resources used are released.  By default JRDF uses an in memory store, so this is not required (when using a disk based store it is).  This allows it to be further simplified:
+```
+...
+for (Triple triple : graph.find(AnyTriple.ANY_TRIPLE)) {
+  System.out.println("Got triple: " + triple);
+}
+...
+```
+
+The ClosableIterators utility provides an alternative means to ensure that the iterator is closed.  For example:
+```
+ClosableIterators.with(graph.find(AnyTriple.ANY_TRIPLE), new Function<Void, ClosableIterable<Triple>>() {
+  public Void apply(ClosableIterable<Triple> object) {
+    for (Triple triple : object) {
+      System.out.println("Got triple: " + triple);
+    }
+    return null;
+  }
+});
+
+```
+
+### Finding Nodes by Type ###
+
+Apart from finding nodes by position, for example all the triples that contain 
+
+&lt;urn:foo&gt;
+
+ as the subject, JRDF allows you to search based on node type.  For example,
+```
+JRDFFactory jrdfFactory = SortedMemoryJRDFFactory.getFactory();
+Graph graph = jrdfFactory.getGraph();
+GraphElementFactory elementFactory = graph.getElementFactory();
+BlankNode b1 = elementFactory.createBlankNode();
+BlankNode b2 = elementFactory.createBlankNode();
+URIReference foo = elementFactory.createURIReference(URI.create("urn:foo"));
+graph.add(foo, foo, b1);
+graph.add(foo, foo, b2);
+ClosableIterable<BlankNode> nodes = (ClosableIterable<BlankNode>) graph.findNodes(BlankNodeType.BNODE_TYPE);
+for (BlankNode node : nodes) {
+  System.out.println("Blank nodes: " + node);
+}
+```
+
+Will print out two blank nodes:
+```
+Blank nodes: 8133d7e6-8ac8-481c-bd76-3647f2f8b965#1
+Blank nodes: 6f379000-58d8-4435-aee8-b1edc0d630d3#2
+```
+
+It currently supports NodeTypes: BNodeType, URIReferenceNodeType, ResourceNodeType, and PredicateNodeType.  It does not handle SubjectNodeType, ObjectNodeType or combinations (like SubjectPredicateNodeType).
+
+## Creating Graphs ##
+
+Local graphs are graphs that rely on a node pool and string pool for the creation of RDF data structures.  This places certain limits on how these items are used. To create a local graph you must use a Factory - either an in memory factory or an on disk one.
+
+To get an in memory graph factory, create a new graph and add the triple "urn:node, urn:node, urn:node" requires the following code:
+
+```
+JRDFFactory jrdfFactory = SortedMemoryJRDFFactory.getFactory();
+Graph graph = jrdfFactory.getGraph();
+GraphElementFactory elementFactory = graph.getElementFactory();
+Node node = elementFactory.createURIReference(URI.create("urn:node"));
+graph.add(node, node, node);
+```
+
+To create an on disk graph replace the first line with (this currently requires BDB Java Edition installed in the class path):
+```
+JRDFFactory jrdfFactory = SortedDiskJRDFFactory.getFactory();
+```
+
+To create a persistent, named graph requires the first line to be replaced with:
+```
+DirectoryHandler handler = new TempDirectoryHandler();
+PersistentJRDFFactory factory = PersistentJRDFFactoryImpl.getFactory(handler);
+Graph graph = jrdfFactory.getNewGraph("myGraphName");
+```
+
+Up to version 0.5.6, the factory must be closed in order for the changes to be written to disk, subsequent versions require you to call close on the graph not on the factory, see [persistent graphs](PersistentGraphs.md).  JRDF has many different types of graphs that can be created through [Spring, other IoC containers or through factories](http://code.google.com/p/jrdf/wiki/JRDFWiring).
+
+## Graph Element Factory and Triple Factory ##
+
+A local JRDF graph requires the creation of RDF structures (triples, literals, URI References, etc.) from a specific RDF graph.  This is done using a Graph Element Factory and Triple Factory to create these structures.
+
+## Nodes ##
+
+JRDF's model of RDF nodes uses a hierarchy of interfaces.  At the top of the class hierarchy is the Node.  This is subclassed by positional nodes: Subject, Predicate and Object.  These are then further subclassed by the appropriate typed nodes: bnode (blank node), URI and Literal.
+
+![http://jrdf.googlecode.com/files/JRDFGraphNodes.png](http://jrdf.googlecode.com/files/JRDFGraphNodes.png)
+
+The Resource interface extends both URIReference and BlankNode.
+
+## Element Factory ##
+
+### URI References ###
+
+A URI Reference in RDF must be an absolute URI.  This is the default behaviour in JRDF.  However, it can be expensive or unnecessary to check that a URI is absolute before creating a URI Reference.  Both of these methods for creating URI References is supported:
+```
+// Check if URI is absolute
+Node node1 = elementFactory.createURIReference(URI.create("urn:node"));
+// Don't check if URI is absolute
+Node node2 = elementFactory.createURIReference(URI.create("urn:node"), false);
+```
+
+### Literals ###
+
+The Element Factory also allows the creation of literals.  To create a typed literal with the value "Hello World"^^xsd:string, the following code is required:
+
+```
+...
+Literal literal = elementFactory.createLiteral("Hello World", org.jrdf.vocabulary.XSD.STRING);
+```
+
+Literals can also be created from native Java types.  By calling "createLiteral" the Java object is converted to a JRDF Literal.  For example to create the Literal "7"^^xsd:int:
+```
+...
+Literal literal = elementFactory.createLiteral(7);
+```
+
+The mapping from Java types to XSD types is as follows:
+| **Java Type** | **XSD Type** |
+|:--------------|:-------------|
+| String        | None         |
+| Boolean, boolean | xsd:boolean  |
+| java.math.BigDecimal | xsd:decimal  |
+| Float, float  | xsd:float    |
+| Double, double | xsd:double   |
+| java.util.GregorianCalendar | xsd:dateTime |
+| java.sql.Date | xsd:dateTime |
+| java.util.Date | xsd:dateTime |
+| javax.xml.namespace.QName | xsd:QName    |
+| java.math.BigInteger | xsd:integer  |
+| Long, long    | xsd:long     |
+| Integer, int  | xsd:int      |
+| Short, short  | xsd:short    |
+| Byte, byte    | xsd:byte     |
+
+If a Java type is used that has no mapping an exception will be thrown.  New mappings can be added through calling addValueCreator(URI, Class<?>, ValueCreator) on the DatatypeFactory.
+
+### Blank Nodes ###
+
+Blank nodes can also be created using the Element Factory:
+
+```
+...
+Node node1 = elementFactory.createURIReference(URI.create("urn:node"));
+Node node2 = elementFactory.createBlankNode();
+graph.add(node2, node1, node2);
+```
+
+### Resources ###
+
+An RDF Resource is either a blank node or a URI Reference.  Resources can be created directly or an existing blank node or URI Reference can be wrapped in a resource.  Resources provide an easy way to add or remove values associated with a resource or to return any associated values.  For example, to represent a supplier with a supplier number ("S1"), name ("urn:Smith"), status (20) and city ("London"):
+```
+Resource supplier = elementFactory.createResource();
+supplier.addValue(supplierNumber, "S1");
+supplier.addValue(name, URI.create("urn:Smith"));
+supplier.addValue(status, 20);
+supplier.addValue(city, "London", XSD.STRING);
+```
+
+This creates a graph with 4 triples in it:
+```
+_:1 urn:sno "S1"
+_:1 urn:name urn:Smith
+_:1 urn:status "20"^^xsd:int
+_:1 urn:city "London"^^xsd:string
+```
+
+Resources give you a way to get all the values of a given predicate for a Resource or to get all the subjects of a Resource of a given predicate.
+
+For example, to find the status of the supplier:
+```
+ClosableIterator<ObjectNode> objects = supplier.getObjects(status);
+```
+
+Or to find the supplier(s) with the name "urn:Smith":
+```
+ClosableIterator<SubjectNode> subjects = smith.getSubjects(name);
+```
+
+## Triple Factory ##
+
+The Triple factory offers a concise way of adding standard RDF data structures.  It allows:
+  * adding triples directly to the Graph without having to create the individual nodes first,
+  * triple reification and
+  * creation of RDF Containers and Collections (Bag, Alt, Collection and Sequence).
+
+### URI Reference ###
+
+To create a triple with URI References requires the following code:
+
+```
+...
+URI node = URI.create("urn:node");
+tripleFactory.add(node, node, node);
+```
+
+### Literals ###
+
+To create literals, replace the last parameter with one or two parameters specifying the Literal.  For example, to create a literal with a data type of "xsd:string" requires the following code:
+
+```
+...
+URI node = URI.create("urn:node");
+tripleFactory.add(node, node, "Hello World", org.jrdf.vocabulary.XSD.STRING);
+```
+
+### Blank Nodes ###
+Blank nodes are difficult to add across multiple triples as a reference to the same blank node must be kept.  For example:
+
+```
+_1 urn:node urn:node
+urn:node urn:node _1
+```
+
+Requires the following code:
+```
+...
+Node uriNode = elementFactory.createURIReference(URI.create("urn:node"));
+Node bnode = elementFactory.createBlankNode();
+graph.add(bnode, uriNode, uriNode);
+graph.add(uriNode, uriNode, bnode);
+```
+
+Each time createBlankNode() is called a new blank node is created so they cannot be added using the TripleFactory.  The combination of using a variable, the Graph Element Factory and then adding them to the Graph is therefore required.
+
+### Reifying Triples ###
+
+RDF Reification allows you to make statements about a triple.  The triple may or may not exist and reifying a triple does not add it to the graph - it only adds the 4 triples indicating that the triple is reified.
+
+To reify a triple:
+```
+// Note: Creating a triple - not adding it to the Graph.
+Triple triple = tripleFactory.createTriple(uriNode, uriNode, uriNode);
+BlankNode bnode = elementFactory.createBlankNode();
+tripleFactory.reifyTriple(triple, bnode);
+```
+
+This creates four triples:
+```
+_:1 rdf:Type rdf:Statement 
+_:1 rdf:Subject urn:node
+_:1 rdf:Predicate urn:node
+_:1 rdf:Object urn:node
+```
+
+### RDF Containers and Collections ###
+RDF Containers and Collections have many similarities with Java's Collection classes.  JRDF has extended Java Collections and implemented the 3 different types of RDF Containers and the one RDF Collection.  They have the following properties:
+| **Type** | **Ordered** | **Duplicates** | **Closed** |
+|:---------|:------------|:---------------|:-----------|
+| Alt      | No          | No             | No         |
+| Bag      | No          | Yes            | No         |
+| Collection | Yes, Linked list | Yes            | Yes        |
+| Sequence | Yes, FIFO (First In, First Out) | Yes            | No         |
+
+Being closed means being able to say that there are only the currently specified number of members that belong to the group.  For more information see: [RDF Primer's entry on Collections](http://www.w3.org/TR/rdf-primer/#collections).
+
+You can create a collection, add triples to it and then add it to the graph using the Triple Factory.  For example:
+```
+Collection collection = new CollectionImpl();
+URIReference fruit1 = elementFactory.createURIReference(URI.create("http://example.org/banana"));
+URIReference fruit2 = elementFactory.createURIReference(URI.create("http://example.org/kiwi"));
+collection.add(fruit1);
+collection.add(fruit2);
+BlankNode list = elementFactory.createBlankNode();
+tripleFactory.add(list, collection);
+```
+
+After the collection has been added to the graph, via the TripleFactory, new values can be added but the collection must be re-added to the graph.

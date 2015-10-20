@@ -1,0 +1,95 @@
+# RESTfully Querying Graphs #
+
+The server component of JRDF provides a way to expose graphs for remote querying using a RESTful model.  This follows the W3C's [SPARQL 1.1 Uniform HTTP Protocol for Managing RDF Graphs](http://www.w3.org/TR/sparql11-http-rdf-update/).
+
+# Starting a Single Server #
+To start a single local server run the SpringLocalServer Java application.  This can be done by running:
+```
+java -jar jrdf-server-0.5.6.3.jar
+```
+
+The server can be view by going to port 8182 on the local machine:
+```
+http://localhost:8182/graph
+```
+
+This will show a list of graphs on the current machine - which will typically be empty on initialization.
+
+By default, new graphs will be created under the temporary directory of your operating system under "perstGraph" subdirectory.  For Windows, this will probably be "C:\temp\perstGraph" and for Unix "/tmp/perstGraph".  Under this directory a file is created called "graphs.nt" this is a NTriples formatted RDF file that lists the available graphs in the system and their id (an number beginning from 1).  The id references the various graph files used in the directory, for example the graph "foo" with an id of 1 will have the files "dmspo1", "ospmd1", "posmd1" and "spomd1" as well as a shared node pool/string pool file(s) in Berkley JDB (usually called "00000000.jdb").  There is more detail on the [persistent graphs page](PersistentGraphs.md).
+
+To add the RDF/XML "slashdot.rdf" to a graph called "test" requires the following code:
+```
+// Parse the file
+Graph graph = MemoryJRDFFactory.getFactory().getGraph();
+Parser parser = new GraphRdfXmlParser(graph, new MemMapFactory());
+parser.parse(new FileInputStream("slashdot.rdf"), "");
+// Create a JRDF/Restlet representation of the Graph (serialized as RDF/XML)
+Map<String, Object> dataModel = new HashMap<String, Object>();
+dataModel.put("graphRef", graph);
+Representation representation = new RdfXmlRepresentationFactory().createRepresentation(
+  APPLICATION_RDF_XML, dataModel);
+// Create a request to PUT the representation at http://127.0.0.1:8182/graph/test
+Reference reference = new Reference("http://127.0.0.1:8182/graph/test");
+Request request = new Request(PUT, reference, representation);
+// Do it and check the response
+Client client = new Client("http");
+Response response = client.handle(request);
+```
+
+The getStatus() of the response should indicate a success.
+
+Queries can be submitted by GETting a encoded SPARQL query.  For example, the SPARQL query:
+```
+SELECT *
+WHERE {
+    ?s ?p ?o .
+}
+```
+
+Is equivalent to:
+```
+http://localhost:8182/graph/foo/?query=SELECT+*%0D%0AWHERE+{%0D%0A++++%3Fs+%3Fp+%3Fo+.%0D%0A}%0D%0A++++
+```
+
+A HTTP request allows you to specify the method and acceptable content type.  JRDF RESTful representation of graphs allows 4 methods and various representations to be specified.
+
+JRDF supports the following methods:
+  * GET (for returning a representation of a graph),
+  * POST (for adding more triples to a graph),
+  * PUT (for uploading/replacing a graph), and
+  * DELETE (for removing all triples in a graph).
+
+The currently supported representation format is RDF/XML.
+
+When querying graphs is supports the following representations:
+  * SPARQL HTML (a simple web page),
+  * SPARQL JSON, and
+  * SPARQL XML.
+
+It's important to note that currently all of these representations are currently limited by memory (although storage of the graphs are not).
+
+## Setting up Persistent Directories and Adding Triples ##
+The default directory handler for JRDF Graphs is the Temporary Directory handler.  This can be modified in the wiring configuration by changing the "directoryHandler" bean and implementing your own "DirectoryHandler".
+
+Currently, while the server is running the files will be locked for concurrent access.  This means that while the server is running you cannot use external programs to modify them.
+
+In the future, extensions to SPARQL and the JRDF access point will allow external programs to update the code via the web interface.  An external Java API could also be added in the future.
+
+# Distributed Querying #
+Distributed querying in JRDF allows a single point to be used to query multiple servers at the same time and the results aggregated together.
+
+This can be done by running:
+```
+java -jar jrdf-distributed-server-0.5.6.3.jar
+```
+
+The server can be view by going to port 8183 on the local machine:
+```
+http://localhost:8183/
+```
+
+This will list the configured servers to be queried at the same time.  Each time the server is started the list of servers will have to be added as the list of servers is not saved.
+
+Querying remote servers assumes that the data being queried on the whole is different on each server and there is no post processing done on the queries returned.  This means, that unlike SPARQL queries against a local JRDF server, duplicates can be returned.
+
+Future implementations will rely on the specifications from the W3C, [SPARQL 1.1 Federation Extensions](http://www.w3.org/2009/sparql/docs/fed/service).

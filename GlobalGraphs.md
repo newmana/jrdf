@@ -1,0 +1,156 @@
+# Global Graphs #
+
+Global Graphs contrast with [local graphs](GettingStarted.md) in that they do not require a node pool and globally unique identifiers for graph nodes.  This means that nodes can be used in a distributed environment.
+
+# RDF Molecules #
+RDF molecules represent a lossless decomposition of an RDF graph.  The main purpose of molecules is to allow blank nodes to be distributed without loss of information or context.  The context in an RDF molecule allows node ids in blank nodes to be discarded and blank nodes are equal or unequal based on the context within an RDF molecule.
+
+The structure of an RDF molecule is a recursive structure - RDF molecules contain other RDF molecules through linking triples.  For example, a set of triples:
+```
+{_:1  observedInteraction _:2}
+{_:1 type ExperimentalObservation}
+{_:2 participant _:3}
+{_:3 hasUniprotID ‘p32379’}
+{_:2 participant _:4}
+{_:4 hasUniprotID ‘p46949’}
+```
+
+Can be represented in an RDF molecule as:
+```
+{_ type ExperimentalObservation}
+{_  observedInteraction _}
+  {_ participant _}
+    {_ hasUniprotID ‘p32379’}
+  {_ participant _}
+    {_ hasUniprotID ‘p46949’}
+```
+
+Where the first level of the molecule contains 2 triples (or root triples), the second level contains 2 triples and each of the 3rd levels contains another triple.  Triples with two blank nodes are know as link triples.
+
+Another perspective of this is that it represents foreign key relations and can be seen as an extension to [untyped relations](RelationalSPARQLOperations.md).  The above RDF molecule could be seen as three relations (tables):
+Experimental Observation
+| Primary Key | Observed Interaction |
+|:------------|:---------------------|
+| EO1         | OI1                  |
+
+Observed Interaction
+| Primary Key | Participant |
+|:------------|:------------|
+| OI1         | PT1         |
+| OI1         | PT2         |
+
+Participant
+| Primary Key | UniProtID |
+|:------------|:----------|
+| PT1         | p32379    |
+| PT2         | p46949    |
+
+Like [untyped relations](RelationalSPARQLOperations.md) each row can have it's own set of name/value pairs.
+
+RDF molecules are also ordered.  For two nodes the ordering is determined by the following rules:
+  * Subject, predicate and object nodes in a triple are compared with each other.
+  * Node Type
+    * Blank node type, is less than;
+    * URI Reference node type, is less than;
+    * Literal node type.
+  * Node Value
+    * Comparison of string value based on N3 serialization.
+
+For example: s p o > `_` p o > `_` p `_`
+
+Triples that contain at least one blank node are known as "ungrounded triples".  Triples that contain no blank nodes are "grounded triples".  The "root triples" of a molecule are the first level triples.  A "link triple" is a triple that contains two blank nodes (as the subject and object).  A "head triple" is the first triple in a molecule as defined by the above ordering.
+
+As most RDF data will already be in local RDF format we need a way to decompose RDF graphs into molecules.  This process can also be used to remove redundant RDF triples and so produce a lean RDF graph.
+
+# Creating a Global Graph from a Local Graph #
+The current algorithm in creating a global graph from a local graph has three steps:
+  * A graph is decomposed into molecules,
+  * An equivalence blank node map (mapping local blank nodes to other local blank nodes) is created between molecules,
+  * Molecules are merged together using the blank node map.
+
+# Decomposing #
+```
+AT is the set of added triples (initially empty).
+LGT is a sorted set in descending order (defined above) of triples from a local graph.
+FOR EACH Triple T from LGT not in AT 
+    Create a new molecule M adding T.
+    IF T is Grounded THEN
+        Add T to AT.
+    ELSE
+        findEnclosedTriples(M).
+    END IF
+END FOR
+
+findEnclosedTriples(M)
+    T is the HeadTriple of M.
+    BTS is a set of all triples which contain Ts blank nodes.
+    FOR EACH Triple BT from BTS not in AT
+        Create a new molecule SM adding BT.
+        Add BT to AT.
+        findEnclosedTriples(SM)
+        IF BT is a Link Triple THEN
+            IF BTs object node equals Ms subject node THEN
+                Add M to SM.
+                SM becomes M.
+            ELSE 
+                Add SM to M.
+            END IF
+        ELSE
+            Add BT to M.
+        END IF
+    END FOR
+    Add all triples found to the set AT.
+END findEnclosedTriples
+```
+
+# Blank Node Mapping #
+Iterate through all the new molecules creating a mapping of blank nodes between molecules.
+
+```
+findBlankNodeMap(m1, m2)
+    BM is a map of blank nodes from m1 to m2 (initially empty).
+    FOR EACH root triple t1 in m1
+        Find the root triple t2 from m2 that corresponds to t1.
+        LET sm1 = m1.submolecule for t1.
+        LET sm2 = m2.submolecule for t2.
+        IF sm1 != null AND sm2 != null THEN
+            nm = findBlankNodeMap(sm1, sm2).
+            IF nm = empty THEN
+                return empty map.
+            ELSE
+                add nm to BM.
+            END IF
+        ELSE IF t1.submolecule = null AND t2.submolecule = null THEN
+            add map between blank nodes in t1 and t2.
+        ELSE 
+            return empty map.
+        END IF
+    END FOR
+    return BM.
+END findBlankNodeMap
+```
+
+# Molecule Merging #
+```
+merge(m1, m2, blankNodeMap)
+    IF m1 subsumes m2 THEN
+        create new molecule m3.
+        replace the blank nodes in m2 with m1s using the blankNodeMap.
+        add the root triples from m1 and m2 to the root triples of m3.
+        FOR EACH root triple t1 in m3
+            LET sm1 = m1.submolecule for t1.
+            LET sm2 = m2.submolecule for t1.
+            IF sm1 != null AND sm2 != null THEN
+                sm3 = merge(sm1, sm2, blankNodeMap).
+                add sm3 to m3 using the root triple t1.
+            END IF
+        END FOR
+    END IF
+    return m3
+END merge
+```
+
+# Node Distribution #
+Within a computing node an implementation of global graphs use identifiers local to that node (local identifiers).  These are only considered unique within a single computing node.  A graph can be split across multiple nodes leading to potentially duplicate node identifiers.  At least we consider it possible - even though GUID generation within the nodes makes this extremely unlikely.  It may simply be faster to have a counter rather than use GUID generation for example.
+
+When adding or querying RDF triples or molecules the equality of a molecule is ascertained by ignoring the node ids from molecules across nodes.  Molecules are compared and if equal one is discarded if similar but contain slightly different information then the properties are added to the molecule using the above merging function.

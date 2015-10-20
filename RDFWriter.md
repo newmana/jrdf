@@ -1,0 +1,82 @@
+# Writing RDF with JRDF #
+
+JRDF comes with a set of interfaces for implementing various RDF output formats.  RDF/XML and NTriples are currently supported.
+
+## Getting Started ##
+The simplest way to persist graphs is to use org.jrdf.writer.Writer which provides default, in memory implementations persisting to NTriples or RDF/XML.
+
+For example, to write NTriples and RDF/XML versions of the same graph:
+```
+Writer.writeNTriples(new File("foo.nt"), graph);
+Writer.writeRdfXml(new File("foo.rdf"), graph);
+```
+
+## Design ##
+
+There are three components used to serialize RDF:
+  * RdfWriter - which takes a graph and object to write the results to,
+  * BlankNodeRegistry - which maintains a map of blank node ids and their objects, and
+  * RdfNamespaceMap - which is used to prefix URI References with an XML name space.
+
+## RdfWriter ##
+
+The interface RdfWriter provides a generic way to implement various ways of persisting RDF. It takes a Graph and either and OutputStream or Writer.  The caller of the code must ensure that the OutputStream or Writer is closed correctly.
+
+### BlankNodeRegistry ###
+
+When writing out blank nodes in RDF/XML it is important the the same blank node stored in a graph is persisted with the same blank node identifier.  The BlankNodeRegistry is used to map blank node instances with unique identifiers.
+
+There are currently two implementations: an in memory (MemBlankNodeRegistryImpl) and BDB (BdbBlankNodeRegistryImpl).
+
+### RdfNamespaceMap ###
+
+In order to reduce the verbosity of the RDF/XML that is produced, a map tracks name spaces used and abbreviates the triples produced.  By default only the RDF name space is abbreviated (rdf -> http://www.w3.org/1999/02/22-rdf-syntax-ns#). Others can be added directly using addNamespace.  For example:
+```
+RdfNamespaceMap map = new RdfNamespaceMapImpl();
+map.addNamespace("owl", "http://www.w3.org/2002/07/owl#");
+```
+
+## RDF/XML Implementation ##
+
+By default, the unique partial URIs are extracted from all of the predicates found in a given Graph (using the load method).  To disable this feature, so that only the RDF name space is used and predicates have a local namespace set the property "org.jrdf.writer.rdfxml.writeLocalNamespace" to "true".
+
+To create an RdfXmlWriter the following code is used (assuming a JRDF Graph, graph, already contains triples):
+```
+StringWriter out = new StringWriter();
+try {
+  BlankNodeRegistry nodeRegistry = new BlankNodeRegistryImpl();
+  RdfNamespaceMap map = new RdfNamespaceMapImpl();
+  RdfWriter writer = new RdfXmlWriter(nodeRegistry, map);
+  writer.write(graph, out);
+} finally {
+  out.close();
+}
+```
+
+If the graph contained one triple: <http://hello.com/foo>, <http://hello.com/foo>, <http://hello.com/foo> the resultant RDF/XML would be:
+```
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE rdf:RDF[
+  <!ENTITY ns1 'http://hello.com/'>
+  <!ENTITY rdf 'http://www.w3.org/1999/02/22-rdf-syntax-ns#'>
+]>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:ns1="http://hello.com/">
+  <rdf:Description rdf:about="http://hello.com/foo">
+    <ns1:foo rdf:resource="http://hello.com/foo"/>
+  </rdf:Description>
+</rdf:RDF>
+```
+
+If "org.jrdf.writer.rdfxml.writeLocalNamespace" is set to "true", the RDF/XML becomes:
+```
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE rdf:RDF[
+  <!ENTITY rdf 'http://www.w3.org/1999/02/22-rdf-syntax-ns#'>
+]>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+  <rdf:Description rdf:about="http://hello.com/foo">
+    <wstxns1:foo xmlns:wstxns1="http://hello.com/" rdf:resource="http://hello.com/foo"/>
+  </rdf:Description>
+</rdf:RDF>
+```
